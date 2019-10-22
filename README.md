@@ -1,3 +1,3 @@
 # Website
-  a responsive website
-
+  responsive website template
+  
