@@ -1,5 +1,8 @@
 @charset "UTF-8";
-@import url(font-awesome.min.css);
+@import url("./all.css");
+@import url("./brand.css");
+@import url("./fontawesome.min.css")
+@import url("./regular.min.css")
 @import url(http://fonts.googleapis.com/css?family=Raleway:700,400);
 
 /*
@@ -267,7 +270,7 @@
 			content: "";
 			-moz-osx-font-smoothing: grayscale;
 			-webkit-font-smoothing: antialiased;
-			font-family: FontAwesome;
+			font-family: Font Awesome\ 5 Free;
 			font-style: normal;
 			font-weight: normal;
 			text-transform: none !important;
@@ -333,7 +336,7 @@
 			input[type="radio"] + label:before {
 				-moz-osx-font-smoothing: grayscale;
 				-webkit-font-smoothing: antialiased;
-				font-family: FontAwesome;
+				font-family: Font Awesome\ 5 Free;
 				font-style: normal;
 				font-weight: normal;
 				text-transform: none !important;
@@ -429,14 +432,17 @@
 		text-decoration: none;
 		border-bottom: none;
 		position: relative;
+        font-family: 'Font Awesome\ 5 Free', 'Font Awesome 5 Brands';
+         content: "\f4b8";
 	}
 
 		.icon:before {
 			-moz-osx-font-smoothing: grayscale;
 			-webkit-font-smoothing: antialiased;
-			font-family: FontAwesome;
+			font-family: 'Font Awesome\ 5 Free', 'Font Awesome 5 Brands';
 			font-style: normal;
 			font-weight: normal;
+            font-weight: 900;
 			text-transform: none !important;
 		}
 
