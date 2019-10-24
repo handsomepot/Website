@@ -6,7 +6,7 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:700,400);
 
 /*
-	Transit by TEMPLATED
+	Firmware by TEMPLATED
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 */
@@ -23,11 +23,11 @@
 			-o-animation: none !important;
 			-ms-animation: none !important;
 			animation: none !important;
-			-moz-transition: none !important;
-			-webkit-transition: none !important;
-			-o-transition: none !important;
-			-ms-transition: none !important;
-			transition: none !important;
+			-moz-Firmwareion: none !important;
+			-webkit-Firmwareion: none !important;
+			-o-Firmwareion: none !important;
+			-ms-Firmwareion: none !important;
+			Firmwareion: none !important;
 		}
 
 	body, input, select, textarea {
@@ -793,11 +793,11 @@
 		-o-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
-		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-moz-Firmwareion: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-Firmwareion: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-o-Firmwareion: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-Firmwareion: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		Firmwareion: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		background-color: #3cadd4;
 		border-radius: 30px;
 		border: 0;
@@ -992,11 +992,11 @@
 				}
 
 					#header nav > ul > li a {
-						-moz-transition: color 0.2s ease-in-out;
-						-webkit-transition: color 0.2s ease-in-out;
-						-o-transition: color 0.2s ease-in-out;
-						-ms-transition: color 0.2s ease-in-out;
-						transition: color 0.2s ease-in-out;
+						-moz-Firmwareion: color 0.2s ease-in-out;
+						-webkit-Firmwareion: color 0.2s ease-in-out;
+						-o-Firmwareion: color 0.2s ease-in-out;
+						-ms-Firmwareion: color 0.2s ease-in-out;
+						Firmwareion: color 0.2s ease-in-out;
 						color: #cdced0;
 						display: inline-block;
 						text-decoration: none;
@@ -1223,3 +1223,151 @@
 		.grid-demo .row.flush > div:last-child span {
 			border-radius: 0 4px 4px 0;
 		}
+
+
+/* Container for skill bars */
+.skill-container {
+  width: 90%;
+  background-color: #ddd;
+  border-radius: 25px;
+}
+
+.skills {
+  text-align: right;
+  padding-top: 1px;
+  padding-bottom: 1px;
+  color: white;
+}
+
+.embedded {
+    width: 90%; 
+    background-color: #4CAF50; 
+    height:10px;
+    border-top-left-radius: 25px; 
+    border-bottom-left-radius: 25px
+}
+.rtos {width: 80%; 
+    background-color: #2196F3;
+    height:10px;
+    border-top-left-radius: 25px; 
+    border-bottom-left-radius: 25px
+}
+.out-container {
+    padding-left: 6px;
+    padding-bottom: 10px;
+}
+
+.ul-large {
+    font-size: 110%;
+    padding-left: 10%;
+    padding-top: 10px;
+    text-align: left;
+}
+
+.h3-orange {
+    color: #eba219;
+
+}
+
+.float {
+    float: left;
+    padding-right: 12px;
+}
+
+.h-color.blue{
+    color:#3cadd4;
+}
+
+.h-color.orange {
+    color: #d4633c;
+}
+
+.h-color.green {
+    color:#61d43c;
+}
+
+.h-color.magenta {
+    color:#e84ce8;
+}
+
+.h-color.white {
+    color:#ffffff;
+
+}
+
+.color-special {
+    background-color:#505050;
+}
+
+
+
+.h4-white {
+    color:white;
+}
+
+. {
+    color: white;
+    font-size: 110%;
+}
+
+
+.wrapper2 {
+		padding: 0.5em 0em 2em;
+		/* Style 1 Wrapper */
+		/* Style 2 Wrapper */
+		/* Style 3 Wrapper */
+	}
+.wrapper2.style1 {
+		
+		background: white;
+	}
+.wrapper2.style2 {
+
+		background: #F5F5F5;
+	}
+
+/* Banner */
+
+#banner2 {
+		background-image: url(../images/dark_tint.png), url(../images/slide04.jpg);
+		background-position: center center;
+		background-size: cover;
+		color: #ffffff;
+		padding: 14em 0em 14em;
+		text-align: center;
+	}
+
+		#banner2 :last-child {
+			margin-bottom: 0;
+		}
+
+		#banner2 h2 {
+			color: #ffffff;
+			font-size: 4em;
+			line-height: 1.25em;
+			margin: 0 0 0.5em 0;
+			padding: 0;
+		}
+
+/* Box */
+
+	.box2 {
+		border-radius: 2px;
+		#border: solid 2px rgba(242, 174, 57, 0.44);
+		margin-top: 1em;
+		padding: 1.5em;
+        #background-color: #ffffff;
+	}
+
+
+
+
+
+
+
+
+#t1 {
+    
+}
+
+
