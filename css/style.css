@@ -487,7 +487,7 @@
 			}
 
 			.icon.rounded.color5 {
-				background-color: #d43cad;
+				background-color: magenta;
 			}
 
 			.icon.rounded.color6 {
@@ -495,7 +495,7 @@
 			}
 
 			.icon.rounded.color7 {
-				background-color: #d4633c;
+				background-color: #ff9f00;
 			}
 
 			.icon.rounded.color8 {
@@ -1045,6 +1045,7 @@
 		text-align: center;
 	}
 
+
 		#banner :last-child {
 			margin-bottom: 0;
 		}
@@ -1258,9 +1259,17 @@
 }
 
 .ul-large {
-    font-size: 110%;
+    font-size: 150%;
     padding-left: 10%;
     padding-top: 10px;
+    text-align: left;
+    line-height: 150%;
+}
+
+
+.ul-big li{
+    font-size: 150%;
+    padding-top: 20px;
     text-align: left;
 }
 
@@ -1276,14 +1285,15 @@
 
 .h-color{
     padding-top: 5px;
+    font-size: 175%;
 }
 
-.h-color.blue{
-    color:#3cadd4;
+.h-color.magenta{
+    color:magenta;
 }
 
 .h-color.orange {
-    color: #d4633c;
+    color: #ff9f00;
 }
 
 .h-color.green {
@@ -1370,4 +1380,26 @@ p{
 
 .text-circle {
     text-align: center;
+    font-size: 150%;
+}
+
+
+#bg-work {
+    padding: 10px 20px;
+    background-color: #fcfcfc;
+    border-radius: 15px;
+}
+.text-work {
+    font-size: 135%;
+    padding: 10px;
+
+}
+.text-work:hover, .text-work:after{
+    background-color: #e029d9;
+    color: white;
+}
+
+.text-project {
+    padding-top: 10px;
+    font-size: 125%;
 }

@@ -15,6 +15,8 @@
   max-height: 250px;
 }
 
+
+
 .circle-bg {
   fill: none;
   stroke: #eee;
@@ -25,8 +27,9 @@
   fill: none;
   stroke-width: 2.8;
   stroke-linecap: round;
-  animation: progress 1s ease-out forwards;
+  #animation: progress 1s ease-out forwards;
 }
+
 
 @keyframes progress {
   0% {
@@ -34,9 +37,11 @@
   }
 }
 
+
 .circular-chart.orange .circle {
   stroke: #ff9f00;
 }
+
 
 .circular-chart.green .circle {
   stroke: #4CC790;
