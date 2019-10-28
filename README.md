@@ -1,3 +1,3 @@
 # Website
-  responsive website template
+  Riley Chen's Website
   
