@@ -987,8 +987,9 @@
 				#header nav > ul > li {
 					border-radius: 4px;
 					display: inline-block;
-					margin-left: 2em;
+					margin-left: 1em;
 					padding-left: 0;
+                    font-size: 150%;
 				}
 
 					#header nav > ul > li a {
@@ -1267,12 +1268,6 @@
 }
 
 
-.ul-big li{
-    font-size: 150%;
-    padding-top: 20px;
-    text-align: left;
-}
-
 .h3-orange {
     color: #eba219;
 
@@ -1403,3 +1398,5 @@ p{
     padding-top: 10px;
     font-size: 125%;
 }
+
+

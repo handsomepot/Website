@@ -16,6 +16,7 @@
 		<script src="js/skel.min.js"></script>
 		<script src="js/skel-layers.min.js"></script>
 		<script src="js/init.js"></script>
+        <link rel="stylesheet" href="css/tutorial.css" />
 		<noscript>
 			<link rel="stylesheet" href="css/skel.css" />
 			<link rel="stylesheet" href="css/style.css" />
@@ -28,7 +29,7 @@
 			<header id="header">
 				<h1><a href="index.html">Quirky Engineer</a></h1>
 				<nav id="nav">
-					<ul>
+					<ul class="ul-big">
 						<li><a href="index.html">Home</a></li>
 						<li><a href="resume.html">Resume</a></li>
 						<li><a href="contact.html">Contact</a></li>
@@ -41,15 +42,136 @@
 				<div class="container">
 
 					<header class="major">
-						<h2>How to make a perentage bar</h2>
-                        <p>creating percentage bar with svg</p>
+						<h2>Tutorial</h2>
+                        <p>This tutorial is based on Riley Chen's website and will teach you some animation effects behind it. <br>I hope you will enjoy this tutorial and I hope it could be useful.</p>
 					</header>
+                    
+                    <div class="row">
+                        <div class="5u 12u$(medium)">
+                            <h2><br>I. progress bar</h2>
 
-					<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-					<p>Vis accumsan feugiat adipiscing nisl amet adipiscing accumsan blandit accumsan sapien blandit ac amet faucibus aliquet placerat commodo. Interdum ante aliquet commodo accumsan vis phasellus adipiscing. Ornare a in lacinia. Vestibulum accumsan ac metus massa tempor. Accumsan in lacinia ornare massa amet. Ac interdum ac non praesent. Cubilia lacinia interdum massa faucibus blandit nullam. Accumsan phasellus nunc integer. Accumsan euismod nunc adipiscing lacinia erat ut sit. Arcu amet. Id massa aliquet arcu accumsan lorem amet accumsan.</p>
-					<p>Amet nibh adipiscing adipiscing. Commodo ante vis placerat interdum massa massa primis. Tempus condimentum tempus non ac varius cubilia adipiscing placerat lorem turpis at. Aliquet lorem porttitor interdum. Amet lacus. Aliquam lobortis faucibus blandit ac phasellus. In amet magna non interdum volutpat porttitor metus a ante ac neque. Nisi turpis. Commodo col. Interdum adipiscing mollis ut aliquam id ante adipiscing commodo integer arcu amet Ac interdum ac non praesent. Cubilia lacinia interdum massa faucibus blandit nullam. Accumsan phasellus nunc integer. Accumsan euismod nunc adipiscing lacinia erat ut sit. Arcu amet. Id massa aliquet arcu accumsan lorem amet accumsan commodo odio cubilia ac eu interdum placerat placerat arcu commodo lobortis adipiscing semper ornare pellentesque.</p>
-					<p>Amet nibh adipiscing adipiscing. Commodo ante vis placerat interdum massa massa primis. Tempus condimentum tempus non ac varius cubilia adipiscing placerat lorem turpis at. Aliquet lorem porttitor interdum. Amet lacus. Aliquam lobortis faucibus blandit ac phasellus. In amet magna non interdum volutpat porttitor metus a ante ac neque. Nisi turpis. Commodo col. Interdum adipiscing mollis ut aliquam id ante adipiscing commodo integer arcu amet blandit adipiscing arcu ante.</p>
+                        </div>
+                        <div class="5u 12u$(medium)">
+                            <div id ="block_container">
+                              <div class="b1">
+                                50%
+                              </div>
+                            </div>
 
+                            <div id ="block_container">
+                              <div class="b2">
+                                75%
+                              </div>
+                            </div>
+
+                            <div id ="block_container">
+                              <div class="b3">
+                                100%
+                              </div>
+                            </div>
+                        
+                        </div>
+                    </div>
+                    
+                    
+                    <h3>1. create background container</h3>
+                    <div class="row">
+        
+                        <div class="5u 12u$(medium)">
+                            <h4>HTML</h4>
+                            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em; height:9.5em"><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;div</span> <span style="color: #0000CC">id =</span><span style="background-color: #fff0f0">&quot;block_container&quot;</span><span style="color: #007700">&gt;</span>
+<span style="color: #007700">&lt;/div&gt;</span>
+</pre></div>
+
+                        </div>
+                        <div class="5u 12u$(medium)">
+                            <h4>CSS</h4>
+                            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0066BB; font-weight: bold">#block_container</span> {
+    <span style="color: #008800; font-weight: bold">display</span><span style="color: #333333">:</span> flex;
+    <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">500px</span>;
+    <span style="color: #008800; font-weight: bold">height</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">20px</span>;
+    <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span><span style="color: #007020">lightgrey</span>;
+    <span style="color: #008800; font-weight: bold">margin</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span> <span style="color: #008800; font-weight: bold">auto</span>;
+    <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span>;
+}
+</pre></div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="6u 12u">
+                            <p><br>Here we create a bar with lightgrey background</p>
+                        </div>
+                    </div>
+                    
+                    <h3>2. create the bar</h3>
+                    <div class="row">
+                        <div class="5u 12u$(medium)">
+                            <h4>HTML</h4>
+                            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em; height: 7em;"><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;div</span> <span style="color: #0000CC">id =</span><span style="background-color: #fff0f0">&quot;block_container&quot;</span><span style="color: #007700">&gt;</span>
+  <span style="color: #007700">&lt;div</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;block1&quot;</span><span style="color: #007700">&gt;</span>50%<span style="color: #007700">&lt;/div&gt;</span>
+<span style="color: #007700">&lt;/div&gt;</span>
+</pre></div>
+                        </div>
+                        <div class="5u 12u$(medium)">
+                            <h4>CSS</h4>
+                            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #BB0066; font-weight: bold">.block1</span>{
+   <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">50</span><span style="color: #333333">%</span>;
+   <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span><span style="color: #007020">green</span>;
+   <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span>;
+   <span style="color: #008800; font-weight: bold">text-align</span><span style="color: #333333">:</span><span style="color: #008800; font-weight: bold">center</span>;
+}
+</pre></div>
+
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="10u 12u">
+                        <p><br>Then we add another div into our block-container and color it as green.
+                            <br>Change the width of a progress bar with the CSS <b>width</b> property (from 0 to 100%).
+                        </p>
+                    </div>
+                    
+                    <h3>2. animate the bar</h3>
+                    <div class="row">
+                        
+                        <div class="10u 12u">
+                            <h4>CSS</h4>
+                            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #BB0066; font-weight: bold">.block1</span>{
+   <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">50</span><span style="color: #333333">%</span>;
+   <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span><span style="color: #007020">green</span>;
+   <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span>;
+   <span style="color: #008800; font-weight: bold">text-align</span><span style="color: #333333">:</span><span style="color: #008800; font-weight: bold">center</span>;
+   animation<span style="color: #333333">-</span>timing<span style="color: #333333">-</span>function<span style="color: #333333">:</span> linear;
+   animation<span style="color: #333333">-</span>fill<span style="color: #333333">-</span>mode<span style="color: #333333">:</span> forwards;
+   animation<span style="color: #333333">-</span>name<span style="color: #333333">:</span>progress1;
+   animation<span style="color: #333333">-</span>duration<span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">1s</span>;
+
+}
+
+<span style="color: #008800; font-weight: bold">@keyframes</span> <span style="color: #007700">progress1</span> {
+  <span style="color: #007700">from</span>{
+        <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">0</span>;
+    }
+    <span style="color: #007700">to</span>{
+        <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">50</span><span style="color: #333333">%</span>;
+    }
+}
+</pre></div>
+
+
+                        </div>
+                        
+                        
+                    </div>
+                    
+                    <div class="row">
+                        
+                        <div class="5u 12u">
+                            <p><br>That's it. View the full source code <a style="text-decoration:underline;" href="https://codepen.io/ting_riley/pen/wvvqXVw" target="_blank">here</a></p>
+                        </div>
+                    </div>
 				</div>
 			</section>
 
