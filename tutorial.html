@@ -29,14 +29,15 @@
 			<header id="header">
 				<h1><a href="index.html">Quirky Engineer</a></h1>
 				<nav id="nav">
-					<ul class="ul-big">
+					<ul>
 						<li><a href="index.html">Home</a></li>
 						<li><a href="resume.html">Resume</a></li>
+						<li><a href="tutorial.html">Tutorial</a></li>
 						<li><a href="contact.html">Contact</a></li>
 					</ul>
 				</nav>
 			</header>
-
+        
 				<!-- Main -->
 			<section id="main" class="wrapper">
 				<div class="container">
@@ -52,6 +53,7 @@
 
                         </div>
                         <div class="5u 12u$(medium)">
+                        <div id="outer">
                             <div id ="block_container">
                               <div class="b1">
                                 50%
@@ -69,7 +71,10 @@
                                 100%
                               </div>
                             </div>
-                        
+                        </div>
+                            <div style="text-align: center">
+                                Hover to animate.
+                            </div>
                         </div>
                     </div>
                     
@@ -92,7 +97,7 @@
     <span style="color: #008800; font-weight: bold">height</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">20px</span>;
     <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span><span style="color: #007020">lightgrey</span>;
     <span style="color: #008800; font-weight: bold">margin</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span> <span style="color: #008800; font-weight: bold">auto</span>;
-    <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span>;
+    <span style="color: #008800; font-weight: bold">border-radius</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span>;
 }
 </pre></div>
 
@@ -118,7 +123,7 @@
                             <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #BB0066; font-weight: bold">.block1</span>{
    <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">50</span><span style="color: #333333">%</span>;
    <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span><span style="color: #007020">green</span>;
-   <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span>;
+   <span style="color: #008800; font-weight: bold">border-radius<span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span>;
    <span style="color: #008800; font-weight: bold">text-align</span><span style="color: #333333">:</span><span style="color: #008800; font-weight: bold">center</span>;
 }
 </pre></div>
@@ -133,19 +138,20 @@
                         </p>
                     </div>
                     
-                    <h3>2. animate the bar</h3>
+                    
+                     <h3>2. create the bar</h3>
                     <div class="row">
-                        
-                        <div class="10u 12u">
+
+                        <div class="10u 12u$(medium)">
                             <h4>CSS</h4>
-                            <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #BB0066; font-weight: bold">.block1</span>{
-   <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">50</span><span style="color: #333333">%</span>;
-   <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span><span style="color: #007020">green</span>;
-   <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span>;
-   <span style="color: #008800; font-weight: bold">text-align</span><span style="color: #333333">:</span><span style="color: #008800; font-weight: bold">center</span>;
-   animation<span style="color: #333333">-</span>timing<span style="color: #333333">-</span>function<span style="color: #333333">:</span> linear;
-   animation<span style="color: #333333">-</span>fill<span style="color: #333333">-</span>mode<span style="color: #333333">:</span> forwards;
-   animation<span style="color: #333333">-</span>name<span style="color: #333333">:</span>progress1;
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #BB0066; font-weight: bold">.block1</span>{
+   <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">50</span><span style="color: #333333">%;</span>
+   <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span><span style="color: #007020">green;</span>
+   <span style="color: #008800; font-weight: bold">border-radius:</span><span style="color: #6600EE; font-weight: bold">25px;</span>
+   <span style="color: #008800; font-weight: bold">text-align:</span><span style="color: #008800; font-weight: bold">center;</span>
+   <span style="color: #333333">animation-timing-function</span><span style="color: #333333">: linear;</span>
+   <span style="color: #333333">animation-fill-mode: forwards;</span>
+   <span style="color: #333333">animation-name:progress1;</span>
    animation<span style="color: #333333">-</span>duration<span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">1s</span>;
 
 }
@@ -165,6 +171,12 @@
                         
                         
                     </div>
+                    <div class="10u 12u">
+                        <p><br>Then we add another div into our block-container and color it as green.
+                            <br>Change the width of a progress bar with the CSS <b>width</b> property (from 0 to 100%).
+                        </p>
+                    </div>
+                    
                     
                     <div class="row">
                         

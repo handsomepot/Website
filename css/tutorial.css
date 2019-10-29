@@ -1,25 +1,53 @@
-h3,h4,p{
-    font-size: 125%;
-}
-span{
-    font-size: 135%;
-}
+
+
+
 
 #block_container {
     display: flex;
-    width:500px;
-    height:22px;
+    width:100%;
+    height:20px;
     background-color:lightgrey;
     margin:25px auto;
     border-radius:25px;
+
+    
+
+
+}
+
+#resume_container {
+    display: flex;
+    width:100%;
+    height:18px;
+    background-color:lightgrey;
+    margin:30px auto;
+    border-radius:25px;
+
+    
+
+
 }
 
 #block_container > div{
     border-radius:25px;
     text-align:center;
-    animation-timing-function: linear;
-    animation-fill-mode: forwards;
-    animation-iteration-count:infinite;
+    line-height: 130%;
+    font-size: 110%;
+    color: floralwhite;
+
+
+}
+
+
+#resume_container > div {
+    border-radius:25px;
+    text-align:center;
+    line-height: 130%;
+    font-size: 100%;
+    background-color:#61d43c;
+    #color: ghostwhite;
+
+
 }
 
 
@@ -60,26 +88,149 @@ span{
   }
 }
 
-.b1{
-  width:50%; 
-  background-color:#31B404;
-  animation-name:example1;
-  animation-duration: 5s;
+@keyframes c {
+   0%{
+    width:0;
+  }
+  20% {
+    width:95%;
+  }
+  100% {
+    width:95%;
+  }
+}
+
+@keyframes cpp {
+   0%{
+    width:0;
+  }
+  20% {
+    width:90%;
+  }
+  100% {
+    width:90%;
+  }
+}
+
+
+
+.block-c{
+  width:95%; 
 
 }
 
+.block-cpp{
+  width:90%; 
+
+
+}
+
+.block-python{
+  width:90%; 
+
+
+}
+
+.block-java{
+  width:70%; 
+
+}
+
+.block-html{
+  width:70%; 
+}
+
+.block-css{
+  width:70%; 
+
+}
+
+
+#resume_outer:hover #resume_container .block-c{
+   animation-timing-function: linear;
+   animation-fill-mode: forwards;
+   animation-name:c;
+   animation-duration: 5s;
+}
+
+#resume_outer:hover #resume_container .block-cpp{
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-name:cpp;
+  animation-duration: 5s;
+}
+
+#outer:hover #block_container .b3{
+     animation-timing-function: linear;
+    animation-fill-mode: forwards;
+   animation-name:example3;
+   animation-duration: 5s;
+}
+
+
+.b1{
+  width:50%; 
+  background-color:#31B404;
+}
+
+
+
 .b2{
+ 
   width:75%;
   background-color:#FF4000;
-  animation-name:example2;
-  animation-duration: 5s;
+
 }
 
 .b3{
   width:100%;
   background-color:#0080FF;
-  animation-name:example3;
+}
+
+#outer:hover #block_container .b1{
+   animation-timing-function: linear;
+   animation-fill-mode: forwards;
+   animation-name:example1;
    animation-duration: 5s;
+}
+
+#outer:hover #block_container .b2{
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-name:example2;
+  animation-duration: 5s;
+}
+
+#outer:hover #block_container .b3{
+     animation-timing-function: linear;
+    animation-fill-mode: forwards;
+   animation-name:example3;
+   animation-duration: 5s;
+}
+
+
+
+
+.block-text{
+  width:10%; 
+  background-color:white;
+    
+
+
+}
+.block-percent{
+  width:50%; 
+  background-color:#31B404;
+
+
+}
+
+#outer {
+    #display: flex;
+}
+
+#resume_outer {
+    #display: flex;
 }
 
 
