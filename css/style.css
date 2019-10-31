@@ -797,11 +797,11 @@
 		-o-appearance: none;
 		-ms-appearance: none;
 		appearance: none;
-		-moz-Firmwareion: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-webkit-Firmwareion: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-o-Firmwareion: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		-ms-Firmwareion: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
-		Firmwareion: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-o-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 		background-color: #3cadd4;
 		border-radius: 30px;
 		border: 0;
@@ -997,11 +997,11 @@
 				}
 
 					#header nav > ul > li a {
-						-moz-Firmwareion: color 0.2s ease-in-out;
-						-webkit-Firmwareion: color 0.2s ease-in-out;
-						-o-Firmwareion: color 0.2s ease-in-out;
-						-ms-Firmwareion: color 0.2s ease-in-out;
-						Firmwareion: color 0.2s ease-in-out;
+						-moz-transition: color 0.2s ease-in-out;
+						-webkit-transition: color 0.2s ease-in-out;
+						-o-transition: color 0.2s ease-in-out;
+						-ms-transition: color 0.2s ease-in-out;
+						transition: color 0.2s ease-in-out;
 						color: #cdced0;
 						display: inline-block;
 						text-decoration: none;
