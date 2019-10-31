@@ -23,11 +23,11 @@
 			-o-animation: none !important;
 			-ms-animation: none !important;
 			animation: none !important;
-			-moz-Firmwareion: none !important;
-			-webkit-Firmwareion: none !important;
-			-o-Firmwareion: none !important;
-			-ms-Firmwareion: none !important;
-			Firmwareion: none !important;
+			-moz-transition: none !important;
+			-webkit-transition: none !important;
+			-o-transition: none !important;
+			-ms-transition: none !important;
+			transition: none !important;
 		}
 
 	body, input, select, textarea {
@@ -425,6 +425,10 @@
 			border-radius: 0;
 			padding: 0;
 		}
+
+	.box p{
+		font-size: 1.2em;
+	}
 
 /* Icon */
 
@@ -1397,6 +1401,85 @@ p{
 .text-project {
     padding-top: 10px;
     font-size: 125%;
+}
+
+
+
+#flip1 i{ 
+ transition: transform 0.5s ease-out;
+  
+}
+
+
+#flip1:hover i{
+  background-color: #ffffff;
+  color:#3cadd4;
+  transform: rotateY(180deg);
+
+}
+
+#flip1:hover h3{
+  color:#ffffff;
+
+}
+
+#flip1:hover{
+  background-color: #238aad;
+  color:#ffffff;
+}
+
+
+
+
+#flip2 i{ 
+ transition: transform 0.5s ease-out;
+  
+}
+
+
+
+#flip2:hover i{
+  background-color: #ffffff;
+  color:#61d43c;
+  transform: rotateY(180deg);
+
+}
+
+#flip2:hover h3{
+  color:#ffffff;
+
+}
+
+#flip2:hover{
+  background-color: #61d43c;
+  color:#ffffff;
+}
+
+
+
+
+#flip3 i{ 
+ transition: transform 0.5s ease-out;
+  
+}
+
+
+
+#flip3:hover i{
+  background-color: #ffffff;
+  color:#ff9f00;
+  transform: rotateY(180deg);
+
+}
+
+#flip3:hover h3{
+  color:#ffffff;
+
+}
+
+#flip3:hover{
+  background-color: #ff9f00;
+  color:#ffffff;
 }
 
 
