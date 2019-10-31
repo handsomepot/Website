@@ -7,7 +7,7 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>CSS Tutorial</title>
+		<title>Riley Chen | CSS Tutorial</title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
@@ -31,29 +31,194 @@
 				<h1><a href="index.html">Quirky Engineer</a></h1>
 				<nav id="nav">
 					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="resume.html">Resume</a></li>
-						<li><a href="tutorial.html">Tutorial</a></li>
-						<li><a href="contact.html">Contact</a></li>
+				        <li><a href="index.html">Home</a></li>
+                        <li><a href="tutorial.html">Tutorial</a></li>
+						<li><a href="about.html">About</a></li>
 					</ul>
 				</nav>
 			</header>
         
 				<!-- Main -->
-			<section id="main" class="wrapper">
+			<section class="wrapper">
 				<div class="container">
 
 					<header class="major">
 						<h2>Tutorial</h2>
                         <p>This tutorial is based on Riley Chen's website and will teach you some animation effects behind it. <br>I hope you will enjoy this tutorial and I hope it could be useful.</p>
 					</header>
+                     <div class="row">
+                        
+                        <div class="12u 12u">
+                            <h2><br>I. flip animation</h2>
+                        </div>
+                        
+                        <div class="4u 12u">
+                            <section class="box-demo" id="flip1"><div>
+								<i class="icon big rounded color1 fas fa-screwdriver"></i>
+								<h3>1st</h3>
+								<p>This is the first animation</p></div>
+							</section>
+                        </div>
+                        <div class="4u 12u">
+                            <section class="box-demo" id="flip2"><div>
+								<i class="icon big rounded color10 fas fa-hammer"></i>
+								<h3>2nd</h3>
+                                <p>This is the second animation</p></div>
+							</section>
+                        </div>
+                        <div class="4u 12u">
+                            <section class="box-demo" id="flip3"><div>
+								<i class="icon big rounded color7 fas fa-wrench"></i>
+								<h3>3rd</h3>
+                                <p>This is the third animation</p></div>
+							</section>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <h3><br>1.create a box including an icon, a header and text</h3>
+                     </div>
                     
                     <div class="row">
-                        <div class="5u 12u$(medium)">
-                            <h2><br>I. progress bar</h2>
+                        
+                        <div class="6u 12u$(medium)">
+                        <h4>HTML</h4>
+                        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;!DOCTYPE html&gt;</span>
+<span style="color: #007700">&lt;html&gt;</span>
 
+<span style="color: #007700">&lt;head&gt;</span>
+    <span style="color: #007700">&lt;title&gt;</span>Font Awesome Icons<span style="color: #007700">&lt;/title&gt;</span>
+    <span style="color: #007700">&lt;meta</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;viewport&quot;</span> <span style="color: #0000CC">content=</span><span style="background-color: #fff0f0">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: #007700">&gt;</span>
+    <span style="color: #007700">&lt;link</span> <span style="color: #0000CC">rel=</span><span style="background-color: #fff0f0">&quot;stylesheet&quot;</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css&quot;</span><span style="color: #007700">&gt;</span>
+<span style="color: #007700">&lt;/head&gt;</span>
+
+<span style="color: #007700">&lt;body&gt;</span>
+
+    <span style="color: #007700">&lt;section</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;box&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;flip1&quot;</span><span style="color: #007700">&gt;</span>
+        <span style="color: #007700">&lt;i</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;icon&quot;</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;fa fa-user&quot;</span><span style="color: #007700">&gt;&lt;/i&gt;</span>
+        <span style="color: #007700">&lt;h3&gt;</span>Flip1<span style="color: #007700">&lt;/h3&gt;</span>
+        <span style="color: #007700">&lt;p&gt;</span>This is the first animation<span style="color: #007700">&lt;/p&gt;</span>
+    <span style="color: #007700">&lt;/section&gt;</span>
+
+<span style="color: #007700">&lt;/body&gt;</span>
+
+<span style="color: #007700">&lt;/html&gt;</span>
+</pre></div>
+
+                     </div>
+                     <div class="6u 12u$(medium)">
+                         <h4>CSS</h4>
+                         <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0066BB; font-weight: bold">#icon</span>{
+     <span style="color: #008800; font-weight: bold">font-size</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span>;
+     <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">#3cadd4</span>;
+     <span style="color: #008800; font-weight: bold">color</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">#ffffff</span>;
+     <span style="color: #008800; font-weight: bold">padding</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">28px</span>;
+     <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">50</span><span style="color: #333333">%</span>;
+}
+
+<span style="color: #BB0066; font-weight: bold">.box</span> {
+     <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">4px</span>;
+     <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">solid</span> <span style="color: #6600EE; font-weight: bold">1px</span> rgba(<span style="color: #6600EE; font-weight: bold">144</span><span style="color: #333333">,</span> <span style="color: #6600EE; font-weight: bold">144</span><span style="color: #333333">,</span> <span style="color: #6600EE; font-weight: bold">144</span><span style="color: #333333">,</span> <span style="color: #6600EE; font-weight: bold">0</span><span style="color: #333333">.</span><span style="color: #6600EE; font-weight: bold">25</span>);
+     <span style="color: #008800; font-weight: bold">margin-bottom</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">2em</span>;
+     <span style="color: #008800; font-weight: bold">padding</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">1.5em</span>;
+     <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25</span><span style="color: #333333">%</span>;
+}
+ 
+</pre></div>
+
+                     </div>
+                        
+                     
+                    </div>
+                    
+                    <div class="row">
+                        <h3><br>2. add hover effects</h3>
+                        
+                     </div>
+                    
+                    <div class="row">
+
+                     <div class="6u 12u$(medium)">
+                         <p><br>When the box is hovered, we swap the background color and icon color.</p>
+                     
+                         <h4>CSS</h4>
+                         <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0066BB; font-weight: bold">#flip1</span><span style="color: #555555; font-weight: bold">:hover</span>{
+  <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">#3cadd4</span>;
+  <span style="color: #008800; font-weight: bold">color</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">#ffffff</span>;
+}
+
+<span style="color: #0066BB; font-weight: bold">#flip1</span><span style="color: #555555; font-weight: bold">:hover</span> <span style="color: #007700">i</span>{
+  <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">#ffffff</span>;
+  <span style="color: #008800; font-weight: bold">color</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">#3cadd4</span>;
+}
+
+<span style="color: #0066BB; font-weight: bold">#flip1</span><span style="color: #555555; font-weight: bold">:hover</span> <span style="color: #007700">h3</span>{
+  <span style="color: #008800; font-weight: bold">color</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">#ffffff</span>;
+}
+</pre></div>
+
+                         
                         </div>
                         <div class="5u 12u$(medium)">
+                            <p><br><br></p>
+                            <h4>&nbsp;</h4>
+                            <section class="box-demo" id="flip7">
+                            <div><i id="icon" class="fa fa-user"></i>
+                                <h3>Change Color</h3>
+                                <p>This is what it looks like</p></div>
+                          </section>
+                            <p style="text-align: center"><br>hover to play</p>
+                     
+                        </div>
+                        
+                    </div>
+                    
+                    <div class="row">
+                        <h3><br>3. flip the icon</h3>
+                     </div>
+                    
+                    <div class="row">
+
+                     <div class="6u 12u$(medium)">
+                         <p>We now play the flip animation when hovered.</p>
+                         <h4>CSS</h4>
+<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0066BB; font-weight: bold">#flip1</span> <span style="color: #007700">i</span>{ 
+ transition<span style="color: #333333">:</span> transform <span style="color: #6600EE; font-weight: bold">0.5s</span> ease<span style="color: #333333">-</span>out;
+  
+}
+
+<span style="color: #0066BB; font-weight: bold">#flip1</span><span style="color: #555555; font-weight: bold">:hover</span> <span style="color: #007700">i</span>{
+  <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">#ffffff</span>;
+  <span style="color: #008800; font-weight: bold">color</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">#3cadd4</span>;
+  transform<span style="color: #333333">:</span> rotateY(<span style="color: #6600EE; font-weight: bold">180</span>deg);
+
+}
+</pre></div>
+
+                         <p><br>view the complete source code <a href="https://codepen.io/ting_riley/pen/RwwLvbp" target="_blank" style="text-decoration:underline;" >here.</a></p>
+                     
+                        </div>
+                        <div class="5u 12u$(medium)">
+                            <p><br></p>
+                            <h4>&nbsp;</h4>
+                            <section class="box-demo2" id="flip1">
+                            <div><i id="icon" class="fa fa-user"></i>
+                                <h3>Flip Animation</h3>
+                                <p>This is the final result</p></div>
+                          </section>
+                            <p style="text-align: center"><br>hover to play</p>
+                     
+                        </div>
+                        
+                    </div>
+                    
+                    
+                    <div class="row">
+                        <div class="12u 12u$(medium)">
+                            <h2><br>II. progress bar</h2>
+
+                        </div>
+                        <div class="6u 12u$(medium)">
                         <div id="outer">
                             <div id ="block_container">
                               <div class="b1">
@@ -74,7 +239,7 @@
                             </div>
                         </div>
                             <div style="text-align: center">
-                                Hover to animate.
+                                Hover to animate.<br><br>
                             </div>
                         </div>
                     </div>
@@ -190,7 +355,7 @@
                     <div class="row">
                         
                         <div class="6u 12u">
-                            <h2><br>II. Circular percentage bar</h2>
+                            <h2><br>III. Circular percentage bar</h2>
                         </div>
                         
                         <div class="5u 12u">
@@ -263,167 +428,7 @@
                  <p><br>I got the idea from <a href="https://medium.com/@pppped/how-to-code-a-responsive-circular-percentage-chart-with-svg-and-css-3632f8cd7705" style="text-decoration:underline;" target="_blank">here</a>. So, I will not provide a step-by-step guide on it.<br>Please visit <a href="https://medium.com/@pppped/how-to-code-a-responsive-circular-percentage-chart-with-svg-and-css-3632f8cd7705" style="text-decoration:underline;" target="_blank">this blog</a> for more detail.<br><br>view the complete source code <a href="https://codepen.io/ting_riley/pen/eYYGPGm" target="_blank" style="text-decoration:underline;" >here.</a>
                     </p></div>
                     
-                        <div class="row">
-                        
-                        <div class="12u 12u">
-                            <h2><br>III. flip animation</h2>
-                        </div>
-                        
-                        <div class="4u 12u">
-                            <section class="box-demo" id="flip1"><div>
-								<i class="icon big rounded color1 fas fa-screwdriver"></i>
-								<h3>1st</h3>
-								<p>This is the first animation</p></div>
-							</section>
-                        </div>
-                        <div class="4u 12u">
-                            <section class="box-demo" id="flip2"><div>
-								<i class="icon big rounded color10 fas fa-hammer"></i>
-								<h3>2nd</h3>
-                                <p>This is the second animation</p></div>
-							</section>
-                        </div>
-                        <div class="4u 12u">
-                            <section class="box-demo" id="flip3"><div>
-								<i class="icon big rounded color7 fas fa-wrench"></i>
-								<h3>3rd</h3>
-                                <p>This is the third animation</p></div>
-							</section>
-                        </div>
-                        
-                    </div>
-                    <div class="row">
-                        <h3><br>1.create a box including an icon, a header and text</h3>
-                     </div>
-                    
-                    <div class="row">
-                        
-                        <div class="6u 12u$(medium)">
-                        <h4>HTML</h4>
-                        <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #557799">&lt;!DOCTYPE html&gt;</span>
-<span style="color: #007700">&lt;html&gt;</span>
-
-<span style="color: #007700">&lt;head&gt;</span>
-    <span style="color: #007700">&lt;title&gt;</span>Font Awesome Icons<span style="color: #007700">&lt;/title&gt;</span>
-    <span style="color: #007700">&lt;meta</span> <span style="color: #0000CC">name=</span><span style="background-color: #fff0f0">&quot;viewport&quot;</span> <span style="color: #0000CC">content=</span><span style="background-color: #fff0f0">&quot;width=device-width, initial-scale=1&quot;</span><span style="color: #007700">&gt;</span>
-    <span style="color: #007700">&lt;link</span> <span style="color: #0000CC">rel=</span><span style="background-color: #fff0f0">&quot;stylesheet&quot;</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css&quot;</span><span style="color: #007700">&gt;</span>
-<span style="color: #007700">&lt;/head&gt;</span>
-
-<span style="color: #007700">&lt;body&gt;</span>
-
-    <span style="color: #007700">&lt;section</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;box&quot;</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;flip1&quot;</span><span style="color: #007700">&gt;</span>
-        <span style="color: #007700">&lt;i</span> <span style="color: #0000CC">id=</span><span style="background-color: #fff0f0">&quot;icon&quot;</span> <span style="color: #0000CC">class=</span><span style="background-color: #fff0f0">&quot;fa fa-user&quot;</span><span style="color: #007700">&gt;&lt;/i&gt;</span>
-        <span style="color: #007700">&lt;h3&gt;</span>Flip1<span style="color: #007700">&lt;/h3&gt;</span>
-        <span style="color: #007700">&lt;p&gt;</span>This is the first animation<span style="color: #007700">&lt;/p&gt;</span>
-    <span style="color: #007700">&lt;/section&gt;</span>
-
-<span style="color: #007700">&lt;/body&gt;</span>
-
-<span style="color: #007700">&lt;/html&gt;</span>
-</pre></div>
-
-                     </div>
-                     <div class="6u 12u$(medium)">
-                         <h4>CSS</h4>
-                         <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0066BB; font-weight: bold">#icon</span>{
-     <span style="color: #008800; font-weight: bold">font-size</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25px</span>;
-     <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">#3cadd4</span>;
-     <span style="color: #008800; font-weight: bold">color</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">#ffffff</span>;
-     <span style="color: #008800; font-weight: bold">padding</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">28px</span>;
-     <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">50</span><span style="color: #333333">%</span>;
-}
-
-<span style="color: #BB0066; font-weight: bold">.box</span> {
-     <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">-</span>radius<span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">4px</span>;
-     <span style="color: #008800; font-weight: bold">border</span><span style="color: #333333">:</span> <span style="color: #008800; font-weight: bold">solid</span> <span style="color: #6600EE; font-weight: bold">1px</span> rgba(<span style="color: #6600EE; font-weight: bold">144</span><span style="color: #333333">,</span> <span style="color: #6600EE; font-weight: bold">144</span><span style="color: #333333">,</span> <span style="color: #6600EE; font-weight: bold">144</span><span style="color: #333333">,</span> <span style="color: #6600EE; font-weight: bold">0</span><span style="color: #333333">.</span><span style="color: #6600EE; font-weight: bold">25</span>);
-     <span style="color: #008800; font-weight: bold">margin-bottom</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">2em</span>;
-     <span style="color: #008800; font-weight: bold">padding</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">1.5em</span>;
-     <span style="color: #008800; font-weight: bold">width</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">25</span><span style="color: #333333">%</span>;
-}
- 
-</pre></div>
-
-                     </div>
-                        
-                     
-                    </div>
-                    
-                    <div class="row">
-                        <h3><br>2. add hover effects</h3>
-                     </div>
-                    
-                    <div class="row">
-
-                     <div class="6u 12u$(medium)">
-                         <h4>CSS</h4>
-                         <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0066BB; font-weight: bold">#flip1</span><span style="color: #555555; font-weight: bold">:hover</span> <span style="color: #007700">i</span>{
-  <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">#ffffff</span>;
-  <span style="color: #008800; font-weight: bold">color</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">#3cadd4</span>;
-}
-
-<span style="color: #0066BB; font-weight: bold">#flip1</span><span style="color: #555555; font-weight: bold">:hover</span> <span style="color: #007700">h3</span>{
-  <span style="color: #008800; font-weight: bold">color</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">#ffffff</span>;
-}
-
-<span style="color: #0066BB; font-weight: bold">#flip1</span><span style="color: #555555; font-weight: bold">:hover</span>{
-  <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">#238aad</span>;
-  <span style="color: #008800; font-weight: bold">color</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">#ffffff</span>;
-}
-</pre></div>
-                         <p><br>When the box is hovered, we swap the background color and icon color.</p>
-                     
-                        </div>
-                        <div class="5u 12u$(medium)">
-                            <h4>&nbsp;</h4>
-                            <section class="box-demo" id="flip4">
-                            <div><i id="icon" class="fa fa-user"></i>
-                                <h3>Flip1</h3>
-                                <p>This is the first animation</p></div>
-                          </section>
-                            <p style="text-align: center"><br>This is what it looks like (hover to play)</p>
-                     
-                        </div>
-                        
-                    </div>
-                    
-                    <div class="row">
-                        <h3><br>3. flip the icon</h3>
-                     </div>
-                    
-                    <div class="row">
-
-                     <div class="6u 12u$(medium)">
-                         <h4>CSS</h4>
-<!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="margin: 0; line-height: 125%"><span style="color: #0066BB; font-weight: bold">#flip1</span> <span style="color: #007700">i</span>{ 
- transition<span style="color: #333333">:</span> transform <span style="color: #6600EE; font-weight: bold">0.5s</span> ease<span style="color: #333333">-</span>out;
-  
-}
-
-<span style="color: #0066BB; font-weight: bold">#flip1</span><span style="color: #555555; font-weight: bold">:hover</span> <span style="color: #007700">i</span>{
-  <span style="color: #008800; font-weight: bold">background-color</span><span style="color: #333333">:</span> <span style="color: #6600EE; font-weight: bold">#ffffff</span>;
-  <span style="color: #008800; font-weight: bold">color</span><span style="color: #333333">:</span><span style="color: #6600EE; font-weight: bold">#3cadd4</span>;
-  transform<span style="color: #333333">:</span> rotateY(<span style="color: #6600EE; font-weight: bold">180</span>deg);
-
-}
-</pre></div>
-
-                         <p><br>We now play the flip animation when hovered.<br><br>view the complete source code <a href="https://codepen.io/ting_riley/pen/RwwLvbp" target="_blank" style="text-decoration:underline;" >here.</a></p>
-                     
-                        </div>
-                        <div class="5u 12u$(medium)">
-                            <h4>&nbsp;</h4>
-                            <section class="box-demo2" id="flip1">
-                            <div><i id="icon" class="fa fa-user"></i>
-                                <h3>Flip1</h3>
-                                <p>This is the final result</p></div>
-                          </section>
-                            <p style="text-align: center"><br>hover to play</p>
-                     
-                        </div>
-                        
-                    </div>
-                    
-                    
+                       
                     
                 </div>
                      
