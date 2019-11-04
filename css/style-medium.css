@@ -39,10 +39,15 @@
 		#banner h2 {
 			font-size: 2.25em;
 		}
+        #banner h3 {
+			font-size: 2em;
+			
+		}
 
 		#banner p {
 			font-size: 1.25em;
 		}
+    
 
 /* Layers */
 
