@@ -1,8 +1,8 @@
 var canvas = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 
-canvas.width = 600;
-canvas.height = 400;
+canvas.width = 700;
+canvas.height = 500;
 
 var score1 = 0;
 var score2 = 0;
@@ -18,8 +18,10 @@ document.addEventListener('keydown', function (e) {
     }
     
     if(gameState == 3 || gameState == 4){
-        if(32 == e.keyCode)
-            gameState = 0;
+        if(32 == e.keyCode){
+            init();
+            gameState = 1;
+        }
     }
 	
     keys[e.keyCode] = true;
@@ -70,8 +72,8 @@ function Box(options){ /*Constructor of Box object*/
 }
 
 var player1 = new Box({ /*player paddle*/
-    x: 10,
-    y: 200,
+    x: 20,
+    y: canvas.height/2-40,
     width: 12,
     height: 80,
     color: '#FFFFFF',
@@ -79,12 +81,12 @@ var player1 = new Box({ /*player paddle*/
 });
 
 var player2 = new Box({ /*player paddle*/
-    x: 575,
-    y: 100,
+    x: canvas.width-20-12,
+    y: canvas.height/2-40,
     width: 12,
     height: 80,
     color: '#FFFFFF',
-    gravity: 2
+    gravity: 3
 });
 
 var midLine = new Box({ /*The net*/
@@ -226,28 +228,28 @@ function draw() {
 }
 
 function drawStartMenu(){
-    ctx.font="30px monospace";
+    ctx.font="25px monospace";
     ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
     ctx.clearRect(canvas.width/2-10,canvas.height/2-40, 20,60);
-    ctx.fillText("Press spacebar to start", canvas.width/2, canvas.height/2);
+    ctx.fillText("Press the spacebar to start", canvas.width/2, canvas.height/2);
 }
 
 function drawOverMenu(){
-    ctx.font="30px monospace";
+    ctx.font="35px monospace";
     ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
     ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
-    ctx.fillText("Press spacebar to restart", canvas.width/2, canvas.height/2 + 40);
+    ctx.fillText("Press the spacebar to restart", canvas.width/2, canvas.height/2 + 40);
 
 }
 
 function drawWinMenu(){
-    ctx.font="30px monospace";
+    ctx.font="25px monospace";
     ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
     ctx.fillText("You Win", canvas.width/2, canvas.height/2);
-    ctx.fillText("Press spacebar to restart", canvas.width/2, canvas.height/2 + 40);
+    ctx.fillText("Press the spacebar to restart", canvas.width/2, canvas.height/2 + 40);
 }
 
 
@@ -260,9 +262,16 @@ function sleep(milliseconds) {
   }
 }
 
+function resetPlayers(){
+    player1.x = 20;
+    player1.y = canvas.height/2-40;
+    player2.x = canvas.width-20-12;
+    player2.y = canvas.height/2-40;
+}
 function init(){
     score1 = 0;
     score2 = 0;
+    resetPlayers();
     createNewBall();
 }
 
