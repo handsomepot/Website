@@ -47,6 +47,10 @@
 		#banner p {
 			font-size: 1.25em;
 		}
+
+        #banner div {
+			width: 200%;
+		}
     
 
 /* Layers */
