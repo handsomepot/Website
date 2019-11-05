@@ -16,6 +16,12 @@ document.addEventListener('keydown', function (e) {
         if(32 == e.keyCode)
             gameState = 1;
     }
+    
+    if(gameState == 3 || gameState == 4){
+        if(32 == e.keyCode)
+            gameState = 0;
+    }
+
     keys[e.keyCode] = true;
     e.preventDefault();
 });
@@ -235,6 +241,8 @@ function drawOverMenu(){
     ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
     ctx.fillText("Game Over", canvas.width/2, canvas.height/2);
+    ctx.fillText("Press spacebar to restart", canvas.width/2, canvas.height/2 + 40);
+
 }
 
 function drawWinMenu(){
@@ -242,6 +250,7 @@ function drawWinMenu(){
     ctx.fillStyle = "#ffffff";
     ctx.textAlign = "center";
     ctx.fillText("You Win", canvas.width/2, canvas.height/2);
+    ctx.fillText("Press spacebar to restart", canvas.width/2, canvas.height/2 + 40);
 }
 
 
