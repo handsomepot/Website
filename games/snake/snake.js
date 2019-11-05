@@ -21,7 +21,7 @@ document.addEventListener('keydown', function (e) {
         if(32 == e.keyCode)
             gameState = 0;
     }
-	
+
     keys[e.keyCode] = true;
     e.preventDefault();
 });
