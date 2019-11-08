@@ -12,14 +12,14 @@ menu.create = function ()
     this.cameras.main.backgroundColor.setTo(44, 62, 80);
     
     
-      player = this.physics.add.sprite(
-    100, // x position
+    player = this.physics.add.sprite(
+    80, // x position
     worldY/2, // y position
     'paddle', // key of image for the sprite
   );
     
     computer = this.physics.add.sprite(
-    worldX-100, // x position
+    worldX-80, // x position
     worldY/2, // y position
     'paddle', // key of image for the sprite
   );

@@ -10,9 +10,9 @@ var count = 4;
 var serve = true; // serve the ball
 var ball;
 var colors = ['#2c3e50', '#e25409', '#043112'];
-var offset = [100, 100, 100];
+var offset = [80, 80, 80];
 var velocity = [300,400,450];
-var vx = [250,300,400];
+var vx = [250,300,350];
 var vy = [300,350,400];
 var scaleY = [1.5,1.25,1];
 var level = 0;
@@ -223,9 +223,9 @@ resetBall = function(){
     ball.body.x = worldX/2;
     
     if(Math.random() >= 0.5)
-        ball.body.y = 100;
+        ball.body.y = 50;
     else
-        ball.body.y = 400;
+        ball.body.y = 450;
     ball.setVelocityX(0);
     ball.setVelocityY(0);
 
