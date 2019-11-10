@@ -5,6 +5,7 @@ var bullets;
 class Enemy extends Phaser.GameObjects.Sprite{
     constructor(config) {
         super(config.scene, config.x, config.y, 'spaceship1');
+        config.scene.physics.world.enable(this);
         config.scene.add.existing(this);
         this.bullets = level1.physics.add.group({ defaultKey: 'bullet1', maxSize: 10 });
     }
@@ -27,10 +28,11 @@ var enemies = [];
 function createEnemies(){
    enemy = new Enemy({scene:level1, x:100, y:100});
    enemy.fire();
+   enemy.body.velocity.y = 20;
    level1.tweens.add({
         targets: enemy,
-        duration: 4000,
-        x: 400,
+        duration: 3000,
+        x: 300,
         delay: 10,
         ease: 'Sine.easeInOut',
         repeat: -1,
