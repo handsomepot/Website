@@ -1,7 +1,6 @@
 let preload = new Phaser.Scene('preload');
 let menu = new Phaser.Scene('menu');
 let level1 = new Phaser.Scene('level1');
-let level2 = new Phaser.Scene('level2');
 let worldX = 800;
 let worldY = 600;
 
@@ -18,7 +17,7 @@ let config = {
     // Center the game canvas both horizontally and vertically within the parent
     //autoCenter: Phaser.Scale.CENTER_BOTH
   },
-    scene: [ preload, menu, level1, level2 ],
+    scene: [ preload, menu, level1 ],
       physics: {
     default: 'arcade',
     arcade: {

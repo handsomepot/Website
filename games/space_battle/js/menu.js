@@ -12,39 +12,8 @@ menu.create = function ()
     this.cameras.main.backgroundColor.setTo(44, 62, 80);
     
     
-    player = this.physics.add.sprite(
-    80, // x position
-    worldY/2, // y position
-    'paddle', // key of image for the sprite
-  );
-    
-    computer = this.physics.add.sprite(
-    worldX-80, // x position
-    worldY/2, // y position
-    'paddle', // key of image for the sprite
-  );
- 
-    ball = this.physics.add.sprite(
-    worldX/2, // x position
-    worldY/2, // y position
-    'ball', // key of image for the sprite
-  );
-    
-    
-  player.scaleY = 2;
-  computer.scaleY = 2;
-    
-   /*var line = this.physics.add.group({
-    key: 'line',
-    repeat: 17,
-    immovable: true,
-    setXY: {
-      x: worldX/2,
-      y: 80,
-      stepY: 20
-    }
-  });*/
-
+   
+  
     var titleText = this.add.text(
     this.physics.world.bounds.width / 2,
     this.physics.world.bounds.height / 4,

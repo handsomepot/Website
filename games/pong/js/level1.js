@@ -11,12 +11,14 @@ var serve = true; // serve the ball
 var ball;
 var colors = ['#2c3e50', '#e25409', '#043112'];
 var offset = [80, 80, 80];
-var velocity = [300,400,450];
-var vx = [250,300,350];
-var vy = [300,350,400];
-var scaleY = [1.5,1.25,1];
+var velocity = [375,450,450];
+var playerVelocity = [400,400,400];
+var vx = [350,350,350];
+var vy = [400,400,400];
+var scaleY = [2,1.75,1.5];
 var level = 0;
 let sfx, sfx2;
+var error = 0;
 // background color #2c3e50
 // background color #2c3e50
 level1.preload = function ()
@@ -44,7 +46,7 @@ level1.create = function ()
  
     ball = this.physics.add.sprite(
     worldX/2, // x position
-    worldY/2, // y position
+    100, // y position
     'ball', // key of image for the sprite
   );
     
@@ -76,10 +78,10 @@ level1.create = function ()
         if(gameState == 'running'){
             
             if(event.key == 'ArrowDown'){
-                player.setVelocityY(360);
+                player.setVelocityY(playerVelocity[level]);
             }
             else if(event.key == 'ArrowUp'){
-                player.setVelocityY(-360);
+                player.setVelocityY(-playerVelocity[level]);
             }
         }
 
@@ -95,11 +97,11 @@ level1.create = function ()
     
    var line = this.physics.add.group({
     key: 'line',
-    repeat: 16,
+    repeat: 20,
     immovable: true,
     setXY: {
       x: worldX/2,
-      y: 100,
+      y: 120,
       stepY: 20
     }
   });
@@ -214,18 +216,31 @@ level1.create = function ()
     sfxScore = this.sound.add('score');
     sfxExplode = this.sound.add('explode');
     
-    
+    this.time.addEvent({ delay: 4000, callback: randomError, callbackScope: this, loop: true });
     
        
 },
 
+randomError = function(){
+    /*if(level == 2)
+        var h = player.body.height/4;
+    else
+        var h = player.body.height/4;
+    
+    if(error == h)
+        error = 0;
+    else if(error == 0)
+        error = -h;
+    else
+        error = h;*/
+    error = 0;
+}
+
 resetBall = function(){
     ball.body.x = worldX/2;
+    ball.body.y = 100;
+ 
     
-    if(Math.random() >= 0.5)
-        ball.body.y = 50;
-    else
-        ball.body.y = 450;
     ball.setVelocityX(0);
     ball.setVelocityY(0);
 
@@ -238,11 +253,10 @@ setRandomDirection = function(){
         ball.setVelocityX(-vx[level]);
     else
         ball.setVelocityX(vx[level]);
+   
+    ball.setVelocityY(-vy[level]);
+
     
-    if(Math.random() >= 0.5)
-        ball.setVelocityY(-vy[level]);
-    else
-        ball.setVelocityY(vy[level]);
 
     ball.visible = true;
 
@@ -299,12 +313,14 @@ countdown = function (){
 }
 
 hitPaddle = function(){
-
+    
+    
     sfxBeep.play();
 }
 
 hitComputer = function(){
 
+    
     sfxBeep.play();
 }
 
@@ -365,7 +381,7 @@ level1.update = function ()
             resetBall();
             
             scoreText2.text = score2 + '';
-            console.log(ball.body.y);
+            //console.log(ball.body.y);
             timer = this.time.addEvent({ delay: 1500, callback: delay1, callbackScope: this, loop: false });
             timerLock = true;
             serve = true;
@@ -387,9 +403,41 @@ level1.update = function ()
                computer.setVelocityY(0);
             }
             else{
+                var h = computer.body.height;
+                console.log(computer.body.y + ' ' + ball.body.y);
+           
+                var s = (computer.body.x - ball.body.x)/ball.body.velocity.x; //second
+                var targetY = ball.body.y + ball.body.velocity.y * s;
 
-                
-                if((computer.body.y - ball.body.y) >= 10){
+                if(s > 0 && ball.body.x >= worldX/2 + 50 - level*50){
+                    if(targetY > worldY){
+                        targetY = (worldY-targetY) + worldY;
+                    }
+                    if((computer.body.y + h/2 - targetY) > 2){
+                       
+                        computer.setVelocityY(-velocity[level]);
+                    }
+                    else if((computer.body.y + h/2 - targetY) <= -2){
+                        
+                        computer.setVelocityY(velocity[level]);
+                    }
+                    else
+                        computer.setVelocityY(0);
+                    
+
+                    console.log(s + ' ' + targetY);
+                }
+                else if(ball.body.x <= worldX/4){
+                    if((computer.body.y + h/2 - ball.body.y) > 20)
+                        computer.setVelocityY(-velocity[level]);
+                    else if((computer.body.y + h/2 - ball.body.y) <= -20)
+                        computer.setVelocityY(velocity[level]);
+
+                }
+                else
+                    computer.setVelocityY(0);
+                     //computer.setVelocityY(0);
+                /*if((computer.body.y - ball.body.y) >= 10){
                     if(computer.body.x - ball.body.x >=40)
                         computer.setVelocityY(-velocity[level]);
                     else if(computer.body.x - ball.body.x >=10)
@@ -407,12 +455,8 @@ level1.update = function ()
                     else
                         computer.setVelocityY(0);
 
-                }
-                else{
+                }*/
 
-                    computer.setVelocityY(0);
-
-                }
             }
 
             
