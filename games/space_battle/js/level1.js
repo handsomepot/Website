@@ -1,6 +1,13 @@
 var starfield;
 var player;
 var bullets;
+class EnemyPos{
+    constructor(x, y, tween){
+        this.x = x;
+        this.y = y;
+        this.tween = tween;
+    }
+}
 
 class Enemy extends Phaser.GameObjects.Sprite{
     constructor(config) {
@@ -21,23 +28,34 @@ class Enemy extends Phaser.GameObjects.Sprite{
 
 }
 
-var enemies = [];
+var enemies;
+var enemyPos = [];
 
 
 
 function createEnemies(){
-   enemy = new Enemy({scene:level1, x:100, y:100});
-   enemy.fire();
-   enemy.body.velocity.y = 20;
-   level1.tweens.add({
-        targets: enemy,
-        duration: 3000,
-        x: 300,
-        delay: 10,
-        ease: 'Sine.easeInOut',
-        repeat: -1,
-        yoyo: true
-    }); 
+    
+    enemyPos.push(new EnemyPos(100, 100, 300));
+    enemyPos.push(new EnemyPos(700, 100, 500));
+    enemies = level1.physics.add.group();
+    for(var i = 0; i < enemyPos.length; i++){
+        enemy = new Enemy({scene:level1, x:enemyPos[i].x, y:enemyPos[i].y});
+        enemy.body.velocity.y = 20;
+        level1.tweens.add({
+            targets: enemy,
+            duration: 3000,
+            x: enemyPos[i].tween,
+            delay: 1000,
+            ease: 'Sine.easeInOut',
+            repeat: -1,
+            yoyo: true
+        }); 
+        enemies.create(enemy);
+        console.log(enemies.children.entries.length);
+    }
+
+    
+
 }
 
 function shoot(event) {
@@ -53,9 +71,6 @@ function shoot(event) {
         
 }
 
-function init(){
-   
-}
 
 level1.preload = function ()
 {
@@ -79,8 +94,7 @@ level1.create = function ()
     cursors = level1.input.keyboard.createCursorKeys();
     
     this.input.keyboard.on('keydown', shoot, this);
-        
-    init();
+
     createEnemies();
     
     
