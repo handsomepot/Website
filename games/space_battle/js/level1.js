@@ -45,6 +45,9 @@ function fire2(x, y) {
         bullet.setActive(true);
         bullet.setVisible(true);
         bullet.body.velocity.y = 300;
+        if(Math.random() >= 0.8){
+            bullet.body.velocity.x = player.body.x - x;
+        }
     }
         
         
@@ -70,13 +73,21 @@ function createEnemy(x, y){
        }); */
 
 }
-
+var isplay = false;
 function addEnemy(){
-    var n = Math.floor((Math.random() * 5) + 1);
-    e = new Enemy({scene:level1, x: n*100, y:-10});
+    var n = Math.floor((Math.random() * 3) + 1);
+    e = new Enemy({scene:level1, x: n*50, y:20});
     enemies.add(e);
     e.body.immovable = true;
     e.body.velocity.y = 150;
+    
+    if(Math.random()>=0.5){
+        e = new Enemy({scene:level1, x: worldX - n*50, y:-20});
+        enemies.add(e);
+        e.body.immovable = true;
+        e.body.velocity.y = 150;
+    }
+
 
 }
 
@@ -84,6 +95,8 @@ function enemyHitPlayer(player, enemy){
     
     //enemy.animate.play('');
     //enemies.remove(enemy, true);
+    isplay = true;
+    
     console.log('enemyHitPlayer');
     console.log(enemies.children.entries.length);
     //level1.setTexture("sprExplosion");  // this refers to the same animation key we used when we added this.anims.create previously
@@ -91,7 +104,7 @@ function enemyHitPlayer(player, enemy){
 }
 
 function hitEnemy(bullet, enemy){
-    if(!enemy.isDead){
+    if(!enemy.isDead && enemy.body.y >= 10){
         enemy.isDead = true;
         enemy.anims.play("sprExplosion"); // play the animation
         enemy.play = false;
@@ -155,11 +168,11 @@ level1.create = function ()
     this.physics.add.overlap(enemybullets, player, hitPlayer, null, this);
     this.physics.add.overlap(bullets, enemies, hitEnemy, null, this);
     this.physics.add.overlap(player, enemies, enemyHitPlayer, null, this);
-    this.time.addEvent({ delay: 1000, callback: addEnemy, callbackScope: this, loop: true });
+    this.time.addEvent({ delay: 2000, callback: addEnemy, callbackScope: this, loop: true });
     this.anims.create({
       key: "sprExplosion",
       frames: this.anims.generateFrameNumbers("sprExplosion"),
-      frameRate: 20,
+      frameRate: 32,
       repeat: 0
     });
     
@@ -195,11 +208,17 @@ level1.update = function (time, delta)
     {
         if(time >= lastTime){
             shoot();
-            lastTime = time + 200;
+            lastTime = time + 300;
         }
     }
     
-
+    bullets.children.each(function(b) {
+           if (b.active) {
+                if (b.y < 0) {
+                    b.setActive(false);
+                }
+            }
+    }.bind(this));
 
     enemybullets.children.each(function(b) {
            if (b.active) {
@@ -216,11 +235,11 @@ level1.update = function (time, delta)
         if(this.isDead && this.play){
             enemies.remove(child, true);
         }
-        if(this.body.y >= 150 && !this.isDead){
+        if(Math.abs((this.body.x - player.body.x)) <= 100 || Math.abs((this.body.y - player.body.y)) <= 400&& !this.isDead){
             if(time > this.lastTime){
                 var w = this.body.width;
                 var h = this.body.height;
-                if(Math.random() >= 0.1)
+                if(Math.random() <= 0.8)
                     fire2(this.body.x + w/2, this.body.y + h);
                 this.lastTime = time + 1500;
             }
@@ -233,6 +252,7 @@ level1.update = function (time, delta)
     };
 
   })
+    
 
 }
 /*

@@ -47,8 +47,8 @@ preload.preload = function ()
     
 
             this.load.image('starfield', '../assets/starfield.png');
-            this.load.image('starship', '../assets/starship.png');
-            this.load.image('spaceship1', '../assets/space3.png');
+            this.load.image('starship', '../assets/player.png');
+            this.load.image('spaceship1', '../assets/enemy.png');
             this.load.image('bullet1', '../assets/bullet1.png');
             this.load.image('bullet2', '../assets/bullet2.png');
             this.load.image('bullet3', '../assets/bullet3.png');
