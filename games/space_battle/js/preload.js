@@ -53,8 +53,12 @@ preload.preload = function ()
             this.load.image('bullet2', '../assets/bullet2.png');
             this.load.image('bullet3', '../assets/bullet3.png');
             this.load.spritesheet("sprExplosion", "../assets/sprExplosion.png", {
-                frameWidth: 32,
-                frameHeight: 32
+                frameWidth: 64,
+                frameHeight: 64
+            });
+            this.load.spritesheet("playerAnimation", "../assets/playerAnimation.png", {
+                frameWidth: 70,
+                frameHeight: 71
             });
     
             
@@ -76,7 +80,7 @@ preload.preload = function ()
                 percentText.destroy();
                 assetText.destroy();
             });
-            
+            this.load.audio('explode', '../assets/laser1.wav');
 
 
 

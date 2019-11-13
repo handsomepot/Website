@@ -1,15 +1,15 @@
 let preload = new Phaser.Scene('preload');
 let menu = new Phaser.Scene('menu');
 let level1 = new Phaser.Scene('level1');
-let worldX = 550;
-let worldY = 700;
+let worldX = 600;
+let worldY = 750;
 
 
 let config = {
     type: Phaser.AUTO,
     parent: 'game',
-    width: 550,
-    height: 700,
+    width: 600,
+    height: 750,
     pixelArt: true,
     scale: {
     // Ensure the canvas is resized to fit the parent div's dimensions

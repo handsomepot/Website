@@ -5,6 +5,9 @@ var enemybullets;
 var lastTime = 0;
 var lastTime2 = 0;
 var cursorKeys;
+var sfxExplode;
+var flip = true;
+var isplay = false;
 // path /Users/riley/Documents/Website/games/space_battle/assets/bullet2.png
 class Enemy extends Phaser.GameObjects.Sprite{
     constructor(config) {
@@ -27,7 +30,7 @@ function shoot() {
     if (bullet) {
         bullet.setActive(true);
         bullet.setVisible(true);
-        bullet.body.velocity.y = -400;
+        bullet.body.velocity.y = -500;
     }
     else{
         //bullets.children.each(function(b) {
@@ -44,58 +47,58 @@ function fire2(x, y) {
     if (bullet) {
         bullet.setActive(true);
         bullet.setVisible(true);
-        bullet.body.velocity.y = 300;
+        bullet.body.velocity.y = 350;
         if(Math.random() >= 0.8){
             bullet.body.velocity.x = player.body.x - x;
         }
     }
         
-        
 }
 
 
-function createEnemy(x, y){
-    var e = new Enemy({scene:level1, x: x, y:y});
-   
-    enemies.add(e);
-    e.body.immovable = true;
-    e.body.velocity.y = 100;
-    //level1.physics.add.existing(e);
-
-    /*level1.tweens.add({
-           targets: enemy,
-           duration: 3000,
-           x: 300,
-           delay: 200,
-           ease: 'Sine.easeInOut',
-           repeat: -1,
-           yoyo: true,
-       }); */
-
-}
-var isplay = false;
 function addEnemy(){
-    var n = Math.floor((Math.random() * 3) + 1);
-    e = new Enemy({scene:level1, x: n*50, y:20});
-    enemies.add(e);
-    e.body.immovable = true;
-    e.body.velocity.y = 150;
-    
-    if(Math.random()>=0.5){
-        e = new Enemy({scene:level1, x: worldX - n*50, y:-20});
+    if(flip){
+        e = new Enemy({scene:level1, x: 100, y:-100});
+        enemies.add(e);
+        e.body.immovable = true;
+        e.body.velocity.y = 150;
+
+        e = new Enemy({scene:level1, x: 150, y:0});
+        enemies.add(e);
+        e.body.immovable = true;
+        e.body.velocity.y = 150;
+
+        e = new Enemy({scene:level1, x: 200, y:-100});
+        enemies.add(e);
+        e.body.immovable = true;
+        e.body.velocity.y = 150;
+    }
+    else{
+        e = new Enemy({scene:level1, x: 350, y:-100});
+        enemies.add(e);
+        e.body.immovable = true;
+        e.body.velocity.y = 150;
+
+        e = new Enemy({scene:level1, x: 400, y:0});
+        enemies.add(e);
+        e.body.immovable = true;
+        e.body.velocity.y = 150;
+
+        e = new Enemy({scene:level1, x: 450, y: -100});
         enemies.add(e);
         e.body.immovable = true;
         e.body.velocity.y = 150;
     }
 
-
+    flip = !flip;
 }
 
 function enemyHitPlayer(player, enemy){
     
     //enemy.animate.play('');
     //enemies.remove(enemy, true);
-    isplay = true;
+    
+    
     
     console.log('enemyHitPlayer');
     console.log(enemies.children.entries.length);
@@ -104,6 +107,7 @@ function enemyHitPlayer(player, enemy){
 }
 
 function hitEnemy(bullet, enemy){
+    
     if(!enemy.isDead && enemy.body.y >= 10){
         enemy.isDead = true;
         enemy.anims.play("sprExplosion"); // play the animation
@@ -115,8 +119,18 @@ function hitEnemy(bullet, enemy){
         console.log(enemies.children.entries.length);  
     }
 }
-
+function stopAnimation(){
+    console.log('stop');
+    player.anims.pause(player.anims.currentAnim.frames[0]);
+    isplay = false;
+}
 function hitPlayer(player, bullet){
+    //enemy.anims.play("sprExplosion"); // play the animation
+    player.anims.play('playerAnimation');
+    if(!isplay){
+        level1.time.addEvent({ delay: 800, callback: stopAnimation, callbackScope: level1, loop: false });
+        isplay = true;
+    }
     
     bullet.disableBody(false, true); // disableBody( [disableGameObject] [, hideGameObject])
     console.log('player hit');
@@ -141,11 +155,12 @@ level1.create = function ()
     enemies = this.physics.add.group({ defaultKey: 'spaceship1', maxSize: 30, runChildUpdate: true });
 
 
-    e = new Enemy({scene:level1, x: 100, y:100});
+    /*e = new Enemy({scene:level1, x: 100, y:100});
     enemies.add(e);
     e.body.immovable = true;
     e.body.velocity.y = 155;
-    console.log(e.time);
+    console.log(e.time);*/
+    addEnemy();
 
 
 
@@ -172,10 +187,16 @@ level1.create = function ()
     this.anims.create({
       key: "sprExplosion",
       frames: this.anims.generateFrameNumbers("sprExplosion"),
-      frameRate: 32,
+      frameRate: 20,
       repeat: 0
     });
-    
+    this.anims.create({
+      key: "playerAnimation",
+      frames: this.anims.generateFrameNumbers("playerAnimation"),
+      frameRate: 60,
+      repeat: 0
+    });
+    sfxExplode = this.sound.add('explode');
 },
 
 
@@ -208,6 +229,7 @@ level1.update = function (time, delta)
     {
         if(time >= lastTime){
             shoot();
+            sfxExplode.play();
             lastTime = time + 300;
         }
     }
@@ -235,13 +257,14 @@ level1.update = function (time, delta)
         if(this.isDead && this.play){
             enemies.remove(child, true);
         }
-        if(Math.abs((this.body.x - player.body.x)) <= 100 || Math.abs((this.body.y - player.body.y)) <= 400&& !this.isDead){
+        if(!this.isDead)
+        if(Math.abs((this.body.x - player.body.x)) <= 100 || Math.abs((this.body.y - player.body.y)) <= 500&& !this.isDead){
             if(time > this.lastTime){
                 var w = this.body.width;
                 var h = this.body.height;
-                if(Math.random() <= 0.8)
-                    fire2(this.body.x + w/2, this.body.y + h);
-                this.lastTime = time + 1500;
+                if(Math.random() <= 0.5)
+                    fire2(this.body.x + w/2, this.body.y + h + 10);
+                this.lastTime = time + 2500;
             }
             
         }
@@ -252,20 +275,6 @@ level1.update = function (time, delta)
     };
 
   })
-    
+
 
 }
-/*
-enterButtonHoverState = function() {
-    //startButton.setStyle({ fill: '#ff0'});
-    //startButton.setStyle({ fontSize: '28px'});
-},
-
-enterButtonResetState = function() {
-    //startButton.setStyle({ fill: '#fff'});
-    //startButton.setStyle({ fontSize: '25px'});
-},
-    
-enterButtonActiveState = function() {
-     level1.scene.start('level1');
-}*/
