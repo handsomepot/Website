@@ -14,6 +14,7 @@ let config = {
     scale: {
     // Ensure the canvas is resized to fit the parent div's dimensions
     //mode: Phaser.Scale.RESIZE,
+    mode: Phaser.Scale.HEIGHT_CONTROLS_WIDTH
     // Center the game canvas both horizontally and vertically within the parent
     //autoCenter: Phaser.Scale.CENTER_BOTH
   },

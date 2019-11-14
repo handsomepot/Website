@@ -3,7 +3,6 @@ preload.preload = function ()
 {
 
 
-
             var progressBar = this.add.graphics();
             var progressBox = this.add.graphics();
             progressBox.fillStyle(0x222222, 0.8);
@@ -48,7 +47,9 @@ preload.preload = function ()
 
             this.load.image('starfield', '../assets/starfield.png');
             this.load.image('starship', '../assets/player.png');
-            this.load.image('spaceship1', '../assets/enemy.png');
+            this.load.image('enemy1', '../assets/enemy1.png');
+            this.load.image('enemy2', '../assets/enemy2.png');
+            this.load.image('ufo', '../assets/ufo.png');
             this.load.image('bullet1', '../assets/bullet1.png');
             this.load.image('bullet2', '../assets/bullet2.png');
             this.load.image('bullet3', '../assets/bullet3.png');
@@ -80,7 +81,10 @@ preload.preload = function ()
                 percentText.destroy();
                 assetText.destroy();
             });
+            this.load.audio('music', '../assets/Mercury.wav');
             this.load.audio('explode', '../assets/laser1.wav');
+            this.load.audio('explode2', '../assets/explosion07.wav');
+    
 
 
 
