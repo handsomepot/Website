@@ -12,10 +12,10 @@ var bgmusic;
 var flip = true;
 var isplay = false;
 var globalTime;
-var enemyType = [5,1,2,3];
+var enemyType = [1,2,3,4,4,4,1,2,3,4,5];
 var enemyIndex = 0;
 var isBoss = false;
-
+var timeEvent;
 /*      1            2         3        4       5
 *   O O  O O         O        O O         O    ufo
 *    O    O        O   O      O O     O
@@ -274,6 +274,7 @@ function addEnemy(){
             break;
         case 5:
             addEnemyGroup5();
+            timeEvent.remove();
             break;
     }
     enemyIndex++;
@@ -290,14 +291,20 @@ function enemyHitPlayer(player, enemy){
     //level1.setTexture("sprExplosion");  // this refers to the same animation key we used when we added this.anims.create previously
 
 }
-
+var lock = false;
+function playExplosionSound(){
+    sfxExplode2.play();
+    lock = false;
+}
 function hitEnemy(bullet, enemy){
     console.log(enemy.number--);
     if(enemy.number >=0){
         isBoss = true;
         bullet.anims.play("sprExplosion");
-        sfxExplode.stop();
-         //sfxExplode2.play();
+        if(!lock){
+            level1.time.addEvent({ delay: 80, callback: playExplosionSound, callbackScope: level1, loop: false});
+            lock = true;
+        }
         return;
     }
     else
@@ -377,7 +384,7 @@ level1.create = function ()
     this.physics.add.overlap(enemybullets, player, hitPlayer, null, this);
     this.physics.add.overlap(bullets, enemies, hitEnemy, null, this);
     this.physics.add.overlap(player, enemies, enemyHitPlayer, null, this);
-    this.time.addEvent({ delay: 3500, callback: addEnemy, callbackScope: this, loop: true   });
+    timeEvent = this.time.addEvent({ delay: 3500, callback: addEnemy, callbackScope: this, loop: true   });
     this.anims.create({
       key: "sprExplosion",
       frames: this.anims.generateFrameNumbers("sprExplosion"),
