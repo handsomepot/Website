@@ -47,19 +47,50 @@ preload.preload = function ()
 
             this.load.image('starfield', '../assets/starfield.png');
             this.load.image('starship', '../assets/player.png');
+
             this.load.image('enemy1', '../assets/enemy1.png');
             this.load.image('enemy2', '../assets/enemy2.png');
             this.load.image('ufo', '../assets/ufo.png');
             this.load.image('bullet1', '../assets/bullet1.png');
             this.load.image('bullet2', '../assets/bullet2.png');
             this.load.image('bullet3', '../assets/bullet3.png');
+            this.load.image('boss', '../assets/boss.png');
             this.load.spritesheet("sprExplosion", "../assets/sprExplosion.png", {
                 frameWidth: 64,
                 frameHeight: 64
             });
-            this.load.spritesheet("playerAnimation", "../assets/playerAnimation.png", {
-                frameWidth: 70,
-                frameHeight: 71
+            this.load.spritesheet("explode2", "../assets/explode2.png", {
+                frameWidth: 80,
+                frameHeight: 80
+            });
+            this.load.spritesheet("explode3", "../assets/explode3.png", {
+                frameWidth: 60,
+                frameHeight: 60
+            });
+            this.load.spritesheet("playergroup", "../assets/playergroup.png", {
+                frameWidth: 75,
+                frameHeight: 75
+            });
+    
+            this.load.spritesheet("enemygroup1", "../assets/enemygroup1.png", {
+                frameWidth: 96,
+                frameHeight: 66
+            });
+        
+            this.load.spritesheet("enemygroup2", "../assets/enemygroup2.png", {
+                frameWidth: 96,
+                frameHeight: 65
+            });
+    
+            
+            this.load.spritesheet("enemygroup3", "../assets/enemygroup3.png", {
+                frameWidth: 96,
+                frameHeight: 66
+            });
+     
+            this.load.spritesheet("enemygroup4", "../assets/enemygroup4.png", {
+                frameWidth: 72,
+                frameHeight: 72
             });
     
             
@@ -84,6 +115,7 @@ preload.preload = function ()
             this.load.audio('music', '../assets/Mercury.wav');
             this.load.audio('explode', '../assets/laser1.wav');
             this.load.audio('explode2', '../assets/explosion07.wav');
+            this.load.audio('explode1', '../assets/explosion01.wav');
     
 
 
