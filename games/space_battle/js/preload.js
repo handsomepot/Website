@@ -54,6 +54,7 @@ preload.preload = function ()
             this.load.image('bullet1', '../assets/bullet1.png');
             this.load.image('bullet2', '../assets/bullet2.png');
             this.load.image('bullet3', '../assets/bullet3.png');
+            this.load.image('bullet4', '../assets/bullet4.png');
             this.load.image('boss', '../assets/boss.png');
             this.load.spritesheet("sprExplosion", "../assets/sprExplosion.png", {
                 frameWidth: 64,
@@ -64,17 +65,17 @@ preload.preload = function ()
                 frameHeight: 80
             });
             this.load.spritesheet("explode3", "../assets/explode3.png", {
-                frameWidth: 60,
-                frameHeight: 60
+                frameWidth: 80,
+                frameHeight: 80
             });
             this.load.spritesheet("playergroup", "../assets/playergroup.png", {
-                frameWidth: 75,
-                frameHeight: 75
+                frameWidth: 60     ,
+                frameHeight: 60
             });
     
             this.load.spritesheet("enemygroup1", "../assets/enemygroup1.png", {
-                frameWidth: 96,
-                frameHeight: 66
+                frameWidth: 80,
+                frameHeight: 55
             });
         
             this.load.spritesheet("enemygroup2", "../assets/enemygroup2.png", {
