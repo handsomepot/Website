@@ -45,7 +45,7 @@ preload.preload = function ()
     
     
 
-            this.load.image('starfield', '../assets/starfield.png');
+            this.load.image('starfield', '../assets/background.jpg');
             this.load.image('starship', '../assets/player.png');
 
             this.load.image('enemy1', '../assets/enemy1.png');
@@ -55,6 +55,11 @@ preload.preload = function ()
             this.load.image('bullet2', '../assets/bullet2.png');
             this.load.image('bullet3', '../assets/bullet3.png');
             this.load.image('bullet4', '../assets/bullet4.png');
+            this.load.image('b1', '../assets/b1.png');
+            this.load.image('b2', '../assets/b2.png');
+            this.load.image('b3', '../assets/b3.png');
+            this.load.image('b4', '../assets/b4.png');
+            this.load.image('b5', '../assets/b5.png');
             this.load.image('boss', '../assets/boss.png');
             this.load.spritesheet("sprExplosion", "../assets/sprExplosion.png", {
                 frameWidth: 64,
