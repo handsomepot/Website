@@ -4,19 +4,18 @@ var bullets;
 var enemybullets;
 var bossbullets;
 var lastTime = 0;
-var lastTime2 = 0;
 var cursorKeys;
 var sfxExplode;
 var sfxExplode2;
 var bgmusic;
 var block = [];
 var flip = true;
-var isplay = false;
 var globalTime;
-var enemyType = [2,3,4,5,5,5,1,2,3,4,5,5,5,5,7,6,7,8,9,8,9,10,8,9];
-var enemyIndex = 0;
-var firstTimeEvent;  
+var lock = false;
 var lives = 5; // lives
+var direction = ['down','right','left','down', 'up','left','right','down', 'up','right','left','down'];
+var index = 0;
+
 /*    1   2          3         4        5           6    7        8      9      10
 *   O O  O O         O        O O         O         O     O        O     O   boss
 *    O    O        O   O      O O     O           O         O
@@ -25,8 +24,8 @@ var lives = 5; // lives
 *                                       O
 */
 
-// path /Users/riley/Documents/Website/games/space_battle/assets/bullet2.png
-// path /Users/riley/Documents/Website/games/space_battle/assets/enemy2.png
+//  /Users/riley/Documents/Website/games/space_battle/assets/
+
 class Enemy extends Phaser.GameObjects.Sprite{
     constructor(config) {
         super(config.scene, config.x, config.y, config.defaultKey);
@@ -37,7 +36,8 @@ class Enemy extends Phaser.GameObjects.Sprite{
         this.isDead = false; 
         this.number = 0;
         this.enemyType = 'regular';
-        this.direction = 'down';
+        this.timerLock = false;
+        this.hitLock = false;
     } 
 }
 
@@ -59,8 +59,8 @@ function shoot() {
     }
     
         
-        
 }
+
 var flip = false;
 function enemyFire(x, y, type) {
     
@@ -75,12 +75,18 @@ function enemyFire(x, y, type) {
     else if(type == 'attack'){
         var bullet = enemybullets.get(x, y);
         if (bullet) {
+            var ratio = 650 / (player.body.y - y);
             bullet.setActive(true);
             bullet.setVisible(true);
-            bullet.body.velocity.y = 300;
-            bullet.body.velocity.x = (player.body.x - x)*2;
+            if(player.body.y - y > 0)
+                bullet.body.velocity.y = 650;
+            else
+                bullet.body.velocity.y = -650;
+            bullet.body.velocity.x = (player.body.x - x)*ratio;
         }
     }
+
+
     else if(type == 'boss'){
             var dx = [0, 0, 1, -1, 1, -1, 1, -1];
             var dy = [1, -1, 0, 0, 1, 1, -1, -1];
@@ -116,23 +122,25 @@ function enemyFire(x, y, type) {
 }
 
 function addEnemyGroup1(){
-    e = new Enemy({scene:level1, x: 80, y:-110, defaultKey:'enemygroup1'});
+    
+    e = new Enemy({scene:level1, x: 180, y:-110, defaultKey:'enemygroup1'});
     enemies.add(e);
     e.body.immovable = true;
     e.body.velocity.y = 170;
     e.anims.play('enemygroup1');
 
-    e = new Enemy({scene:level1, x: 140, y:0, defaultKey:'enemygroup1'});
+    e = new Enemy({scene:level1, x: 240, y:0, defaultKey:'enemygroup1'});
     enemies.add(e);
     e.body.immovable = true;
     e.body.velocity.y = 170;
     e.anims.play('enemygroup1');
 
-    e = new Enemy({scene:level1, x: 200, y:-110, defaultKey:'enemygroup1'});
+    e = new Enemy({scene:level1, x: 300, y:-110, defaultKey:'enemygroup1'});
     enemies.add(e);
     e.body.immovable = true;
     e.body.velocity.y = 170;
     e.anims.play('enemygroup1');
+
 }
 
 function addEnemyGroup2(){
@@ -190,37 +198,6 @@ function addEnemyGroup3(){
 
 }
 
-function addEnemyGroup4(){
-    e = new Enemy({scene:level1, x: 100, y:-200, defaultKey:'enemy2'});
-    enemies.add(e);
-    e.body.immovable = true;
-    e.body.velocity.y = 120;
-    
-    e = new Enemy({scene:level1, x: 100, y:-100, defaultKey:'enemy2'});
-    enemies.add(e);
-    e.body.immovable = true;
-    e.body.velocity.y = 120;
-
-    e = new Enemy({scene:level1, x: 100, y:0, defaultKey:'enemy2'});
-    enemies.add(e);
-    e.body.immovable = true;
-    e.body.velocity.y = 120;
-    
-    e = new Enemy({scene:level1, x: 500, y:-200, defaultKey:'enemy2'});
-    enemies.add(e);
-    e.body.immovable = true;
-    e.body.velocity.y = 120;
-    
-    e = new Enemy({scene:level1, x: 500, y:-100, defaultKey:'enemy2'});
-    enemies.add(e);
-    e.body.immovable = true;
-    e.body.velocity.y = 120;
-
-    e = new Enemy({scene:level1, x: 500, y:0, defaultKey:'enemy2'});
-    enemies.add(e);
-    e.body.immovable = true;
-    e.body.velocity.y = 120;
-}
 
 function addEnemyGroup5(){  // S shape
     e = new Enemy({scene:level1, x: 120, y:0, defaultKey:'enemygroup4'});
@@ -395,15 +372,33 @@ function addEnemyGroup8(){
     enemies.add(e);
     e.enemyType = 'attack';
     e.body.immovable = true;
-    e.body.velocity.y = 150;
+    e.body.velocity.y = 170;
     e.anims.play('enemygroup4');
+    e.number = 3;
     
     e = new Enemy({scene:level1, x: 100, y:-100, defaultKey:'enemygroup4'});
     enemies.add(e);
     e.enemyType = 'attack';
     e.body.immovable = true;
-    e.body.velocity.y = 150;
+    e.body.velocity.y = 170;
     e.anims.play('enemygroup4');
+    e.number = 3;
+    
+    e = new Enemy({scene:level1, x: 300, y:-200, defaultKey:'enemygroup1'});
+    enemies.add(e);
+    e.enemyType = 'attack';
+    e.body.immovable = true;
+    e.body.velocity.y = 120;
+    e.anims.play('enemygroup1');
+    e.number = 3;
+    
+    e = new Enemy({scene:level1, x: 300, y:-300, defaultKey:'enemygroup1'});
+    enemies.add(e);
+    e.enemyType = 'attack';
+    e.body.immovable = true;
+    e.body.velocity.y = 120;
+    e.anims.play('enemygroup1');
+    e.number = 3;
   
 }
 
@@ -413,21 +408,23 @@ function addEnemyGroup9(){
     enemies.add(e);
     e.enemyType = 'attack';
     e.body.immovable = true;
-    e.body.velocity.y = 150;
+    e.body.velocity.y = 170;
     e.anims.play('enemygroup4');
+    e.number = 3;
     
     e = new Enemy({scene:level1, x: 500, y:-100, defaultKey:'enemygroup4'});
     enemies.add(e);
     e.enemyType = 'attack';
     e.body.immovable = true;
-    e.body.velocity.y = 150;
+    e.body.velocity.y = 170;
     e.anims.play('enemygroup4');
+    e.number = 3;
   
 }
 
 
 function addEnemyGroup10(){
-    e = new Enemy({scene:level1, x: 300, y:0, defaultKey:'boss'});
+    e = new Enemy({scene:level1, x: 300, y:-100, defaultKey:'boss'});
     enemies.add(e);
     e.enemyType = 'boss';
     e.body.immovable = true;
@@ -439,76 +436,29 @@ function addEnemyGroup10(){
 }
 
 
-function addEnemy(){
-
-    if(enemyIndex >= enemyType.length){
-        //enemyIndex = 0;
-        return;
-    }
-    var x = enemyType[enemyIndex];
-    switch(x){
-        case 1:
-            addEnemyGroup1();
-            break;
-        case 2:
-            addEnemyGroup2();
-            break;
-        case 3:
-            addEnemyGroup3();
-            break;
-        case 4:
-            addEnemyGroup4();
-            break;
-        case 5:
-            addEnemyGroup5();
-            break;
-        case 6:
-            addEnemyGroup6();
-            break;
-        case 7:
-            addEnemyGroup7();
-            break;
-        case 8:
-            addEnemyGroup8();
-            break; 
-        case 9:
-            addEnemyGroup9();
-            break;        
-        case 10:
-            addEnemyGroup10();
-            break;
-    }
-
-    enemyIndex++;
-}
-
-function addFirstEnemy(){
-    level1.time.addEvent({ delay: 2500, callback: addEnemy, callbackScope: level1, loop: true });
-    firstTimeEvent.remove();
-
-}
-
-
 function enemyHitPlayer(player, enemy){
     if(enemy.enemyType=='boss'){
         player.anims.play("sprExplosion"); // play the animation
     }
     if(!enemy.isDead && enemy.body.y >= 10){
         enemy.isDead = true;
-        enemy.anims.play("explode2"); // play the animation
-        enemy.lastTime = globalTime;
+        
+        e = new Enemy({scene:level1, x: enemy.x, y:enemy.y});
+        e.body.immovable = true;
+        e.anims.play('explode2');
         sfxExplode1.play();
+
     }
+    /*if(!enemy.isDead){
+        enemy.isDead = true;
+        enemy.anims.play("explode2"); // play the animation
+        sfxExplode1.play();
+    }*/
     lives--;
     if(lives >= 0)
         block[lives].visible = false;
 }
 
-var lock = false;
-function playExplosionSound(){
-    sfxExplode2.play();
-    lock = false;
-}
 
 function hitEnemy(bullet, enemy){
 
@@ -520,14 +470,14 @@ function hitEnemy(bullet, enemy){
         e.anims.play('sprExplosion');
         bullet.disableBody(false, true); 
         
-        if(!lock){
+        if(!enemy.hitLock){
             level1.time.addEvent({ delay: 80, callback: function(){    
                 sfxExplode2.play();
                 e.destroy();
-                lock = false;
+                enemy.hitLock = false;
                                                                   
             }, callbackScope: level1, loop: false});
-            lock = true;
+            enemy.hitLock = true;
         }
         return;
     }
@@ -546,18 +496,17 @@ function hitEnemy(bullet, enemy){
     
     if(!enemy.isDead && enemy.body.y >= 10){
         enemy.isDead = true;
-        enemy.anims.play("sprExplosion"); // play the animation
-        enemy.lastTime = globalTime;
+        
+        e = new Enemy({scene:level1, x: enemy.x, y:enemy.y});
+        e.body.immovable = true;
+        e.anims.play('sprExplosion');
+        //enemy.anims.play("sprExplosion"); // play the animation
+        //enemy.lastTime = globalTime;
         sfxExplode2.play();
 
+        //enemy.disableBody(true, true); // disableBody( [disableGameObject] [, hideGameObject])
         bullet.disableBody(false, true); // disableBody( [disableGameObject] [, hideGameObject])
     }
-}
-
-function stopAnimation(){
-    console.log('stop');
-    //player.anims.pause(player.anims.currentAnim.frames[0]);
-    isplay = false;
 }
 
 function hitPlayer(player, bullet){
@@ -644,7 +593,7 @@ level1.preload = function ()
       repeat: -1
     });
     
-
+ 
       
 },
 
@@ -653,7 +602,7 @@ level1.create = function ()
     
     starfield = level1.add.tileSprite(worldX/2, worldY/2, worldX, worldY, 'starfield');
     
-    player = this.physics.add.sprite(400, 700, 'playergroup');
+    player = this.physics.add.sprite(worldX/2, 700, 'playergroup');
     player.setCollideWorldBounds(true);
     player.setImmovable(true);
     player.anims.play('playergroup');
@@ -684,13 +633,25 @@ level1.create = function ()
     this.physics.add.overlap(bullets, enemies, hitEnemy, null, this);
     this.physics.add.collider(player,enemies, enemyHitPlayer, null, this);
    
-    this.time.addEvent({ delay: 1500, callback: addEnemyGroup1,callbackScope: this, loop: false });    
+    this.time.addEvent({ delay: 2500, callback: addEnemyGroup1,callbackScope: this, loop: false });    
     this.time.addEvent({ delay: 4000, callback: addEnemyGroup2, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 7000, callback: addEnemyGroup3, callbackScope: this, loop: false }); 
-    this.time.addEvent({ delay: 11000, callback: addEnemyGroup4, callbackScope: this, loop: false }); 
-    this.time.addEvent({ delay: 15500, callback: addEnemyGroup5, callbackScope: this, loop: false }); 
-    this.time.addEvent({ delay: 19000, callback: addEnemyGroup5, callbackScope: this, loop: false }); 
-    this.time.addEvent({ delay: 23500, callback: addEnemyGroup5, callbackScope: this, loop: false }); 
+    this.time.addEvent({ delay: 7000, callback: addEnemyGroup3, callbackScope: this, loop:false });
+    this.time.addEvent({ delay: 11000, callback: addEnemyGroup3, callbackScope: this, loop:false });
+    //this.time.addEvent({ delay: 20000, callback: addEnemyGroup5, callbackScope: this, loop:false });
+    this.time.addEvent({ delay: 15000, callback: addEnemyGroup8, callbackScope: this, loop:false });
+    this.time.addEvent({ delay: 21000, callback: addEnemyGroup9, callbackScope: this, loop:false });
+    this.time.addEvent({ delay: 24000, callback: addEnemyGroup8, callbackScope: this, loop:false });
+    this.time.addEvent({ delay: 27000, callback: addEnemyGroup9, callbackScope: this, loop:false });
+    this.time.addEvent({ delay: 32000, callback: addEnemyGroup10, callbackScope: this, loop:false });
+    /*this.time.addEvent({ delay: 7000, callback: addEnemyGroup3, callbackScope: this, loop: false }); 
+    this.time.addEvent({ delay: 12000, callback: addEnemyGroup4, callbackScope: this, loop: false }); 
+    this.time.addEvent({ delay: 18000, callback: addEnemyGroup5, callbackScope: this, loop: false }); 
+    this.time.addEvent({ delay: 24000, callback: addEnemyGroup5, callbackScope: this, loop: false }); 
+    this.time.addEvent({ delay: 30000, callback: addEnemyGroup5, callbackScope: this, loop: false }); 
+    this.time.addEvent({ delay: 34000, callback: addEnemyGroup6, callbackScope: this, loop: false }); 
+    this.time.addEvent({ delay: 38000, callback: addEnemyGroup7, callbackScope: this, loop: false }); 
+    this.time.addEvent({ delay: 38000, callback: addEnemyGroup8, callbackScope: this, loop: false }); */
+
 
     
 
@@ -771,70 +732,77 @@ level1.update = function (time, delta)
     child.update = function (time, delta) {
         
         if(this.enemyType == 'boss'){
-           if(this.y <= 250){
-               this.y += 2; // go down
-           }
-           if(this.moveTime == 0)
-                this.moveTime = time;
-           if(time > this.moveTime + 8000  && this.x >=100){
-               this.x --;
-           } 
-           else if(time > this.moveTime + 4000 && this.x <= 500){
-               this.x ++;
-           } 
+       
+            var dir = direction[index];
+            if(dir == 'left'){
+                child.x -= 2;
+            }
+            if(dir == 'right'){
+                child.x += 2;
+            }
+            if(dir == 'up'){
+                child.y -= 2;
+            }
+            if(dir == 'down'){
+                child.y += 2;
+            }
+            if(child.moveTime == 0){
+                level1.time.addEvent({ 
+                    delay: 2000, 
+                    callback: function(){
+                        index ++;
+                        if(index == 12){
+                            index = 4;
+                        }
+                    },
+                    callbackScope: level1, 
+                    loop: true }); 
+                child.moveTime = 1;
+            }
            
-           if(!this.isDead){
-                
-                   if(time > this.lastTime + 1600){
-
-                        var w = this.body.width;
-                        var h = this.body.height;
-                        enemyFire(this.body.x + w/2, this.body.y + h + 10, this.enemyType);
-                        this.lastTime = time;
-
-                    }
-           }
 
         }
-        else if(this.enemyType == 'attack'){
+        if(this.enemyType == 'left' || this.enemyType == 'right'){
+            
+            if(!this.timerLock && Math.abs(this.x - player.body.x) < 500){
+                this.timerLock = true;
+                level1.time.addEvent({ delay: 10, callback: 
+                function(){
+                    level1.time.addEvent({ 
+                        delay: 2200, 
+                        callback: function(){
+                            child.timerLock = false;
+                        },
+                        callbackScope: level1, 
+                        loop: false });    
 
-            if(Math.abs(this.body.y - player.body.y) <= 550 && !this.isDead){
+                    enemyFire(child.x, child.y + child.body.height/2, child.enemyType);
 
-                if(time > this.lastTime + 1200){
-
-                    var w = this.body.width;
-                    var h = this.body.height;
-                    enemyFire(this.body.x + w/2, this.body.y + h + 10, this.enemyType);
-                    this.lastTime = time;
-                    console.log(this.enemyType);
-                }
-
+                },
+                callbackScope: level1, loop: false });    
             }
-            
-            
         }
         else{
-            if(Math.abs(this.body.x - player.body.x) <= 200 && Math.abs(this.body.y - player.body.y) <= 550 && !this.isDead){
+            if(!this.timerLock && Math.abs(this.x - player.body.x) < 150){
+                this.timerLock = true;
+                level1.time.addEvent({ delay: 10, callback: 
+                function(){
+                    level1.time.addEvent({ 
+                        delay: 2000, 
+                        callback: function(){
+                            child.timerLock = false;
+                        },
+                        callbackScope: level1, 
+                        loop: false });    
+                    if(!child.isDead)
+                        enemyFire(child.x, child.y + 20, child.enemyType);
 
-                if(time > this.lastTime + 2000){
-
-                    var w = this.body.width;
-                    var h = this.body.height;
-                    enemyFire(this.body.x + w/2, this.body.y + h + 10, this.enemyType);
-                    this.lastTime = time;
-                    console.log(this.enemyType);
-                }
-
+                },
+                callbackScope: level1, loop: false });    
             }
         }
         
-
-        if(time > this.lastTime + 1000){
-            if(this.isDead){
-                enemies.remove(child, true);
-            }
-        }
-        if(this.body.y >= worldY){
+        if(this.body.y >= worldY || this.isDead){
             enemies.remove(child, true);
         }
 

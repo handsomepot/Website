@@ -50,7 +50,6 @@ preload.preload = function ()
 
             this.load.image('enemy1', '../assets/enemy1.png');
             this.load.image('enemy2', '../assets/enemy2.png');
-            this.load.image('ufo', '../assets/ufo.png');
             this.load.image('bullet1', '../assets/bullet1.png');
             this.load.image('bullet2', '../assets/bullet2.png');
             this.load.image('bullet3', '../assets/bullet3.png');
