@@ -1,7 +1,7 @@
 let cursors;
 var titleText;
 var start = 0;
-var sfxMenu;
+var sfxMenu=null;
 var offset = 0;
 var startText;
 var startText2;
@@ -9,11 +9,7 @@ menu.preload = function ()
 {
     this.load.bitmapFont('desyrel', '../assets/font/font.png', '../assets/font/font.xml');
       //this.load.bitmapFont('carbonTypeFont', carbonTypeTexture, carbonTypeDescription);
-    sfxMenu = this.sound.add('menuMusic');
-   sfxMenu.play({
-    volume: .2,
-    loop: true
-  })
+    
 }
 menu.create = function ()
 {
@@ -26,7 +22,7 @@ menu.create = function ()
     titleText = this.add.bitmapText(worldX/2, -30, 'desyrel', '', 110).setOrigin(0.5).setCenterAlign().setInteractive();
 
     titleText.setText([
-        'UFOLL'
+        'GALIAN'
     ]);
     
     this.time.addEvent({ delay: 500, callback: function(){start = 1;},callbackScope: this, loop: false });    
@@ -46,7 +42,7 @@ menu.create = function ()
     startText2 = this.add.text(
     this.physics.world.bounds.width / 2,
     this.physics.world.bounds.height / 2 + 50,
-    '(arrow keys to move / SPACE to fire)',
+    '(arrow keys to move / Z to fire)',
     {
       fontFamily: 'Monaco, Courier, monospace',
       fontSize: '20px',
@@ -63,10 +59,17 @@ menu.create = function ()
        console.log(event.keyCode);
        if(83 == event.keyCode){
            sfxMenu.stop();
+           menu.scene.stop('menu');
            menu.scene.start('level1');
        }
 
     });
+    if(sfxMenu==null)
+        sfxMenu = this.sound.add('menuMusic');
+    sfxMenu.play({
+    volume: .2,
+    loop: true
+  })
    
 
 },

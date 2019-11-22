@@ -6,7 +6,7 @@ preload.preload = function ()
             var progressBar = this.add.graphics();
             var progressBox = this.add.graphics();
             progressBox.fillStyle(0x222222, 0.8);
-            progressBox.fillRect(240, 270, 320, 50);
+            progressBox.fillRect(140, 270, 270, 50);
             
             var width = this.cameras.main.width;
             var height = this.cameras.main.height;
@@ -46,7 +46,7 @@ preload.preload = function ()
     
 
             this.load.image('starfield', '../assets/background.jpg');
-            this.load.image('starship', '../assets/player.png');
+            this.load.image('starship', '../assets/starship.png');
 
             this.load.image('enemy1', '../assets/enemy1.png');
             this.load.image('enemy2', '../assets/enemy2.png');
@@ -60,9 +60,17 @@ preload.preload = function ()
             this.load.image('b4', '../assets/b4.png');
             this.load.image('b5', '../assets/b5.png');
             this.load.image('boss', '../assets/boss.png');
+            //this.load.image('ufo1', '../assets/ufo1.png');
+            this.load.image('ufo2', '../assets/ufo2.png');
+            this.load.image('ufo3', '../assets/ufo3.png');
+            this.load.image('ufo4', '../assets/ufo4.png');
+            this.load.image('ufo5', '../assets/ufo5.png');
+            this.load.image('ufo6', '../assets/ufo6.png');
+            this.load.image('ufo7', '../assets/ufo7.png');
+            this.load.image('ufo8', '../assets/ufo8.png');
     
 
-            this.load.image('ball', '../assets/pangball.png');
+            this.load.image('live', '../assets/live.png');
             this.load.image('particle', '../assets/yellow.png');
 
 
@@ -75,12 +83,17 @@ preload.preload = function ()
                 frameHeight: 80
             });
             this.load.spritesheet("explode3", "../assets/explode3.png", {
-                frameWidth: 80,
-                frameHeight: 80
+                frameWidth: 50,
+                frameHeight: 50
             });
             this.load.spritesheet("playergroup", "../assets/playergroup.png", {
                 frameWidth: 60     ,
                 frameHeight: 60
+            });
+    
+            this.load.spritesheet("playergroup2", "../assets/playerAnimation2.png", {
+                frameWidth: 65     ,
+                frameHeight: 65
             });
     
             this.load.spritesheet("enemygroup1", "../assets/enemygroup1.png", {
@@ -95,8 +108,8 @@ preload.preload = function ()
     
             
             this.load.spritesheet("enemygroup3", "../assets/enemygroup3.png", {
-                frameWidth: 96,
-                frameHeight: 66
+                frameWidth: 72,
+                frameHeight: 72
             });
      
             this.load.spritesheet("enemygroup4", "../assets/enemygroup4.png", {
@@ -104,13 +117,24 @@ preload.preload = function ()
                 frameHeight: 72
             });
     
+           this.load.spritesheet("ufo1", "../assets/ufo1.png", {
+                frameWidth: 80,
+                frameHeight: 40
+            });
+    
+            this.load.spritesheet("smallboss", "../assets/smallboss.png", {
+                frameWidth: 120,
+                frameHeight: 120
+            });
+    
             
             this.load.on('progress', function (value) {
                 percentText.setText(parseInt(value * 100) + '%');
                 progressBar.clear();
                 progressBar.fillStyle(0xffffff, 1);
-                progressBar.fillRect(250, 280, 300 * value, 30);
+                progressBar.fillRect(150, 280, 250 * value, 30);
             });
+            
             
             this.load.on('fileprogress', function (file) {
                 assetText.setText('Loading asset: ' + file.key);
@@ -129,6 +153,9 @@ preload.preload = function ()
             this.load.audio('explode2', '../assets/explosion01.wav');
             this.load.audio('menuMusic', '../assets/menu.mp3');
             this.load.audio('point', '../assets/point.mp3');
+            this.load.audio('death', '../assets/death.wav');
+            this.load.audio('boss1Music', '../assets/boss.wav');
+            this.load.audio('battle1', '../assets/battle1.wav');
     
 
 
