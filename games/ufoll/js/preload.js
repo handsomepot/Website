@@ -54,6 +54,8 @@ preload.preload = function ()
             this.load.image('bullet2', '../assets/bullet2.png');
             this.load.image('bullet3', '../assets/bullet3.png');
             this.load.image('bullet4', '../assets/bullet4.png');
+            this.load.image('bullet5', '../assets/bullet5.png');
+            this.load.image('bullet6', '../assets/bullet6.png');
             this.load.image('b1', '../assets/b1.png');
             this.load.image('b2', '../assets/b2.png');
             this.load.image('b3', '../assets/b3.png');
@@ -61,9 +63,9 @@ preload.preload = function ()
             this.load.image('b5', '../assets/b5.png');
             this.load.image('boss', '../assets/boss.png');
             //this.load.image('ufo1', '../assets/ufo1.png');
-            this.load.image('ufo2', '../assets/ufo2.png');
-            this.load.image('ufo3', '../assets/ufo3.png');
-            this.load.image('ufo4', '../assets/ufo4.png');
+            //this.load.image('ufo2', '../assets/ufo2.png');
+            //this.load.image('ufo3', '../assets/ufo3.png');
+            //this.load.image('ufo4', '../assets/ufo4.png');
             this.load.image('ufo5', '../assets/ufo5.png');
             this.load.image('ufo6', '../assets/ufo6.png');
             this.load.image('ufo7', '../assets/ufo7.png');
@@ -120,11 +122,36 @@ preload.preload = function ()
            this.load.spritesheet("ufo1", "../assets/ufo1.png", {
                 frameWidth: 80,
                 frameHeight: 40
+            }); 
+            
+            this.load.spritesheet("ufo2", "../assets/ufo2.png", {
+                frameWidth: 80,
+                frameHeight: 40
+            }); 
+    
+            this.load.spritesheet("ufo4", "../assets/ufo4.png", {
+                frameWidth: 80,
+                frameHeight: 40
             });
     
             this.load.spritesheet("smallboss", "../assets/smallboss.png", {
                 frameWidth: 120,
                 frameHeight: 120
+            });
+    
+            this.load.spritesheet("smallboss1", "../assets/smallboss1.png", {
+                frameWidth: 110 ,
+                frameHeight: 120
+            });
+    
+            this.load.spritesheet("boss1", "../assets/boss1.png", {
+                frameWidth: 120 ,
+                frameHeight: 125
+            });
+    
+            this.load.spritesheet("brick1", "../assets/brick1.png", {
+                frameWidth: 90 ,
+                frameHeight: 80
             });
     
             

@@ -3,6 +3,8 @@ var player;
 var bullets;
 var enemies;
 var enemybullets;
+var lazerbullets;
+var lazerbullets2;
 var smallbossbullets;
 var lastTime = 0;
 var sfxExplode;
@@ -23,6 +25,9 @@ var overText;
 var gameState = 'running';
 var t1;
 var isShoot = false;
+var stage = 1;
+var bossText;
+var stageText;
 
 /*    1   2          3         4        5           6    7        8      9      10
 *   O O  O O         O        O O         O         O     O        O     O   smallboss
@@ -56,6 +61,8 @@ function removeAllObjects(){
 
     bullets.clear(true);
     enemybullets.clear(true);
+    lazerbullets.clear(true);
+    lazerbullets2.clear(true);
     smallbossbullets.clear(true);
     player.visible = false;
     
@@ -64,8 +71,10 @@ function removeAllObjects(){
     flip = true;
     lock = false;
     liveBall.destroy();
-    //currentBoss.destroy();
+    currentBoss.destroy();
     overText.destroy();
+    index = 0;
+    stage = 1;
 
 }
 // boss fire
@@ -92,30 +101,25 @@ function fire(){
     }
     
     else{
-        level1.time.addEvent({ delay: 50, callback: 
+        level1.time.addEvent({ delay: 150, callback: 
           function(){
         if(!currentBoss.isDead)
                 bossFire2(currentBoss.x, currentBoss.y);
         },callbackScope: level1, loop: false });  
 
-        level1.time.addEvent({ delay: 150, callback: 
+        level1.time.addEvent({ delay: 250, callback: 
           function(){
             if(!currentBoss.isDead)
                 bossFire2(currentBoss.x, currentBoss.y);
         },callbackScope: level1, loop: false });  
 
         if(currentBoss.enemyType == 'boss'){
-            level1.time.addEvent({ delay: 250, callback: 
-              function(){
-                if(!currentBoss.isDead)
-                    bossFire2(currentBoss.x, currentBoss.y);
-            },callbackScope: level1, loop: false });  
-
             level1.time.addEvent({ delay: 350, callback: 
               function(){
                 if(!currentBoss.isDead)
                     bossFire2(currentBoss.x, currentBoss.y);
             },callbackScope: level1, loop: false });  
+
         }
          
     }
@@ -143,21 +147,46 @@ function bossFire1(x,y){
 
 function bossFire2(x,y){
 
-    var bullet = smallbossbullets.get(x, y - 20);
-    if (bullet) {
+    //var bullet = smallbossbullets.get(x-60, y + 60);
+    /*if (bullet) {
         bullet.setActive(true);
         bullet.setVisible(true);
         bullet.body.velocity.y = 400;
         bullet.body.velocity.x = player.x - currentBoss.x;
     }
     
-    bullet = smallbossbullets.get(x, y - 20);
+    bullet = smallbossbullets.get(x+60, y + 60);
     if (bullet) {
         bullet.setActive(true);
         bullet.setVisible(true);
         bullet.body.velocity.y = 400;
         bullet.body.velocity.x = currentBoss.x - player.x;
+    }*/
+    
+    var bullet = smallbossbullets.get(x , y + 20);
+    if (bullet) {
+        bullet.setActive(true);
+        bullet.setVisible(true);
+        bullet.body.velocity.x = 200;
+        bullet.body.velocity.y = 250;
     }
+    
+    bullet = smallbossbullets.get(x , y + 20);
+    if (bullet) {
+        bullet.setActive(true);
+        bullet.setVisible(true);
+        bullet.body.velocity.x = -200;
+        bullet.body.velocity.y = 250;
+    } 
+    
+    bullet = smallbossbullets.get(x , y + 20);
+    if (bullet) {
+        bullet.setActive(true);
+        bullet.setVisible(true);
+        bullet.body.velocity.x = 0;
+        bullet.body.velocity.y = 350;
+    }
+
 
 }
 
@@ -198,6 +227,36 @@ function enemyFire(x, y, type) {
             
             bullet.body.velocity.x = (player.body.x - x);
             bullet.body.velocity.y = (player.body.y - y);
+        }
+    }
+    
+    else if(type == 'scatter'){
+        var bullet = enemybullets.get(x, y);
+        if (bullet) {
+            
+            bullet.body.velocity.x = 350;
+            bullet.body.velocity.y = 0;
+        }
+        
+        bullet = enemybullets.get(x, y);
+        if (bullet) {
+            
+            bullet.body.velocity.x = -350;
+            bullet.body.velocity.y = 0;
+        }
+        
+        bullet = enemybullets.get(x, y);
+        if (bullet) {
+            
+            bullet.body.velocity.x = 0;
+            bullet.body.velocity.y = -350;
+        }
+        
+        bullet = enemybullets.get(x, y);
+        if (bullet) {
+            
+            bullet.body.velocity.x = 0;
+            bullet.body.velocity.y = 350;
         }
     }
 
@@ -258,6 +317,8 @@ function addEnemyGroup3(){
     e.body.immovable = true;
     e.body.velocity.y = 150;
     e.enemyType = 'attack'
+    e.anims.play('ufo2');
+
 
     
     e = new Enemy({scene:level1, x: 160, y:-80, defaultKey:'ufo2'});
@@ -265,6 +326,7 @@ function addEnemyGroup3(){
     e.body.immovable = true;
     e.body.velocity.y = 150;
     e.enemyType = 'attack'
+    e.anims.play('ufo2');
 
 
     e = new Enemy({scene:level1, x: 240, y:-160, defaultKey:'ufo2'});
@@ -272,6 +334,7 @@ function addEnemyGroup3(){
     e.body.immovable = true;
     e.body.velocity.y = 150;
     e.enemyType = 'attack'
+    e.anims.play('ufo2');
 
     
     e = new Enemy({scene:level1, x: 320, y:-80, defaultKey:'ufo2'});
@@ -279,6 +342,7 @@ function addEnemyGroup3(){
     e.body.immovable = true;
     e.body.velocity.y = 150;
     e.enemyType = 'attack'
+    e.anims.play('ufo2');
 
 
     e = new Enemy({scene:level1, x: 400, y:0, defaultKey:'ufo2'});
@@ -286,13 +350,14 @@ function addEnemyGroup3(){
     e.body.immovable = true;
     e.body.velocity.y = 150;
     e.enemyType = 'attack'
+    e.anims.play('ufo2');
 
     
 
 }
 
 function addEnemyGroup4(){
-    e = new Enemy({scene:level1, x: 0, y:0, defaultKey:'ufo3'});
+    e = new Enemy({scene:level1, x: 0, y:0, defaultKey:'ufo4'});
     enemies.add(e);
     e.body.immovable = true;
     e.body.velocity.y = 60;
@@ -302,9 +367,24 @@ function addEnemyGroup4(){
     
     e.body.setCollideWorldBounds(true); //ball can't leave the screen
     e.body.setBounce(1, 1);
+    
+    e.anims.play('ufo4');
 
 
-    e = new Enemy({scene:level1, x: 80, y:80, defaultKey:'ufo3'});
+    e = new Enemy({scene:level1, x: 80, y:80, defaultKey:'ufo4'});
+    enemies.add(e);
+    e.body.immovable = true;
+    e.body.velocity.y = 60;
+    e.body.velocity.x = 180;
+    e.enemyType = 'attack';
+    e.number = 3;
+    
+    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+    e.body.setBounce(1, 1);
+    e.anims.play('ufo4');
+    
+
+    e = new Enemy({scene:level1, x: 160, y:160, defaultKey:'ufo4'});
     enemies.add(e);
     e.body.immovable = true;
     e.body.velocity.y = 60;
@@ -315,18 +395,7 @@ function addEnemyGroup4(){
     
     e.body.setCollideWorldBounds(true); //ball can't leave the screen
     e.body.setBounce(1, 1);
-
-    e = new Enemy({scene:level1, x: 160, y:160, defaultKey:'ufo3'});
-    enemies.add(e);
-    e.body.immovable = true;
-    e.body.velocity.y = 60;
-    e.body.velocity.x = 180;
-    e.enemyType = 'attack';
-    //e.anims.play('enemygroup1');
-    e.number = 3;
-    
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
-    e.body.setBounce(1, 1);
+    e.anims.play('ufo4');
 
 
 
@@ -372,7 +441,7 @@ function addEnemyGroup6(){
 
 function addEnemyGroup7(){
     
-    e = new Enemy({scene:level1, x: 420, y:0, defaultKey:'ufo7'});
+    e = new Enemy({scene:level1, x: 420, y:0, defaultKey:'ufo6'});
     enemies.add(e);
     e.body.immovable = true;
     e.enemyType = 'attack';
@@ -382,7 +451,7 @@ function addEnemyGroup7(){
     e.body.setBounce(1, 1);
     e.number = 5;
 
-    e = new Enemy({scene:level1, x: 340, y:50, defaultKey:'ufo8'});
+    e = new Enemy({scene:level1, x: 340, y:50, defaultKey:'ufo7'});
     enemies.add(e);
     e.body.immovable = true;
     e.enemyType = 'attack';
@@ -393,7 +462,7 @@ function addEnemyGroup7(){
     e.number = 5;
 
     
-    e = new Enemy({scene:level1, x: 260, y: 100, defaultKey:'ufo1'});
+    e = new Enemy({scene:level1, x: 260, y: 100, defaultKey:'ufo8'});
     enemies.add(e);
     e.body.immovable = true;
     e.enemyType = 'attack';
@@ -447,32 +516,37 @@ function addEnemyGroup9(){
 
 
 function addEnemyGroup10(){
-    e = new Enemy({scene:level1, x: 300, y:-20, defaultKey:'smallboss'});
+    e = new Enemy({scene:level1, x: worldX/2, y:-20, defaultKey:'boss1'});
     enemies.add(e);
     e.enemyType = 'smallboss';
     e.body.immovable = true;
     e.body.velocity.y = 0;
     e.number = 30;
-    e.anims.play('smallboss');
+    e.anims.play('boss1');
+    e.scaleX = 0.75;
+    e.scaleY = 0.75;
   
 }
 
 function addBoss(){
-    e = new Enemy({scene:level1, x: 300, y:-150, defaultKey:'boss'});
+    e = new Enemy({scene:level1, x: worldX/2, y:-100, defaultKey:'boss1'});
     enemies.add(e);
     e.enemyType = 'boss';
     e.body.immovable = true;
     e.body.velocity.y = 0;
     e.number = 80;
-    e.scaleX = 1.5;
-    e.scaleY = 1.5;
+    e.scaleX = 1.1;
+    e.scaleY = 1.1;
     t1.remove();
     index = 0;
+    e.anims.play('boss1');
     bgmusic.stop();
     sfxBoss1.play({
         volume: .3,
         loop: true
       })
+    //e.body.setCollideWorldBounds(true); //ball can't leave the screen
+    //e.body.setBounce(1, 1);
     
     level1.time.addEvent({ delay: 5000, 
                           callback: function(){
@@ -483,10 +557,10 @@ function addBoss(){
     
     
     
-    var bossText = this.add.text(
+    bossText = this.add.text(
     this.physics.world.bounds.width/2,
     40,
-    'BOSS UFO' ,
+    'BOSS FROG' ,
     {
       fontFamily:  'monospace',
       fontSize: '22px',
@@ -497,6 +571,53 @@ function addBoss(){
     bossText.setAlpha(0.75);
     
 }
+
+function addBrick1(){
+    /*e = new Enemy({scene:level1, x: 100, y:0, defaultKey:'brick1'});
+    enemies.add(e);
+    e.enemyType = 'attack';
+    e.body.immovable = true;
+    e.body.velocity.y = 0;
+    e.number = 5;
+    e.anims.play('brick1');
+    e.body.velocity.y = 100;*/
+    
+    
+    e = new Enemy({scene:level1, x: worldX - 100, y:0, defaultKey:'brick1'});
+    enemies.add(e);
+    e.body.immovable = true;
+    e.enemyType = 'attack';
+    e.body.velocity.y = 0;
+    e.number = 5;
+    e.anims.play('brick1');
+    e.body.velocity.y = 100;
+
+}
+
+
+function addBrick2(){
+    e = new Enemy({scene:level1, x: 100, y:0, defaultKey:'brick1'});
+    enemies.add(e);
+    e.enemyType = 'scatter';
+    e.body.immovable = true;
+    e.body.velocity.y = 0;
+    e.number = 5;
+    e.anims.play('brick1');
+    e.body.velocity.y = 100;
+    
+    
+    /*e = new Enemy({scene:level1, x: worldX - 100, y:0, defaultKey:'brick1'});
+    enemies.add(e);
+    e.body.immovable = true;
+    e.enemyType = 'scatter';
+    e.body.velocity.y = 0;
+    e.number = 5;
+    e.anims.play('brick1');
+    e.body.velocity.y = 100;*/
+
+}
+
+
 
 function hitBall(){
     
@@ -570,14 +691,11 @@ function hitEnemy(bullet, enemy){
     }
 
     if(enemy.enemyType =='boss'){
-
-        if(enemy.number <= 0){
-            console.log('level2');
-            if(!lock){
-                level1.time.addEvent({ delay: 2800, callback: function(){level1.scene.start('level2');}, callbackScope: level1, loop: false});
-                lock = true;
-            }
-        }
+        
+        bossText.visible = false;
+        stage++;
+        stageText.text = 'stage ' + stage;
+        level1.time.addEvent({ delay: 1000, callback: addBrick1, callbackScope: level1, loop:false });
     }
     
     
@@ -709,10 +827,46 @@ level1.preload = function ()
       repeat: -1
     });
     
-        this.anims.create({
+    this.anims.create({
       key: "ufo1",
       frames: this.anims.generateFrameNumbers("ufo1"),
       frameRate: 4,
+      repeat: -1
+    });
+    
+    this.anims.create({
+      key: "ufo2",
+      frames: this.anims.generateFrameNumbers("ufo2"),
+      frameRate: 4,
+      repeat: -1
+    });
+    
+    this.anims.create({
+      key: "ufo4",
+      frames: this.anims.generateFrameNumbers("ufo4"),
+      frameRate: 4,
+      repeat: -1
+    });
+      
+    this.anims.create({
+      key: "smallboss1",
+      frames: this.anims.generateFrameNumbers("smallboss1"),
+      frameRate: 10,
+      repeat: -1
+    });
+    
+         
+    this.anims.create({
+      key: "boss1",
+      frames: this.anims.generateFrameNumbers("boss1"),
+      frameRate: 10,
+      repeat: -1
+    });
+           
+    this.anims.create({
+      key: "brick1",
+      frames: this.anims.generateFrameNumbers("brick1"),
+      frameRate: 5,
       repeat: -1
     });
     
@@ -747,6 +901,8 @@ level1.create = function ()
 
     bullets = this.physics.add.group({ defaultKey: 'bullet2', maxSize: 500 });
     enemybullets = this.physics.add.group({ defaultKey: 'bullet3', maxSize: 500 });
+    lazerbullets = this.physics.add.group({ defaultKey: 'bullet5', maxSize: 500 });
+    lazerbullets2 = this.physics.add.group({ defaultKey: 'bullet6', maxSize: 500 });
     smallbossbullets = this.physics.add.group({ defaultKey: 'bullet4', maxSize: 500 });
     enemies = this.physics.add.group({ defaultKey: 'enemy1', maxSize: 30, runChildUpdate: true });
  
@@ -777,16 +933,29 @@ level1.create = function ()
     this.physics.world.enable(enemies);
     this.physics.world.enable(bullets);
     this.physics.world.enable(enemybullets);
+    this.physics.world.enable(lazerbullets);
+    this.physics.world.enable(lazerbullets2);
     this.physics.world.enable(smallbossbullets);
 
     
     this.physics.add.overlap(liveBall, player, hitBall, null, this);
     this.physics.add.overlap(enemybullets, player, hitPlayer, null, this);
+    this.physics.add.overlap(lazerbullets, player, hitPlayer, null, this);
+    this.physics.add.overlap(lazerbullets2, player, hitPlayer, null, this);
     this.physics.add.overlap(smallbossbullets, player, hitPlayer, null, this);
     this.physics.add.overlap(bullets, enemies, hitEnemy, null, this);
     this.physics.add.collider(player,enemies, enemyHitPlayer, null, this);
    
-    this.time.addEvent({ delay: 2500, callback: addEnemyGroup1,callbackScope: this, loop: false });    
+    // level2    
+    this.time.addEvent({ delay: 2500, callback: addBrick1,callbackScope: this, loop: false });    
+    this.time.addEvent({ delay: 5000, callback: addBrick2,callbackScope: this, loop: false });    
+    this.time.addEvent({ delay: 7500, callback: addBrick1,callbackScope: this, loop: false });    
+    this.time.addEvent({ delay: 10000, callback: addBrick2,callbackScope: this, loop: false });    
+    this.time.addEvent({ delay: 13000, callback: addBrick1,callbackScope: this, loop: false });    
+    this.time.addEvent({ delay: 16000, callback: addBrick2,callbackScope: this, loop: false });    
+    
+    // level1
+    /*this.time.addEvent({ delay: 2500, callback: addEnemyGroup1, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 5000, callback: addEnemyGroup2, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 8000, callback: addEnemyGroup3, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 11000, callback: addEnemyGroup4, callbackScope: this, loop:false });
@@ -805,7 +974,9 @@ level1.create = function ()
     this.time.addEvent({ delay: 58000, callback: addEnemyGroup2, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 63000, callback: addEnemyGroup4, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 68000, callback: addEnemyGroup7, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 83000, callback: addBoss, callbackScope: this, loop:false });
+    this.time.addEvent({ delay: 72000, callback: addEnemyGroup1, callbackScope: this, loop:false });
+    this.time.addEvent({ delay: 78000, callback: addBoss, callbackScope: this, loop:false });*/
+
 
     
     if(bgmusic == null){
@@ -824,10 +995,10 @@ level1.create = function ()
     loop: true
   })
     
-    var stageText = this.add.text(
+    stageText = this.add.text(
     this.physics.world.bounds.width -100,
     40,
-    'Stage 1',
+    'Stage ' + stage,
     {
       fontFamily:  'monospace',
       fontSize: '22px',
@@ -936,7 +1107,7 @@ level1.update = function (time, delta)
             if(!child.timerLock){
                 child.timerLock = true;
                 currentBoss = child;
-                level1.time.addEvent({ delay: 2000, callback: fire, callbackScope: level1, loop: true });  
+                level1.time.addEvent({ delay: 2200, callback: fire, callbackScope: level1, loop: true });  
                 
             }
 
@@ -959,7 +1130,7 @@ level1.update = function (time, delta)
             }
             if(child.moveTime == 0){
                 t2 = level1.time.addEvent({ 
-                    delay: delatTime, 
+                    delay: 1700, 
                     callback: function(){
                         index ++;
                         if(index == 12){
@@ -980,7 +1151,7 @@ level1.update = function (time, delta)
 
         }
         
-        if(this.enemyType == 'attack'){
+        if(this.enemyType == 'attack' || this.enemyType == 'scatter'){
             
             if(!this.timerLock && Math.abs(this.x - player.body.x) < 500){
                 this.timerLock = true;
