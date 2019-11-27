@@ -61,6 +61,9 @@ preload.preload = function ()
             this.load.image('b3', '../assets/b3.png');
             this.load.image('b4', '../assets/b4.png');
             this.load.image('b5', '../assets/b5.png');
+            this.load.image('b6', '../assets/b6.png');
+            this.load.image('b7', '../assets/b7.png');
+            this.load.image('b8', '../assets/b8.png');
             this.load.image('boss', '../assets/boss.png');
             //this.load.image('ufo1', '../assets/ufo1.png');
             //this.load.image('ufo2', '../assets/ufo2.png');
@@ -139,7 +142,7 @@ preload.preload = function ()
                 frameHeight: 120
             });
     
-            this.load.spritesheet("smallboss1", "../assets/smallboss1.png", {
+            this.load.spritesheet("crab", "../assets/crab.png", {
                 frameWidth: 110 ,
                 frameHeight: 120
             });
