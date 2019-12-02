@@ -7,7 +7,7 @@ var startText;
 var startText2;
 menu.preload = function ()
 {
-    this.load.bitmapFont('desyrel', '../assets/font/font.png', '../assets/font/font.xml');
+    this.load.bitmapFont('desyrel', 'assets/font/font.png', 'assets/font/font.xml');
       //this.load.bitmapFont('carbonTypeFont', carbonTypeTexture, carbonTypeDescription);
     
 }
@@ -86,17 +86,3 @@ menu.update = function ()
     
     
 }
-/*
-enterButtonHoverState = function() {
-    //startButton.setStyle({ fill: '#ff0'});
-    //startButton.setStyle({ fontSize: '28px'});
-},
-
-enterButtonResetState = function() {
-    //startButton.setStyle({ fill: '#fff'});
-    //startButton.setStyle({ fontSize: '25px'});
-},
-    
-enterButtonActiveState = function() {
-     menu.scene.start('level1');
-}*/

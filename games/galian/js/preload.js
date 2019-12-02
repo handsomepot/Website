@@ -45,114 +45,114 @@ preload.preload = function ()
     
     
 
-            this.load.image('starfield', '../assets/background.jpg');
-            this.load.image('starship', '../assets/starship.png');
+            this.load.image('starfield', 'assets/background.jpg');
+            this.load.image('starship', 'assets/starship.png');
 
-            this.load.image('enemy1', '../assets/enemy1.png');
-            this.load.image('enemy2', '../assets/enemy2.png');
-            this.load.image('bullet1', '../assets/bullet1.png');
-            this.load.image('bullet2', '../assets/bullet2.png');
-            this.load.image('bullet3', '../assets/bullet3.png');
-            this.load.image('bullet4', '../assets/bullet4.png');
-            this.load.image('bullet5', '../assets/bullet5.png');
-            this.load.image('bullet6', '../assets/bullet6.png');
-            this.load.image('b1', '../assets/b1.png');
-            this.load.image('b2', '../assets/b2.png');
-            this.load.image('b3', '../assets/b3.png');
-            this.load.image('b4', '../assets/b4.png');
-            this.load.image('b5', '../assets/b5.png');
-            this.load.image('b6', '../assets/b6.png');
-            this.load.image('b7', '../assets/b7.png');
-            this.load.image('b8', '../assets/b8.png');
-            this.load.image('boss', '../assets/boss.png');
-            //this.load.image('ufo1', '../assets/ufo1.png');
-            //this.load.image('ufo2', '../assets/ufo2.png');
-            //this.load.image('ufo3', '../assets/ufo3.png');
-            //this.load.image('ufo4', '../assets/ufo4.png');
-            this.load.image('ufo5', '../assets/ufo5.png');
-            this.load.image('ufo6', '../assets/ufo6.png');
-            this.load.image('ufo7', '../assets/ufo7.png');
-            this.load.image('ufo8', '../assets/ufo8.png');
+            this.load.image('enemy1', 'assets/enemy1.png');
+            this.load.image('enemy2', 'assets/enemy2.png');
+            this.load.image('bullet1', 'assets/bullet1.png');
+            this.load.image('bullet2', 'assets/bullet2.png');
+            this.load.image('bullet3', 'assets/bullet3.png');
+            this.load.image('bullet4', 'assets/bullet4.png');
+            this.load.image('bullet5', 'assets/bullet5.png');
+            this.load.image('bullet6', 'assets/bullet6.png');
+            this.load.image('b1', 'assets/b1.png');
+            this.load.image('b2', 'assets/b2.png');
+            this.load.image('b3', 'assets/b3.png');
+            this.load.image('b4', 'assets/b4.png');
+            this.load.image('b5', 'assets/b5.png');
+            this.load.image('b6', 'assets/b6.png');
+            this.load.image('b7', 'assets/b7.png');
+            this.load.image('b8', 'assets/b8.png');
+            this.load.image('boss', 'assets/boss.png');
+            //this.load.image('ufo1', 'assets/ufo1.png');
+            //this.load.image('ufo2', 'assets/ufo2.png');
+            //this.load.image('ufo3', 'assets/ufo3.png');
+            //this.load.image('ufo4', 'assets/ufo4.png');
+            this.load.image('ufo5', 'assets/ufo5.png');
+            this.load.image('ufo6', 'assets/ufo6.png');
+            this.load.image('ufo7', 'assets/ufo7.png');
+            this.load.image('ufo8', 'assets/ufo8.png');
     
 
-            this.load.image('live', '../assets/live.png');
-            this.load.image('particle', '../assets/yellow.png');
+            this.load.image('live', 'assets/live.png');
+            this.load.image('particle', 'assets/yellow.png');
 
 
-            this.load.spritesheet("sprExplosion", "../assets/sprExplosion.png", {
+            this.load.spritesheet("sprExplosion", "assets/sprExplosion.png", {
                 frameWidth: 64,
                 frameHeight: 64
             });
-            this.load.spritesheet("explode2", "../assets/explode2.png", {
+            this.load.spritesheet("explode2", "assets/explode2.png", {
                 frameWidth: 80,
                 frameHeight: 80
             });
-            this.load.spritesheet("explode3", "../assets/explode3.png", {
+            this.load.spritesheet("explode3", "assets/explode3.png", {
                 frameWidth: 50,
                 frameHeight: 50
             });
-            this.load.spritesheet("playergroup", "../assets/playergroup.png", {
+            this.load.spritesheet("playergroup", "assets/playergroup.png", {
                 frameWidth: 60     ,
                 frameHeight: 60
             });
     
-            this.load.spritesheet("playergroup2", "../assets/playerAnimation2.png", {
+            this.load.spritesheet("playergroup2", "assets/playerAnimation2.png", {
                 frameWidth: 65     ,
                 frameHeight: 65
             });
     
-            this.load.spritesheet("enemygroup1", "../assets/enemygroup1.png", {
+            this.load.spritesheet("enemygroup1", "assets/enemygroup1.png", {
                 frameWidth: 80,
                 frameHeight: 55
             });
         
-            this.load.spritesheet("enemygroup2", "../assets/enemygroup2.png", {
+            this.load.spritesheet("enemygroup2", "assets/enemygroup2.png", {
                 frameWidth: 96,
                 frameHeight: 65
             });
     
             
-            this.load.spritesheet("enemygroup3", "../assets/enemygroup3.png", {
+            this.load.spritesheet("enemygroup3", "assets/enemygroup3.png", {
                 frameWidth: 72,
                 frameHeight: 72
             });
      
-            this.load.spritesheet("enemygroup4", "../assets/enemygroup4.png", {
+            this.load.spritesheet("enemygroup4", "assets/enemygroup4.png", {
                 frameWidth: 72,
                 frameHeight: 72
             });
     
-           this.load.spritesheet("ufo1", "../assets/ufo1.png", {
+           this.load.spritesheet("ufo1", "assets/ufo1.png", {
                 frameWidth: 80,
                 frameHeight: 40
             }); 
             
-            this.load.spritesheet("ufo2", "../assets/ufo2.png", {
+            this.load.spritesheet("ufo2", "assets/ufo2.png", {
                 frameWidth: 80,
                 frameHeight: 40
             }); 
     
-            this.load.spritesheet("ufo4", "../assets/ufo4.png", {
+            this.load.spritesheet("ufo4", "assets/ufo4.png", {
                 frameWidth: 80,
                 frameHeight: 40
             });
     
-            this.load.spritesheet("smallboss", "../assets/smallboss.png", {
+            this.load.spritesheet("smallboss", "assets/smallboss.png", {
                 frameWidth: 120,
                 frameHeight: 120
             });
     
-            this.load.spritesheet("crab", "../assets/crab.png", {
+            this.load.spritesheet("crab", "assets/crab.png", {
                 frameWidth: 110 ,
                 frameHeight: 120
             });
     
-            this.load.spritesheet("boss1", "../assets/boss1.png", {
+            this.load.spritesheet("boss1", "assets/boss1.png", {
                 frameWidth: 120 ,
                 frameHeight: 125
             });
     
-            this.load.spritesheet("brick1", "../assets/brick1.png", {
+            this.load.spritesheet("brick1", "assets/brick1.png", {
                 frameWidth: 90 ,
                 frameHeight: 80
             });
@@ -177,15 +177,15 @@ preload.preload = function ()
                 percentText.destroy();
                 assetText.destroy();
             });
-            this.load.audio('music', '../assets/Mercury.wav');
-            this.load.audio('explode', '../assets/laser1.wav');
-            this.load.audio('explode1', '../assets/explosion07.wav');
-            this.load.audio('explode2', '../assets/explosion01.wav');
-            this.load.audio('menuMusic', '../assets/menu.mp3');
-            this.load.audio('point', '../assets/point.mp3');
-            this.load.audio('death', '../assets/death.wav');
-            this.load.audio('boss1Music', '../assets/boss.wav');
-            this.load.audio('battle1', '../assets/battle1.wav');
+            this.load.audio('music', 'assets/Mercury.wav');
+            this.load.audio('explode', 'assets/laser1.wav');
+            this.load.audio('explode1', 'assets/explosion07.wav');
+            this.load.audio('explode2', 'assets/explosion01.wav');
+            this.load.audio('menuMusic', 'assets/menu.mp3');
+            this.load.audio('point', 'assets/point.mp3');
+            this.load.audio('death', 'assets/death.wav');
+            this.load.audio('boss1Music', 'assets/boss.wav');
+            this.load.audio('battle1', 'assets/battle1.wav');
     
 
 
