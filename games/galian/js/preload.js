@@ -177,7 +177,7 @@ preload.preload = function ()
                 percentText.destroy();
                 assetText.destroy();
             });
-            this.load.audio('battle1', 'assets/battle1.mp3');
+            this.load.audio('battle1', 'assets/battle1.ogg');
             this.load.audio('music', 'assets/Mercury.wav');
             this.load.audio('explode', 'assets/laser1.wav');
             this.load.audio('explode1', 'assets/explosion07.wav');

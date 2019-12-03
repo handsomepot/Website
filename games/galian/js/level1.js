@@ -76,7 +76,7 @@ function removeAllObjects(){
     flip = true;
     lock = false;
     liveBall.destroy();
-    currentBoss.destroy();
+    //currentBoss.destroy();
     overText.destroy();
     stage = 1;
 
