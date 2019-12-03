@@ -21,7 +21,7 @@ var lock = false;
 var lives = max_live; // lives
 var direction = ['down','right','left','down', 'up','left','right','down', 'up','right','left','down'];
 var liveBall;
-var currentBoss;
+var currentBoss = null;
 var overText;
 var gameState = 'running';
 var t1,t2;
@@ -86,6 +86,9 @@ function removeAllObjects(){
 
 // boss fire
 function fire(){
+    if(currentBoss.enemyType=='smallboss'){
+        currentBoss.timerLock = false;
+    }
     if(flip){
         level1.time.addEvent({ delay: 300, callback: 
           function(){
@@ -521,6 +524,10 @@ function addEnemyGroup9(){
 
 
 function addEnemyGroup10(){
+    if(currentBoss!=null){
+        currentBoss.bulletTimer.remove();
+        currentBoss.destroy();
+    }
     e = new Enemy({scene:level1, x: worldX/2, y:-20, defaultKey:'boss1'});
     enemies.add(e);
     e.enemyType = 'smallboss';
@@ -560,6 +567,10 @@ function addEnemyGroup11(){
 
 
 function addBoss(){
+    if(currentBoss!=null){
+        currentBoss.bulletTimer.remove();
+        currentBoss.destroy();
+    }
     e = new Enemy({scene:level1, x: worldX/2, y:-100, defaultKey:'boss1'});
     enemies.add(e);
     e.enemyType = 'boss1';
@@ -681,6 +692,10 @@ function addBrick4(){
 }
 
 function addBrick5(){ // crab small
+    if(currentBoss!=null){
+        currentBoss.bulletTimer.remove();
+        currentBoss.destroy();
+    }
     e = new Enemy({scene:level1, x: worldX/2, y:-20, defaultKey:'crab'});
     enemies.add(e);
     e.enemyType = 'smallboss';
@@ -751,7 +766,7 @@ function hitBall(){
 function addLevel2(){
         level1.time.addEvent({ delay:  2000, callback: addBrick1,callbackScope: level1, loop: false });
         level1.time.addEvent({ delay:  6000, callback: addBrick1,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay: 10000, callback: addBrick1,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay: 10000, callback: addEnemyGroup10,callbackScope: level1, loop: false });
 
         level1.time.addEvent({ delay: 21000, callback: addBrick2,callbackScope: level1, loop: false }); 
         level1.time.addEvent({ delay: 21000, callback: addBrick3,callbackScope: level1, loop: false }); 
@@ -1086,6 +1101,7 @@ level1.create = function ()
  
     
     // level1
+
     this.time.addEvent({ delay: 2500, callback: addEnemyGroup1, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 5000, callback: addEnemyGroup2, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 8000, callback: addEnemyGroup3, callbackScope: this, loop:false });
@@ -1243,10 +1259,9 @@ level1.update = function (time, delta)
             }
             
             if(!child.timerLock){
-                console.log(currentBoss);
                 child.timerLock = true;
                 currentBoss = child;
-                child.bulletTimer = level1.time.addEvent({ delay: 2200, callback: fire, callbackScope: level1, loop: true });  
+                child.bulletTimer = level1.time.addEvent({ delay: 2500, callback: fire, callbackScope: level1, loop: false });  
                 
             }
 
