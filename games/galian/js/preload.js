@@ -185,7 +185,7 @@ preload.preload = function ()
             this.load.audio('point', 'assets/point.mp3');
             this.load.audio('death', 'assets/death.wav');
             this.load.audio('boss1Music', 'assets/boss.wav');
-            this.load.audio('battle1', 'assets/battle1.wav');
+            this.load.audio('battle1', 'assets/battle1.mp3');
     
 
 
