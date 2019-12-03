@@ -26,7 +26,7 @@ var gameState = 'running';
 var t1,t2;
 var isShoot = false;
 var stage = 1;
-var bossText;
+var bossText, bossText2;
 var stageText;
 
 
@@ -535,26 +535,26 @@ function addEnemyGroup10(){
 
 function addEnemyGroup11(){
     
-    e = new Enemy({scene:level1, x: 100, y:worldY, defaultKey:'ufo6'});
+    e = new Enemy({scene:level1, x: 0, y:worldY/2, defaultKey:'ufo6'});
     enemies.add(e);
     e.body.immovable = true;
     e.enemyType = 'attack3';
-    e.body.velocity.y = -100;
-    e.body.velocity.x = 0;
+    e.body.velocity.y = -130;
+    e.body.velocity.x = 20;
     e.body.setCollideWorldBounds(true); //ball can't leave the screen
     e.body.setBounce(1, 1);
-    e.number = 5;
+    e.number = 8;
 
     
-    e = new Enemy({scene:level1, x: worldX-100, y: worldY, defaultKey:'ufo8'});
+    e = new Enemy({scene:level1, x: worldX-20, y: worldY/2, defaultKey:'ufo8'});
     enemies.add(e);
     e.body.immovable = true;
     e.enemyType = 'attack3';
-    e.body.velocity.y = -100;
-    e.body.velocity.x = 0;
+    e.body.velocity.y = -130;
+    e.body.velocity.x = -20;
     e.body.setCollideWorldBounds(true); //ball can't leave the screen
     e.body.setBounce(1, 1);
-    e.number = 5;
+    e.number = 8;
 }
 
 
@@ -564,7 +564,7 @@ function addBoss(){
     e.enemyType = 'boss1';
     e.body.immovable = true;
     e.body.velocity.y = 0;
-    e.number = 80;
+    e.number = 2;
     e.scaleX = 1.1;
     e.scaleY = 1.1;
     //t1.remove();
@@ -698,10 +698,23 @@ function addBoss2(){ // crab small
     e.enemyType = 'boss2';
     e.body.immovable = true;
     e.body.velocity.y = 0;
-    e.number = 8;
+    e.number = 28;
     e.anims.play('crab');
     e.scaleX = 1.1;
     e.scaleY = 1.1;
+    
+    bossText2 = this.add.text(
+    this.physics.world.bounds.width/2,
+    40,
+    'BOSS CRAB' ,
+    {
+      fontFamily:  'monospace',
+      fontSize: '22px',
+      fill: '#fff',
+    },
+    );
+    bossText2.setOrigin(0.5);
+    bossText2.setAlpha(0.75);
 }
 
 
@@ -780,26 +793,33 @@ function hitEnemy(bullet, enemy){
             bossText.visible = false;
             stage++;
             stageText.text = 'stage ' + stage;
-            level1.time.addEvent({ delay:  2000, callback: addBrick1,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay:  6000, callback: addBrick1,callbackScope: level1, loop: false });
+            level1.time.addEvent({ delay:  2000, callback: addBoss2,callbackScope: level1, loop: false });
+            /*level1.time.addEvent({ delay:  6000, callback: addBrick1,callbackScope: level1, loop: false });
             level1.time.addEvent({ delay: 10000, callback: addBrick1,callbackScope: level1, loop: false });
             
             level1.time.addEvent({ delay: 21000, callback: addBrick2,callbackScope: level1, loop: false }); 
             level1.time.addEvent({ delay: 21000, callback: addBrick3,callbackScope: level1, loop: false }); 
             level1.time.addEvent({ delay: 27000, callback: addBrick2,callbackScope: level1, loop: false });
             level1.time.addEvent({ delay: 27000, callback: addBrick3,callbackScope: level1, loop: false }); 
-            level1.time.addEvent({ delay: 32000, callback: addBrick4,callbackScope: level1, loop: false }); 
             level1.time.addEvent({ delay: 37000, callback: addBrick4,callbackScope: level1, loop: false }); 
             level1.time.addEvent({ delay: 45000, callback: addEnemyGroup11,callbackScope: level1, loop: false }); 
-            level1.time.addEvent({ delay: 55000, callback: addEnemyGroup11,callbackScope: level1, loop: false }); 
-            level1.time.addEvent({ delay: 65000, callback: addBrick5,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 75000, callback: addBrick3,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 85000, callback: addBrick2,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 95000, callback: addBrick5,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 105000, callback: addEnemyGroup11,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 115000, callback: addBoss2,callbackScope: level1, loop: false });
+            level1.time.addEvent({ delay: 53000, callback: addEnemyGroup11,callbackScope: level1, loop: false }); 
+            level1.time.addEvent({ delay: 61000, callback: addBrick5,callbackScope: level1, loop: false });
+            level1.time.addEvent({ delay: 69000, callback: addBrick4,callbackScope: level1, loop: false });
+            level1.time.addEvent({ delay: 77000, callback: addBrick4,callbackScope: level1, loop: false });
+            level1.time.addEvent({ delay: 85000, callback: addBrick4,callbackScope: level1, loop: false });
+            level1.time.addEvent({ delay: 95000, callback: addEnemyGroup11,callbackScope: level1, loop: false });
+            level1.time.addEvent({ delay: 105000, callback: addBoss2,callbackScope: level1, loop: false });*/
         }
     }
+     if(enemy.enemyType =='boss2'){
+         if(enemy.winLock==false){
+            enemy.winLock = true;
+            bossText2.visible = false;
+            stage++;
+            stageText.text = 'stage ' + stage;
+         }
+     }
     
     
     if(!enemy.isDead && enemy.body.y >= 10){
@@ -1048,7 +1068,8 @@ level1.create = function ()
  
     
     // level1
-    this.time.addEvent({ delay: 2500, callback: addEnemyGroup1, callbackScope: this, loop:false });
+    this.time.addEvent({ delay: 2500, callback: addBoss, callbackScope: this, loop:false });
+    /*this.time.addEvent({ delay: 2500, callback: addEnemyGroup1, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 5000, callback: addEnemyGroup2, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 8000, callback: addEnemyGroup3, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 11000, callback: addEnemyGroup4, callbackScope: this, loop:false });
@@ -1068,7 +1089,7 @@ level1.create = function ()
     this.time.addEvent({ delay: 63000, callback: addEnemyGroup4, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 68000, callback: addEnemyGroup7, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 72000, callback: addEnemyGroup1, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 78000, callback: addBoss, callbackScope: this, loop:false });
+    this.time.addEvent({ delay: 78000, callback: addBoss, callbackScope: this, loop:false });*/
 
 
     
@@ -1118,6 +1139,9 @@ level1.update = function (time, delta)
     }
     else if(stage==2){
         starfield.tilePositionY -= 3; // background scrolling
+    }
+    else if(stage==3){
+        starfield.tilePositionY -= 4; // background scrolling
     }
    
     player.setVelocity(0); // player velocity
@@ -1268,22 +1292,17 @@ level1.update = function (time, delta)
             }
         }
         else if(this.enemyType == 'attack3'){
-            if(!this.timerLock && Math.abs(this.x - player.body.x) < 500 && this.y < worldY-200){
+            
+            if(!this.timerLock && this.y < worldY-250){
                 this.timerLock = true;
-                level1.time.addEvent({ delay: 10, callback: 
+                level1.time.addEvent({ delay: 1600, callback: 
                 function(){
-                    level1.time.addEvent({ 
-                        delay: 1300, 
-                        callback: function(){
-                            child.timerLock = false;
-                        },
-                        callbackScope: level1, 
-                        loop: false });    
-                        if(!child.isDead)
-                            enemyFire(child.x, child.y + 20, child.enemyType);
+                    
+                    if(!child.isDead)
+                        enemyFire(child.x, child.y + 20, child.enemyType);
 
                 },
-                callbackScope: level1, loop: false });    
+                callbackScope: level1, loop: true });    
             }
         }
         else if(this.enemyType == 'regular'){
