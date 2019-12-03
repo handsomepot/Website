@@ -148,21 +148,6 @@ function bossFire1(x,y){
 
 function bossFire2(x,y){
 
-    //var bullet = smallbossbullets.get(x-60, y + 60);
-    /*if (bullet) {
-        bullet.setActive(true);
-        bullet.setVisible(true);
-        bullet.body.velocity.y = 400;
-        bullet.body.velocity.x = player.x - currentBoss.x;
-    }
-    
-    bullet = smallbossbullets.get(x+60, y + 60);
-    if (bullet) {
-        bullet.setActive(true);
-        bullet.setVisible(true);
-        bullet.body.velocity.y = 400;
-        bullet.body.velocity.x = currentBoss.x - player.x;
-    }*/
     
     var bullet = smallbossbullets.get(x , y + 20);
     if (bullet) {
@@ -417,7 +402,6 @@ function addEnemyGroup4(){
     e.body.velocity.y = 60;
     e.body.velocity.x = 180;
     e.enemyType = 'attack';
-    //e.anims.play('enemygroup1');
     e.number = 5;
     
     e.body.setCollideWorldBounds(true); //ball can't leave the screen
@@ -590,8 +574,6 @@ function addBoss(){
         volume: .3,
         loop: true
       })
-    //e.body.setCollideWorldBounds(true); //ball can't leave the screen
-    //e.body.setBounce(1, 1);
     
     level1.time.addEvent({ delay: 5000, 
                           callback: function(){
@@ -766,9 +748,6 @@ function enemyHitPlayer(player, enemy){
     lives--;
     if(lives >= 0)
         block[lives].visible = false;
-    
-        
-    
 }
 
 
@@ -820,8 +799,6 @@ function hitEnemy(bullet, enemy){
             level1.time.addEvent({ delay: 105000, callback: addEnemyGroup11,callbackScope: level1, loop: false });
             level1.time.addEvent({ delay: 115000, callback: addBoss2,callbackScope: level1, loop: false });
         }
-   
-        //level1.time.addEvent({ delay: 85000, callback: addBrick5,callbackScope: level1, loop: false });   
     }
     
     
@@ -832,11 +809,8 @@ function hitEnemy(bullet, enemy){
         e = new Enemy({scene:level1, x: enemy.x, y:enemy.y});
         e.body.immovable = true;
         e.anims.play('sprExplosion');
-        //enemy.anims.play("sprExplosion"); // play the animation
-        //enemy.lastTime = globalTime;
         sfxExplode2.play();
 
-        //enemy.disableBody(true, true); // disableBody( [disableGameObject] [, hideGameObject])
         bullet.disableBody(false, true); // disableBody( [disableGameObject] [, hideGameObject])
         
         if(enemy.enemyType == 'smallboss' || enemy.enemyType == 'boss1' || enemy.enemyType == 'boss2'){
@@ -863,7 +837,6 @@ function hitPlayer(player, bullet){
     tmp = new Enemy({scene:level1, x: bullet.x, y:bullet.y + 20});
     tmp.body.immovable = true;
     tmp.anims.play('explode3');
-    //e.visible = false;
     
     if(!lock){
         level1.time.addEvent({ delay: 180, callback: function(){
