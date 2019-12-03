@@ -526,6 +526,7 @@ function addEnemyGroup9(){
 function addEnemyGroup10(){
     if(currentBoss!=null){
         currentBoss.bulletTimer.remove();
+        currentBoss.moveTimer.remove();
         currentBoss.destroy();
     }
     e = new Enemy({scene:level1, x: worldX/2, y:-20, defaultKey:'boss1'});
@@ -569,6 +570,7 @@ function addEnemyGroup11(){
 function addBoss(){
     if(currentBoss!=null){
         currentBoss.bulletTimer.remove();
+        currentBoss.moveTimer.remove();
         currentBoss.destroy();
     }
     e = new Enemy({scene:level1, x: worldX/2, y:-100, defaultKey:'boss1'});
@@ -694,6 +696,7 @@ function addBrick4(){
 function addBrick5(){ // crab small
     if(currentBoss!=null){
         currentBoss.bulletTimer.remove();
+        currentBoss.moveTimer.remove();
         currentBoss.destroy();
     }
     e = new Enemy({scene:level1, x: worldX/2, y:-20, defaultKey:'crab'});
@@ -708,6 +711,11 @@ function addBrick5(){ // crab small
 }
 
 function addBoss2(){ // crab 
+    if(currentBoss!=null){
+        currentBoss.bulletTimer.remove();
+        currentBoss.moveTimer.remove();
+        currentBoss.destroy();
+    }
     e = new Enemy({scene:level1, x: worldX/2, y:-20, defaultKey:'crab'});
     enemies.add(e);
     e.enemyType = 'boss2';
