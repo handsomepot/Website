@@ -13,6 +13,7 @@ var sfxExplode2;
 var sfxPoint;
 let bgmusic = null;
 var sfxBattle1;
+var sfxBattle2;
 var block = [];
 var flip = true;
 var globalTime;
@@ -564,10 +565,9 @@ function addBoss(){
     e.enemyType = 'boss1';
     e.body.immovable = true;
     e.body.velocity.y = 0;
-    e.number = 2;
+    e.number = 88;
     e.scaleX = 1.1;
     e.scaleY = 1.1;
-    //t1.remove();
     e.anims.play('boss1');
     bgmusic.stop();
     sfxBoss1.play({
@@ -692,16 +692,31 @@ function addBrick5(){ // crab small
     e.scaleY = 0.75;
 }
 
-function addBoss2(){ // crab small
+function addBoss2(){ // crab 
     e = new Enemy({scene:level1, x: worldX/2, y:-20, defaultKey:'crab'});
     enemies.add(e);
     e.enemyType = 'boss2';
     e.body.immovable = true;
     e.body.velocity.y = 0;
-    e.number = 28;
+    e.number = 108;
     e.anims.play('crab');
-    e.scaleX = 1.1;
-    e.scaleY = 1.1;
+    e.scaleX = 1.2;
+    e.scaleY = 1.2;
+    
+   sfxBattle1.stop();
+    sfxBoss1.play({
+        volume: .3,
+        loop: true
+      })
+    
+    level1.time.addEvent({ delay: 5000, 
+                          callback: function(){
+                            sfxBoss1.stop();
+                            sfxBattle2.play({volume: .6,loop: true});
+                        }
+                  ,callbackScope: this, loop: false });    
+    
+    
     
     bossText2 = this.add.text(
     this.physics.world.bounds.width/2,
@@ -733,7 +748,25 @@ function hitBall(){
     }
 
 }
+function addLevel2(){
+        level1.time.addEvent({ delay:  2000, callback: addBrick1,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay:  6000, callback: addBrick1,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay: 10000, callback: addBrick1,callbackScope: level1, loop: false });
 
+        level1.time.addEvent({ delay: 21000, callback: addBrick2,callbackScope: level1, loop: false }); 
+        level1.time.addEvent({ delay: 21000, callback: addBrick3,callbackScope: level1, loop: false }); 
+        level1.time.addEvent({ delay: 27000, callback: addBrick2,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay: 27000, callback: addBrick3,callbackScope: level1, loop: false }); 
+        level1.time.addEvent({ delay: 35000, callback: addBrick4,callbackScope: level1, loop: false }); 
+        level1.time.addEvent({ delay: 45000, callback: addEnemyGroup11,callbackScope: level1, loop: false }); 
+        level1.time.addEvent({ delay: 53000, callback: addEnemyGroup11,callbackScope: level1, loop: false }); 
+        level1.time.addEvent({ delay: 61000, callback: addBrick5,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay: 69000, callback: addBrick4,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay: 77000, callback: addBrick4,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay: 85000, callback: addBrick4,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay: 95000, callback: addEnemyGroup11,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay: 105000, callback: addBoss2,callbackScope: level1, loop: false });
+}
 function enemyHitPlayer(player, enemy){
     if(enemy.enemyType=='smallboss' || enemy.enemyType=='boss1' || enemy.enemyType=='boss2'){
         player.anims.play("sprExplosion"); // play the animation
@@ -793,23 +826,8 @@ function hitEnemy(bullet, enemy){
             bossText.visible = false;
             stage++;
             stageText.text = 'stage ' + stage;
-            level1.time.addEvent({ delay:  2000, callback: addBoss2,callbackScope: level1, loop: false });
-            /*level1.time.addEvent({ delay:  6000, callback: addBrick1,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 10000, callback: addBrick1,callbackScope: level1, loop: false });
-            
-            level1.time.addEvent({ delay: 21000, callback: addBrick2,callbackScope: level1, loop: false }); 
-            level1.time.addEvent({ delay: 21000, callback: addBrick3,callbackScope: level1, loop: false }); 
-            level1.time.addEvent({ delay: 27000, callback: addBrick2,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 27000, callback: addBrick3,callbackScope: level1, loop: false }); 
-            level1.time.addEvent({ delay: 37000, callback: addBrick4,callbackScope: level1, loop: false }); 
-            level1.time.addEvent({ delay: 45000, callback: addEnemyGroup11,callbackScope: level1, loop: false }); 
-            level1.time.addEvent({ delay: 53000, callback: addEnemyGroup11,callbackScope: level1, loop: false }); 
-            level1.time.addEvent({ delay: 61000, callback: addBrick5,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 69000, callback: addBrick4,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 77000, callback: addBrick4,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 85000, callback: addBrick4,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 95000, callback: addEnemyGroup11,callbackScope: level1, loop: false });
-            level1.time.addEvent({ delay: 105000, callback: addBoss2,callbackScope: level1, loop: false });*/
+            addLevel2();
+
         }
     }
      if(enemy.enemyType =='boss2'){
@@ -1068,8 +1086,7 @@ level1.create = function ()
  
     
     // level1
-    this.time.addEvent({ delay: 2500, callback: addBoss, callbackScope: this, loop:false });
-    /*this.time.addEvent({ delay: 2500, callback: addEnemyGroup1, callbackScope: this, loop:false });
+    this.time.addEvent({ delay: 2500, callback: addEnemyGroup1, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 5000, callback: addEnemyGroup2, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 8000, callback: addEnemyGroup3, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 11000, callback: addEnemyGroup4, callbackScope: this, loop:false });
@@ -1089,7 +1106,7 @@ level1.create = function ()
     this.time.addEvent({ delay: 63000, callback: addEnemyGroup4, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 68000, callback: addEnemyGroup7, callbackScope: this, loop:false });
     this.time.addEvent({ delay: 72000, callback: addEnemyGroup1, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 78000, callback: addBoss, callbackScope: this, loop:false });*/
+    this.time.addEvent({ delay: 78000, callback: addBoss, callbackScope: this, loop:false });
 
 
     
@@ -1102,6 +1119,7 @@ level1.create = function ()
         sfxPoint = this.sound.add('point');
         sfxBoss1 = this.sound.add('boss1Music');
         sfxBattle1 = this.sound.add('battle1');
+        sfxBattle2 = this.sound.add('battle2');
     }
     
    bgmusic.play({

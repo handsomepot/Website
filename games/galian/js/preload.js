@@ -178,6 +178,7 @@ preload.preload = function ()
                 assetText.destroy();
             });
             this.load.audio('battle1', 'assets/battle1.ogg');
+            this.load.audio('battle2', 'assets/battle2.ogg');
             this.load.audio('music', 'assets/Mercury.wav');
             this.load.audio('explode', 'assets/laser1.wav');
             this.load.audio('explode1', 'assets/explosion07.wav');
