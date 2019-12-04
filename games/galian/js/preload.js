@@ -65,10 +65,6 @@ preload.preload = function ()
             this.load.image('b7', 'assets/b7.png');
             this.load.image('b8', 'assets/b8.png');
             this.load.image('boss', 'assets/boss.png');
-            //this.load.image('ufo1', 'assets/ufo1.png');
-            //this.load.image('ufo2', 'assets/ufo2.png');
-            //this.load.image('ufo3', 'assets/ufo3.png');
-            //this.load.image('ufo4', 'assets/ufo4.png');
             this.load.image('ufo5', 'assets/ufo5.png');
             this.load.image('ufo6', 'assets/ufo6.png');
             this.load.image('ufo7', 'assets/ufo7.png');
