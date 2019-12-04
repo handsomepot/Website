@@ -70,6 +70,18 @@ preload.preload = function ()
             this.load.image('ufo7', 'assets/ufo7.png');
             this.load.image('ufo8', 'assets/ufo8.png');
     
+    
+            this.load.audio('battle1', 'assets/battle1.ogg');
+            this.load.audio('battle2', 'assets/battle2.ogg');
+            this.load.audio('music', 'assets/Mercury.wav');
+            this.load.audio('explode', 'assets/laser1.wav');
+            this.load.audio('explode1', 'assets/explosion07.wav');
+            this.load.audio('explode2', 'assets/explosion01.wav');
+            this.load.audio('menuMusic', 'assets/menu.ogg');
+            this.load.audio('point', 'assets/point.mp3');
+            this.load.audio('death', 'assets/death.wav');
+            this.load.audio('boss1Music', 'assets/boss.wav');
+    
 
             this.load.image('live', 'assets/live.png');
             this.load.image('particle', 'assets/yellow.png');
@@ -78,7 +90,13 @@ preload.preload = function ()
             this.load.spritesheet("sprExplosion", "assets/sprExplosion.png", {
                 frameWidth: 64,
                 frameHeight: 64
+            }); 
+    
+            this.load.spritesheet("sprExplosion2", "assets/sprExplosion2.png", {
+                frameWidth: 50,
+                frameHeight: 50
             });
+    
             this.load.spritesheet("explode2", "assets/explode2.png", {
                 frameWidth: 80,
                 frameHeight: 80
@@ -173,16 +191,7 @@ preload.preload = function ()
                 percentText.destroy();
                 assetText.destroy();
             });
-            this.load.audio('battle1', 'assets/battle1.ogg');
-            this.load.audio('battle2', 'assets/battle2.ogg');
-            this.load.audio('music', 'assets/Mercury.wav');
-            this.load.audio('explode', 'assets/laser1.wav');
-            this.load.audio('explode1', 'assets/explosion07.wav');
-            this.load.audio('explode2', 'assets/explosion01.wav');
-            this.load.audio('menuMusic', 'assets/menu.ogg');
-            this.load.audio('point', 'assets/point.mp3');
-            this.load.audio('death', 'assets/death.wav');
-            this.load.audio('boss1Music', 'assets/boss.wav');
+
 
     
 

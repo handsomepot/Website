@@ -827,7 +827,7 @@ function hitEnemy(bullet, enemy){
         enemy.number--;
         e = new Enemy({scene:level1, x: bullet.x, y:bullet.y -40});
         e.body.immovable = true;
-        e.anims.play('sprExplosion');
+        e.anims.play('sprExplosion2');
         bullet.disableBody(false, true); 
         
         if(!enemy.hitLock){
@@ -934,6 +934,13 @@ level1.preload = function ()
     this.anims.create({
       key: "sprExplosion",
       frames: this.anims.generateFrameNumbers("sprExplosion"),
+      frameRate: 20,
+      repeat: 0
+    });  
+    
+    this.anims.create({
+      key: "sprExplosion2",
+      frames: this.anims.generateFrameNumbers("sprExplosion2"),
       frameRate: 20,
       repeat: 0
     }); 
