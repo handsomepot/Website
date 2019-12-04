@@ -1,4 +1,4 @@
-const max_live = 6;
+const max_live = 5;
 var starfield;
 var player;
 var bullets;
@@ -14,7 +14,6 @@ var sfxPoint;
 let bgmusic = null;
 var sfxBattle1;
 var sfxBattle2;
-var block = [];
 var flip = true;
 var globalTime;
 var lock = false;
@@ -31,17 +30,9 @@ var isShoot = false;
 var stage = 1;
 var bossText, bossText2;
 var stageText;
+var ship = [];
+var b = [];
 
-
-/*    1   2          3         4        5           6    7        8      9      10
-*   O O  O O         O        O O         O         O     O        O     O   smallboss
-*    O    O        O   O      O O     O           O         O
-*                 O     O     O O         O     O             O
-*                                    O
-*                                       O
-*/
-
-//  /Users/riley/Documents/Website/games/ufoll/assets/
 
 class Enemy extends Phaser.GameObjects.Sprite{
     constructor(config) {
@@ -75,7 +66,6 @@ function removeAllObjects(){
     player.visible = false;
     
 
-    block = [];
     flip = true;
     lock = false;
     liveBall.destroy();
@@ -83,6 +73,9 @@ function removeAllObjects(){
     //currentBoss.destroy();
     overText.destroy();
     stage = 1;
+
+    ship = [];
+    b = [];
 
 }
 
@@ -777,7 +770,7 @@ function addBoss2(){ // crab
     e.enemyType = 'boss2';
     e.body.immovable = true;
     e.body.velocity.y = 0;
-    e.number = 200;
+    e.number = 300;
     e.anims.play('crab');
     e.scaleX = 1.2;
     e.scaleY = 1.2;
@@ -814,10 +807,13 @@ function addBoss2(){ // crab
 
 function hitLiveBall(){
     
+    
     if(lives < max_live && lives >=0){
-        block[lives].visible = true;
+        ship[lives].setAlpha(1);
         lives++;
     }
+
+    
             
     if(liveBall.visible){
         sfxPoint.play();
@@ -830,8 +826,9 @@ function hitLiveBall(){
 
 function hitBulletBall(){
     
+    b[bulletNum] = level1.physics.add.sprite(180 + bulletNum*15, 40, 'bullet2');
     bulletNum++;
-            
+
     if(liveBall.visible){
         sfxPoint.play();
         bulletBall.body.x = -100;
@@ -841,27 +838,27 @@ function hitBulletBall(){
 
 }
 function addLevel1(){
-    this.time.addEvent({ delay: 2500, callback: addUfo1, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 5000, callback: addUfo2, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 8000, callback: addUfo3, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 11000, callback: addUfo4, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 15000, callback: addUfo5, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 19000, callback: addUfo6, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 23000, callback: addUfo7, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 27000, callback: addUfo8, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 29000, callback: addUfo9, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 31000, callback: addUfo8, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 33000, callback: addUfo9, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 35000, callback: addUfo8, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 37000, callback: addUfo8, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 39000, callback: addUfo9, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 43000, callback: addSmallboss1, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 53000, callback: addUfo1, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 58000, callback: addUfo2, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 63000, callback: addUfo4, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 68000, callback: addUfo7, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 72000, callback: addUfo1, callbackScope: this, loop:false });
-    this.time.addEvent({ delay: 78000, callback: addBoss, callbackScope: this, loop:false });
+    level1.time.addEvent({ delay: 2500, callback: addUfo1, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 5000, callback: addUfo2, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 8000, callback: addUfo3, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 11000, callback: addUfo4, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 15000, callback: addUfo5, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 19000, callback: addUfo6, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 23000, callback: addUfo7, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 27000, callback: addUfo8, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 29000, callback: addUfo9, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 31000, callback: addUfo8, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 33000, callback: addUfo9, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 35000, callback: addUfo8, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 37000, callback: addUfo8, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 39000, callback: addUfo9, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 43000, callback: addSmallboss1, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 53000, callback: addUfo1, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 58000, callback: addUfo2, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 63000, callback: addUfo4, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 68000, callback: addUfo7, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 72000, callback: addUfo1, callbackScope: level1, loop:false });
+    level1.time.addEvent({ delay: 78000, callback: addBoss, callbackScope: level1, loop:false });
 }
 
 function addLevel2(){
@@ -887,9 +884,7 @@ function addLevel2(){
 function enemyHitPlayer(player, enemy){
     if(enemy.enemyType=='smallboss' || enemy.enemyType=='boss1' || enemy.enemyType=='boss2'){
         player.anims.play("sprExplosion"); // play the animation
-        for(var i = 0 ; i < block.length; i++){
-            block[i].visible = false;
-        }
+        
         lives = 0;
         return;
     }
@@ -908,9 +903,11 @@ function enemyHitPlayer(player, enemy){
         enemy.anims.play("explode2"); // play the animation
         sfxExplode1.play();
     }*/
+    
     lives--;
-    if(lives >= 0)
-        block[lives].visible = false;
+    if(lives>=0)
+        ship[lives].setAlpha(0.15);
+    
 }
 
 
@@ -996,8 +993,9 @@ function hitPlayer(player, bullet){
     //bullet.anims.play('sprExplosion');
     console.log(lives);
     lives--;
-    if(lives >= 0)
-        block[lives].visible = false;
+    if(lives>=0)
+        ship[lives].setAlpha(0.15);
+    
     if(lives == 0){
         return;
     }
@@ -1168,13 +1166,6 @@ level1.create = function ()
     player.anims.play('playergroup2');
     
 
-    for(var i = 0; i < max_live; i++){
-        var b = this.physics.add.sprite(32 + 28*i, 40, 'b' + (i+1));
-        block.push(b);
-        b.scaleX = 0.8;
-        b.setAlpha(0.5);
-    }
-    
 
     bullets = this.physics.add.group({ defaultKey: 'bullet2', maxSize: 500 });
     enemybullets = this.physics.add.group({ defaultKey: 'bullet3', maxSize: 500 });
@@ -1249,7 +1240,7 @@ level1.create = function ()
   })
     
     stageText = this.add.text(
-    this.physics.world.bounds.width -100,
+    this.physics.world.bounds.width -80,
     40,
     'Stage ' + stage,
     {
@@ -1260,6 +1251,14 @@ level1.create = function ()
     );
     stageText.setOrigin(0.5);
     stageText.setAlpha(0.75);
+    
+    for(var i = 0; i < max_live; i++){
+        ship[i] = this.physics.add.sprite(30 + i* 30, 40, 'starship');
+    }
+    
+
+    b[0] = this.physics.add.sprite(180, 40, 'bullet2');
+    
     
      overText = this.add.bitmapText(worldX/2,worldY/2, 'desyrel', '', 90).setOrigin(0.5).setCenterAlign().setInteractive();
 
@@ -1487,6 +1486,7 @@ level1.update = function (time, delta)
         player.visible = false;
         if(gameState == 'running'){
             gameState = 'over';
+                    
             this.time.addEvent({ delay: 8000, callback: function(){
                lives = max_live;
   
