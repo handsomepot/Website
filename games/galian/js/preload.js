@@ -84,6 +84,7 @@ preload.preload = function ()
     
 
             this.load.image('live', 'assets/live.png');
+            this.load.image('up', 'assets/up.png');
             this.load.image('particle', 'assets/yellow.png');
 
 
@@ -151,10 +152,6 @@ preload.preload = function ()
                 frameHeight: 40
             });
     
-            this.load.spritesheet("smallboss", "assets/smallboss.png", {
-                frameWidth: 120,
-                frameHeight: 120
-            });
     
             this.load.spritesheet("crab", "assets/crab.png", {
                 frameWidth: 110 ,
@@ -191,12 +188,6 @@ preload.preload = function ()
                 percentText.destroy();
                 assetText.destroy();
             });
-
-
-    
-
-
-
 
 },
 
