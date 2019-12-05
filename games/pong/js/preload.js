@@ -3,7 +3,6 @@ preload.preload = function ()
 {
 
 
-
             var progressBar = this.add.graphics();
             var progressBox = this.add.graphics();
             progressBox.fillStyle(0x222222, 0.8);
@@ -72,9 +71,6 @@ preload.preload = function ()
                 assetText.destroy();
             });
             
-
-
-
 
 },
 
