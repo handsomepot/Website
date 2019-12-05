@@ -30,6 +30,8 @@ var isShoot = false;
 var stage = 1;
 var bossText, bossText2;
 var stageText;
+var scoreText;
+var score = 0;
 var ship = [];
 var b = [];
 
@@ -52,6 +54,11 @@ class Enemy extends Phaser.GameObjects.Sprite{
     } 
 }
 
+function pad(num, size) {
+    var s = num+"";
+    while (s.length < size) s = "0" + s;
+    return s;
+}
 
 function removeAllObjects(){
     starfield.destroy();
@@ -913,7 +920,7 @@ function enemyHitPlayer(player, enemy){
 
 function hitEnemy(bullet, enemy){
 
-    
+    score += 50;
     if(enemy.number > 0){
         enemy.number--;
         e = new Enemy({scene:level1, x: bullet.x, y:bullet.y -40});
@@ -934,7 +941,7 @@ function hitEnemy(bullet, enemy){
     }
 
     if(enemy.enemyType =='boss1'){
-        
+        score+=100;
         if(enemy.winLock==false){
             enemy.winLock = true;
             bossText.visible = false;
@@ -945,6 +952,7 @@ function hitEnemy(bullet, enemy){
         }
     }
      if(enemy.enemyType =='boss2'){
+         score+=100;
          if(enemy.winLock==false){
             enemy.winLock = true;
             bossText2.visible = false;
@@ -1252,12 +1260,27 @@ level1.create = function ()
     stageText.setOrigin(0.5);
     stageText.setAlpha(0.75);
     
+    scoreText = this.add.text(
+    80,
+    40,
+    pad(score,8),
+    {
+      fontFamily:  'Palatino',
+      fontSize: '28px',
+      fill: '#fff',
+    },
+    );
+    scoreText.setOrigin(0.5);
+    scoreText.setAlpha(0.75);
+    
     for(var i = 0; i < max_live; i++){
-        ship[i] = this.physics.add.sprite(30 + i* 30, 40, 'starship');
+        ship[i] = this.physics.add.sprite(30 + i* 30, 70, 'b' + (i+3));
+        ship[i].scaleX = 0.8;
+        ship[i].scaleY = 0.8;
     }
     
 
-    b[0] = this.physics.add.sprite(180, 40, 'bullet2');
+    b[0] = this.physics.add.sprite(175, 40, 'bullet2');
     
     
      overText = this.add.bitmapText(worldX/2,worldY/2, 'desyrel', '', 90).setOrigin(0.5).setCenterAlign().setInteractive();
@@ -1481,6 +1504,7 @@ level1.update = function (time, delta)
 
     if(lives <= 0){
         sfxBattle1.stop();
+        sfxBattle2.stop();
         sfxBoss1.stop();
         bgmusic.stop();
         player.visible = false;
@@ -1513,6 +1537,8 @@ level1.update = function (time, delta)
         }
 
     }
+        
+    scoreText.text = pad(score,8);
 
   })
     globalTime = time;
