@@ -786,7 +786,7 @@ function addBrick5(){ // crab small
     e.enemyType = 'smallboss';
     e.body.immovable = true;
     e.body.velocity.y = 0;
-    e.number = 70;
+    e.number = 50;
     e.anims.play('crab');
 
 }
@@ -859,7 +859,7 @@ function hitLiveBall(){
 
 function hitBulletBall(){
     
-    b[bulletNum] = level1.physics.add.sprite(180 + bulletNum*15, 40, 'bullet2');
+    b[bulletNum] = level1.physics.add.sprite(150 + bulletNum*15, 34, 'bullet2');
     bulletNum++;
 
     if(liveBall.visible){
@@ -907,7 +907,7 @@ function addLevel2(){
         level1.time.addEvent({ delay: 45000, callback: addUfo11,callbackScope: level1, loop: false }); 
         level1.time.addEvent({ delay: 53000, callback: addUfo11,callbackScope: level1, loop: false }); 
         level1.time.addEvent({ delay: 61000, callback: addBrick5,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay: 69000, callback: addBrick4,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay: 69000, callback: addBrick2,callbackScope: level1, loop: false });
         level1.time.addEvent({ delay: 77000, callback: addBrick4,callbackScope: level1, loop: false });
         level1.time.addEvent({ delay: 85000, callback: addBrick4,callbackScope: level1, loop: false });
         level1.time.addEvent({ delay: 96000, callback: addUfo11,callbackScope: level1, loop: false });
@@ -1061,6 +1061,7 @@ level1.preload = function ()
 {
     this.load.bitmapFont('desyrel', 'assets/font/font.png', 'assets/font/font.xml');
     this.load.bitmapFont('arcade', 'assets/font/arcade.png', 'assets/font/arcade.xml');
+    this.load.bitmapFont('topaz', 'assets/font/topaz.png', 'assets/font/topaz.xml');
 
     
     this.anims.create({
@@ -1294,10 +1295,10 @@ level1.create = function ()
     //dynamic.setScale(3);
     
 
-    b[0] = this.physics.add.sprite(180, 40, 'bullet2');
+    b[0] = this.physics.add.sprite(150, 34, 'bullet2');
     
     
-    scoreText = this.add.bitmapText(90, 40, 'arcade', pad(score, 8), 18).setOrigin(0.5).setCenterAlign().setInteractive();
+    scoreText = this.add.bitmapText(70, 30, 'topaz', pad(score, 8), 28).setOrigin(0.5).setCenterAlign().setInteractive();
     stageText = this.add.bitmapText(worldX-90, 40, 'arcade', 'Stage ' + stage, 16).setOrigin(0.5).setCenterAlign().setInteractive();
     
     overText = this.add.bitmapText(worldX/2,worldY/2, 'desyrel', '', 90).setOrigin(0.5).setCenterAlign().setInteractive();
