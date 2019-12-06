@@ -1027,7 +1027,9 @@ function hitPlayer(player, bullet){
 
 level1.preload = function ()
 {
-    this.load.bitmapFont('desyrel', '../assets/font/font.png', '../assets/font/font.xml');
+    this.load.bitmapFont('desyrel', 'assets/font/font.png', 'assets/font/font.xml');
+    this.load.bitmapFont('arcade', 'assets/font/arcade.png', 'assets/font/arcade.xml');
+
     
     this.anims.create({
       key: "playergroup",
@@ -1247,49 +1249,32 @@ level1.create = function ()
     loop: true
   })
     
-    stageText = this.add.text(
-    this.physics.world.bounds.width -80,
-    40,
-    'Stage ' + stage,
-    {
-      fontFamily:  'monospace',
-      fontSize: '22px',
-      fill: '#fff',
-    },
-    );
-    stageText.setOrigin(0.5);
-    stageText.setAlpha(0.75);
-    
-    scoreText = this.add.text(
-    80,
-    40,
-    pad(score,8),
-    {
-      fontFamily:  'Palatino',
-      fontSize: '28px',
-      fill: '#fff',
-    },
-    );
-    scoreText.setOrigin(0.5);
-    scoreText.setAlpha(0.75);
+
     
     for(var i = 0; i < max_live; i++){
-        ship[i] = this.physics.add.sprite(30 + i* 30, 70, 'b' + (i+3));
+        ship[i] = this.physics.add.sprite(30 + i* 30, 60, 'b' + (i+3));
         ship[i].scaleX = 0.8;
         ship[i].scaleY = 0.8;
     }
     
 
+
+    //dynamic.setScale(3);
+    
+
     b[0] = this.physics.add.sprite(175, 40, 'bullet2');
     
     
-     overText = this.add.bitmapText(worldX/2,worldY/2, 'desyrel', '', 90).setOrigin(0.5).setCenterAlign().setInteractive();
+    scoreText = this.add.bitmapText(90, 40, 'arcade', pad(score, 8), 18).setOrigin(0.5).setCenterAlign().setInteractive();
+    stageText = this.add.bitmapText(worldX-100, 40, 'arcade', 'Stage ' + stage, 20).setOrigin(0.5).setCenterAlign().setInteractive();
+    
+    overText = this.add.bitmapText(worldX/2,worldY/2, 'desyrel', '', 90).setOrigin(0.5).setCenterAlign().setInteractive();
 
     overText.setText([
         'GAME OVER'
     ]);
     overText.visible = false;
-    console.log(overText);
+ 
 },
 
 
@@ -1538,7 +1523,7 @@ level1.update = function (time, delta)
 
     }
         
-    scoreText.text = pad(score,8);
+    scoreText.text =  pad(score, 8);
 
   })
     globalTime = time;
