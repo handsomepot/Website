@@ -22,7 +22,6 @@ var bulletNum = 1;
 var direction = ['down','right','left','down', 'up','left','right','down', 'up','right','left','down'];
 var liveBall;
 var bulletBall;
-var currentBoss = null;
 var overText;
 var gameState = 'running';
 var t1,t2;
@@ -78,7 +77,6 @@ function removeAllObjects(){
     lock = false;
     liveBall.destroy();
     bulletBall.destroy();
-    //currentBoss.destroy();
     overText.destroy();
     stage = 1;
     bulletNum = 1;
@@ -90,35 +88,35 @@ function removeAllObjects(){
 
 
 // boss fire
-function fire(){
-    
+function fire(child){
+    console.log(child);
 
     if(flip){
         level1.time.addEvent({ delay: 300, callback: 
           function(){
-        if(!currentBoss.isDead)
-                bossFire1(currentBoss.x, currentBoss.y);
+        if(!child.isDead)
+                bossFire1(child.x, child.y);
         },callbackScope: level1, loop: false });  
 
         level1.time.addEvent({ delay: 700, callback: 
           function(){
-            if(!currentBoss.isDead)
-                bossFire1(currentBoss.x, currentBoss.y);
+            if(!child.isDead)
+                bossFire1(child.x, child.y);
         },callbackScope: level1, loop: false });  
         
-        if(currentBoss.enemyType == 'boss1' || currentBoss.enemyType == 'boss2'){
+        if(child.enemyType == 'boss1' || child.enemyType == 'boss2'){
             level1.time.addEvent({ delay: 1100, callback: 
               function(){
-                if(!currentBoss.isDead)
-                    bossFire1(currentBoss.x, currentBoss.y);
+                if(!child.isDead)
+                    bossFire1(child.x, child.y);
             },callbackScope: level1, loop: false });  
         }
         
-        if(currentBoss.enemyType == 'boss2'){
+        if(child.enemyType == 'boss2'){
             level1.time.addEvent({ delay: 1500, callback: 
               function(){
-                if(!currentBoss.isDead)
-                    bossFire1(currentBoss.x, currentBoss.y);
+                if(!child.isDead)
+                    bossFire1(child.x, child.y);
             },callbackScope: level1, loop: false });  
         }
         
@@ -128,35 +126,36 @@ function fire(){
     else{
         level1.time.addEvent({ delay: 250, callback: 
           function(){
-            if(!currentBoss.isDead)
-                bossFire2(currentBoss.x, currentBoss.y);
+            if(!child.isDead)
+                bossFire2(child.x, child.y);
         },callbackScope: level1, loop: false });  
 
         level1.time.addEvent({ delay: 450, callback: 
           function(){
-            if(!currentBoss.isDead)
-                bossFire2(currentBoss.x, currentBoss.y);
+            if(!child.isDead)
+                bossFire2(child.x, child.y);
         },callbackScope: level1, loop: false });  
 
-        if(currentBoss.enemyType == 'boss1' || currentBoss.enemyType == 'boss2'){
+        if(child.enemyType == 'boss1' || child.enemyType == 'boss2'){
             level1.time.addEvent({ delay: 650, callback: 
               function(){
-                if(!currentBoss.isDead)
-                    bossFire2(currentBoss.x, currentBoss.y);
+                if(!child.isDead)
+                    bossFire2(child.x, child.y);
             },callbackScope: level1, loop: false });  
 
         }
-        if(currentBoss.enemyType == 'boss2'){
+        if(child.enemyType == 'boss2'){
             level1.time.addEvent({ delay: 850, callback: 
               function(){
-                if(!currentBoss.isDead)
-                    bossFire2(currentBoss.x, currentBoss.y);
+                if(!child.isDead)
+                    bossFire2(child.x, child.y);
             },callbackScope: level1, loop: false });  
 
         }
          
     }
-    currentBoss.bulletTimer = null;
+    child.bulletTimer.remove();
+    child.bulletTimer = null;
     flip = !flip;
 }    
 
@@ -209,6 +208,23 @@ function bossFire2(x,y){
 
 }
 
+function bossFire3(x,y){
+    var dx = [0,  0, 1, -1,  1,  -1,   1,  -1];
+    var dy = [1, -1, 0,  0,  1,   1,  -1,  -1];
+    var v =  [1, 1,  1,  1, 0.7, 0.7, 0.7, 0.7];
+
+
+    for(var i = 0; i < dx.length; i ++){
+        var bullet = lazerbullets.get(x + dx[i] * 30, y + dy[i]*30);
+        if (bullet) {
+            bullet.setActive(true);
+            bullet.setVisible(true);
+            bullet.body.velocity.x = dx[i]*250 * v[i];
+            bullet.body.velocity.y = dy[i]*250 * v[i];
+        }
+    }
+}
+
 
 function shoot() {
 
@@ -222,25 +238,7 @@ function shoot() {
         vy = -650;
     }
     
-        
 
-    
- 
-    /*if(bulletNum >=2){
-        bullet = bullets.get(player.body.x + w/4, player.body.y - 24);
-        if (bullet) {
-            bullet.setActive(true);
-            bullet.setVisible(true);
-            bullet.body.velocity.y = vy;
-        }
-
-        bullet = bullets.get(player.body.x + w/4*3, player.body.y-24);
-        if (bullet) {
-            bullet.setActive(true);
-            bullet.setVisible(true);
-            bullet.body.velocity.y = vy;
-        }
-    }*/
     
     
     bullet = bullets.get(player.body.x + w/4, player.body.y);
@@ -265,7 +263,7 @@ function shoot() {
 }
 
 
-function enemyFire(x, y, type) {
+function enemyFire(x, y, type, child) {
     
     if(type == 'regular'){
         var bullet = enemybullets.get(x, y);
@@ -336,12 +334,19 @@ function enemyFire(x, y, type) {
         }
     }
     
-    else if(type == 'round' || type == 'round_back'){
+    else if(type == 'round'){
         level1.time.addEvent({ delay: 350, callback: 
               function(){
                 bossFire1(x,y);
         },callbackScope: level1, loop: false });  
        bossFire1(x,y);
+    } 
+    else if(type == 'round_back'){
+        level1.time.addEvent({ delay: 250, callback: 
+              function(){
+                bossFire3(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+       //bossFire3(x,y);
     }
 }
 
@@ -589,12 +594,7 @@ function addUfo9(){
 
 
 function addSmallboss1(){
-    if(currentBoss!=null){
-        if(currentBoss.bulletTimer!=null)
-            currentBoss.bulletTimer.remove();
-        currentBoss.moveTimer.remove();
-        currentBoss.destroy();
-    }
+
     e = new Enemy({scene:level1, x: worldX/2, y:-20, defaultKey:'boss1'});
     enemies.add(e);
     e.enemyType = 'smallboss';
@@ -634,11 +634,11 @@ function addUfo11(){
 
 function addUfo12(){
     
-    e = new Enemy({scene:level1, x: worldX/2, y:0, defaultKey:'ufo1'});
+    e = new Enemy({scene:level1, x: 120, y:0, defaultKey:'ufo1'});
     enemies.add(e);
     e.body.immovable = true;
     e.enemyType = 'round_back';
-    e.body.velocity.y = 80;
+    e.body.velocity.y = 180;
     e.body.velocity.x = 0;
     e.body.setCollideWorldBounds(true); //ball can't leave the screen
     e.body.setBounce(1, 1);
@@ -648,12 +648,7 @@ function addUfo12(){
 
 
 function addBoss(){
-    if(currentBoss!=null){
-        if(currentBoss.bulletTimer!=null)
-            currentBoss.bulletTimer.remove();
-        currentBoss.moveTimer.remove();
-        currentBoss.destroy();
-    }
+    
     e = new Enemy({scene:level1, x: worldX/2, y:-100, defaultKey:'boss1'});
     enemies.add(e);
     e.enemyType = 'boss1';
@@ -775,12 +770,7 @@ function addBrick4(){
 }
 
 function addBrick5(){ // crab small
-    if(currentBoss!=null){
-        if(currentBoss.bulletTimer!=null)
-            currentBoss.bulletTimer.remove();
-        currentBoss.moveTimer.remove();
-        currentBoss.destroy();
-    }
+
     e = new Enemy({scene:level1, x: worldX/2, y:-20, defaultKey:'crab'});
     enemies.add(e);
     e.enemyType = 'smallboss';
@@ -792,12 +782,7 @@ function addBrick5(){ // crab small
 }
 
 function addBoss2(){ // crab 
-    if(currentBoss!=null){
-        if(currentBoss.bulletTimer!=null)
-            currentBoss.bulletTimer.remove();
-        currentBoss.moveTimer.remove();
-        currentBoss.destroy();
-    }
+
     e = new Enemy({scene:level1, x: worldX/2, y:-20, defaultKey:'crab'});
     enemies.add(e);
     e.enemyType = 'boss2';
@@ -837,6 +822,17 @@ function addBoss2(){ // crab
     bossText2.setAlpha(0.75);
 }
 
+function addEnemy1(){
+
+    e = new Enemy({scene:level1, x: worldX/2, y:-20, defaultKey:'brick1'});
+    enemies.add(e);
+    e.enemyType = 'smallboss';
+    e.body.immovable = true;
+    e.body.velocity.y = 0;
+    e.number = 50;
+    e.anims.play('brick1');
+
+}
 
 function hitLiveBall(){
     
@@ -915,8 +911,9 @@ function addLevel2(){
 }
 
 function addLevel3(){
-        level1.time.addEvent({ delay:  2000, callback: addUfo12,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay:  8000, callback: addUfo12,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay:  2000, callback: addEnemy1,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay:  6000, callback: addEnemy1,callbackScope: level1, loop: false });
+
 }
 
 function enemyHitPlayer(player, enemy){
@@ -935,12 +932,7 @@ function enemyHitPlayer(player, enemy){
         sfxExplode1.play();
 
     }
-    
-    /*if(!enemy.isDead){
-        enemy.isDead = true;
-        enemy.anims.play("explode2"); // play the animation
-        sfxExplode1.play();
-    }*/
+
     
     lives--;
     if(lives>=0)
@@ -972,6 +964,8 @@ function hitEnemy(bullet, enemy){
     }
 
     if(enemy.enemyType =='boss1'){
+        enemy.moveTimer.remove();
+        enemy.bulletTimer.remove();
         score+=100;
         if(enemy.winLock==false){
             enemy.winLock = true;
@@ -983,6 +977,8 @@ function hitEnemy(bullet, enemy){
         }
     }
      if(enemy.enemyType =='boss2'){
+        enemy.moveTimer.remove();
+        enemy.bulletTimer.remove();
          score+=100;
          if(enemy.winLock==false){
             enemy.winLock = true;
@@ -1212,7 +1208,7 @@ level1.create = function ()
 
     bullets = this.physics.add.group({ defaultKey: 'bullet2', maxSize: 500 });
     enemybullets = this.physics.add.group({ defaultKey: 'bullet3', maxSize: 500 });
-    lazerbullets = this.physics.add.group({ defaultKey: 'bullet5', maxSize: 500 });
+    lazerbullets = this.physics.add.group({ defaultKey: 'bullet1', maxSize: 500 });
     lazerbullets2 = this.physics.add.group({ defaultKey: 'bullet6', maxSize: 500 });
     smallbossbullets = this.physics.add.group({ defaultKey: 'bullet4', maxSize: 500 });
     enemies = this.physics.add.group({ defaultKey: 'enemy1', maxSize: 30, runChildUpdate: true });
@@ -1262,7 +1258,7 @@ level1.create = function ()
     
     // level1
 
-    addLevel1();
+    addLevel3();
 
     
     if(bgmusic == null){
@@ -1404,8 +1400,7 @@ level1.update = function (time, delta)
             }
             
             if(child.bulletTimer==null){
-                currentBoss = child;
-                child.bulletTimer = level1.time.addEvent({ delay: 1500, callback: fire, callbackScope: level1, loop: false });  
+                child.bulletTimer = level1.time.addEvent({ delay: 1500, callback: fire, args:[child], callbackScope: level1, loop: false });  
                 
             }
 
@@ -1440,9 +1435,8 @@ level1.update = function (time, delta)
             }
             
             if(child.bulletTimer==null){
-            
-                currentBoss = child;
-                child.bulletTimer = level1.time.addEvent({ delay: 1400, callback: fire, callbackScope: level1, loop: false });  
+
+                child.bulletTimer = level1.time.addEvent({ delay: 1400, callback: fire, args: [child], callbackScope: level1, loop: false });  
                 
             }
 
@@ -1476,7 +1470,7 @@ level1.update = function (time, delta)
                 function(){
                     
                     if(!child.isDead)
-                        enemyFire(child.x, child.y + 20, child.enemyType);
+                        enemyFire(child.x, child.y + 20, child.enemyType, child);
 
                 },
                 callbackScope: level1, loop: true });    
@@ -1495,7 +1489,7 @@ level1.update = function (time, delta)
                         callbackScope: level1, 
                         loop: false });    
                         if(!child.isDead)
-                            enemyFire(child.x, child.y + 20, child.enemyType);
+                            enemyFire(child.x, child.y + 20, child.enemyType, child);
 
                 },
                 callbackScope: level1, loop: false });    
@@ -1507,7 +1501,7 @@ level1.update = function (time, delta)
                 level1.time.addEvent({ delay: 2000, callback: 
                     function(){
                           if(!child.isDead)
-                            enemyFire(child.x, child.y + 20, child.enemyType);
+                            enemyFire(child.x, child.y + 20, child.enemyType, child);
                          child.timerLock = false;
                      }, callbackScope: level1, loop: false });  
                  
@@ -1517,21 +1511,26 @@ level1.update = function (time, delta)
           
             if(!this.timerLock){
                 this.timerLock = true;
-                level1.time.addEvent({ delay: 3000, callback: 
+                level1.time.addEvent({ delay: 1500, callback: 
                     function(){
+
                           if(!child.isDead)
-                            enemyFire(child.x, child.y + 20, child.enemyType);
+                            enemyFire(child.x, child.y + 20, child.enemyType, child);
                          child.timerLock = false;
                      }, callbackScope: level1, loop: false });  
                  
             }
-            if(this.y < worldY && this.y >= 500){
+            if(this.y < worldY && this.y >= 400){
                 if(this.moveTimer==null){
                     this.moveTimer = level1.time.addEvent({ delay: 100, callback: 
                         function(){
-                              if(!child.isDead)
-                                child.body.setVelocityX(50);
+                              if(!child.isDead){
+                                if(Math.random() >= 0.5)
+                                    child.body.setVelocityX(50);
+                                else
+                                    child.body.setVelocityX(-50);
                                 child.body.setVelocityY(-100);
+                              }
                          }, callbackScope: level1, loop: false });  
 
                 }
