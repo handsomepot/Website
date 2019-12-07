@@ -161,6 +161,11 @@ preload.preload = function ()
             this.load.spritesheet("boss1", "assets/boss1.png", {
                 frameWidth: 120 ,
                 frameHeight: 125
+            }); 
+            
+            this.load.spritesheet("frog", "assets/boss1.png", {
+                frameWidth: 120 ,
+                frameHeight: 125
             });
     
             this.load.spritesheet("brick1", "assets/brick1.png", {
