@@ -168,6 +168,11 @@ preload.preload = function ()
                 frameHeight: 125
             });
     
+            this.load.spritesheet("boss3", "assets/boss3.png", {
+                frameWidth: 170 ,
+                frameHeight: 100
+            });
+    
             this.load.spritesheet("brick1", "assets/brick1.png", {
                 frameWidth: 90 ,
                 frameHeight: 80

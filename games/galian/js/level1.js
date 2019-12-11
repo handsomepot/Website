@@ -2,6 +2,7 @@ const max_live = 5;
 var starfield;
 var player;
 var bullets;
+var liveBalls;
 var enemies;
 var enemybullets;
 var lazerbullets;
@@ -17,22 +18,23 @@ var sfxBattle2;
 var globalTime;
 var lock = false;
 var lives = max_live; // lives
-var bulletNum = 3; 
+var bulletNum = 1; 
 var direction = ['down','right','left','down', 'up','left','right','down', 'up','right','left','down'];
 var liveBall;
 var bulletBall;
 var overText;
+var winText;
 var gameState = 'running';
 var t1,t2;
 var isShoot = false;
 var stage = 1;
-var bossText, bossText2;
+var bossText, bossText2,bossText3;
 var stageText;
 var scoreText;
 var score = 0;
 var ship = [];
 var b = [];
-var shootTime = [230,200,170];
+var shootTime = [200,170,150];
 
 
 class Enemy extends Phaser.GameObjects.Sprite{
@@ -51,6 +53,7 @@ class Enemy extends Phaser.GameObjects.Sprite{
         this.moveTimer = null;
         this.index = 0;
         this.flip = true;
+        this.isCollide = false;
     } 
 }
 
@@ -85,8 +88,59 @@ function removeAllObjects(){
 
 }
 
+function fire2(child){
+    console.log(child);
 
-// boss fire
+    if(child.flip){
+        level1.time.addEvent({ delay: 300, callback: 
+          function(){
+        if(!child.isDead)
+                bossFire3(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+
+        level1.time.addEvent({ delay: 600, callback: 
+          function(){
+            if(!child.isDead)
+                bossFire3(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+
+        level1.time.addEvent({ delay: 900, callback: 
+          function(){
+            if(!child.isDead)
+                bossFire3(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+
+        level1.time.addEvent({ delay: 1200, callback: 
+          function(){
+            if(!child.isDead)
+                bossFire3(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+    }
+    else{
+        level1.time.addEvent({ delay: 250, callback: 
+          function(){
+            if(!child.isDead)
+                bossFire4(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+
+        level1.time.addEvent({ delay: 450, callback: 
+          function(){
+            if(!child.isDead)
+                bossFire4(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+
+        level1.time.addEvent({ delay: 650, callback: 
+          function(){
+            if(!child.isDead)
+                bossFire4(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+    }
+
+    child.bulletTimer.remove();
+    child.bulletTimer = null;
+    child.flip = !child.flip;        
+}   
+
 function fire(child){
     console.log(child);
 
@@ -217,22 +271,65 @@ function bossFire2(x,y){
 
 }
 
+
 function bossFire3(x,y){
-    var dx = [0,  0, 1, -1,  1,  -1,   1,  -1];
-    var dy = [1, -1, 0,  0,  1,   1,  -1,  -1];
-    var v =  [1, 1,  1,  1, 0.7, 0.7, 0.7, 0.7];
+    var dx = [0, 0, 1, -1, 1, -1, 1, -1];
+    var dy = [1, -1, 0, 0, 1, 1, -1, -1];
+    var v = [1,1,1,1,0.7, 0.7, 0.7, 0.7];
 
 
     for(var i = 0; i < dx.length; i ++){
-        var bullet = lazerbullets.get(x + dx[i] * 30, y + dy[i]*30);
+        var bullet = smallbossbullets.get(x + dx[i] * 30, y + dy[i]*30);
+        bullet
         if (bullet) {
             bullet.setActive(true);
             bullet.setVisible(true);
-            bullet.body.velocity.x = dx[i]*250 * v[i];
-            bullet.body.velocity.y = dy[i]*250 * v[i];
+            bullet.body.velocity.x = dx[i]*350 * v[i];
+            bullet.body.velocity.y = dy[i]*350 * v[i];
+            bullet.scaleX = 2;
+            bullet.scaleY = 2;
         }
     }
 }
+
+
+function bossFire4(x,y){
+
+    
+    var bullet;
+    /*bullet = smallbossbullets.get(x , y + 20);
+    if (bullet) {
+        
+        bullet.setActive(true);
+        bullet.setVisible(true);
+        bullet.body.velocity.x = 300;
+        bullet.body.velocity.y = 350;
+        bullet.scaleX = 2;
+        bullet.scaleY = 2;
+    }
+    
+    bullet = smallbossbullets.get(x , y + 20);
+    if (bullet) {
+        bullet.setActive(true);
+        bullet.setVisible(true);
+        bullet.body.velocity.x = -300;
+        bullet.body.velocity.y = 350;
+        bullet.scaleX = 2;
+        bullet.scaleY = 2;
+    } */
+    
+    bullet = smallbossbullets.get(x , y + 20);
+    if (bullet) {
+        bullet.setActive(true);
+        bullet.setVisible(true);
+        bullet.body.velocity.x = 0;
+        bullet.body.velocity.y = 450;
+        bullet.scaleX = 2;
+        bullet.scaleY = 2;
+    }
+
+}
+
 
 
 function shoot() {
@@ -247,26 +344,43 @@ function shoot() {
         vy = -650;
     }
     
+    if(bulletNum==3){
+        
+        var dx = [ 0, 1, -1];
+        var dy = [-1,-2, -2];
+        var v =  [ 1, 0.5, 0.5];
 
-    
-    
-    bullet = bullets.get(player.body.x + w/4, player.body.y);
-    if (bullet) {
-        bullet.setActive(true);
-        bullet.setVisible(true);
-        bullet.body.velocity.y = vy;
+
+        for(var i = 0; i < 3; i ++){
+            var bullet = lazerbullets.get(player.body.x + 20 + dx[i] * 30, player.body.y + dy[i]*30);
+            if (bullet) {
+                bullet.setActive(true);
+                bullet.setVisible(true);
+                bullet.body.velocity.x = dx[i]*350 * v[i];
+                bullet.body.velocity.y = dy[i]*350 * v[i];
+            }
+        }
+        
     }
     
+    else{
+        bullet = bullets.get(player.body.x + w/4, player.body.y);
+        if (bullet) {
+            bullet.setActive(true);
+            bullet.setVisible(true);
+            bullet.body.velocity.y = vy;
+        }
 
 
 
-    bullet = bullets.get(player.body.x + w/4*3, player.body.y);
-    if (bullet) {
-        bullet.setActive(true);
-        bullet.setVisible(true);
-        bullet.body.velocity.y = vy;
-    }   
-    
+
+        bullet = bullets.get(player.body.x + w/4*3, player.body.y);
+        if (bullet) {
+            bullet.setActive(true);
+            bullet.setVisible(true);
+            bullet.body.velocity.y = vy;
+        }   
+    }
 
         
 }
@@ -466,7 +580,7 @@ function addUfo3(){
 
 
 function addUfo4(){
-    e = new Enemy({scene:level1, x: 0, y:0, defaultKey:'ufo4'});
+    e = new Enemy({scene:level1, x: 0, y:-80, defaultKey:'ufo4'});
     enemies.add(e);
     e.body.immovable = true;
     e.body.velocity.y = 60;
@@ -474,13 +588,13 @@ function addUfo4(){
     e.enemyType = 'attack';
     e.number = 5;
     
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+    e.isCollide = true;
     e.body.setBounce(1, 1);
     
     e.anims.play('ufo4');
 
 
-    e = new Enemy({scene:level1, x: 80, y:80, defaultKey:'ufo4'});
+    e = new Enemy({scene:level1, x: 80, y:0, defaultKey:'ufo4'});
     enemies.add(e);
     e.body.immovable = true;
     e.body.velocity.y = 60;
@@ -488,12 +602,12 @@ function addUfo4(){
     e.enemyType = 'attack';
     e.number = 5;
     
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+    e.isCollide = true;
     e.body.setBounce(1, 1);
     e.anims.play('ufo4');
     
 
-    e = new Enemy({scene:level1, x: 160, y:160, defaultKey:'ufo4'});
+    e = new Enemy({scene:level1, x: 160, y:80, defaultKey:'ufo4'});
     enemies.add(e);
     e.body.immovable = true;
     e.body.velocity.y = 60;
@@ -501,7 +615,7 @@ function addUfo4(){
     e.enemyType = 'attack';
     e.number = 5;
     
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+    e.isCollide = true;
     e.body.setBounce(1, 1);
     e.anims.play('ufo4');
 
@@ -543,34 +657,34 @@ function addUfo6(){
 
 function addUfo7(){
     
-    e = new Enemy({scene:level1, x: 420, y:0, defaultKey:'ufo6'});
+    e = new Enemy({scene:level1, x: 420, y:-100, defaultKey:'ufo6'});
     enemies.add(e);
     e.body.immovable = true;
     e.enemyType = 'attack';
     e.body.velocity.y = 90;
     e.body.velocity.x = -250;
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+    e.isCollide = true;
     e.body.setBounce(1, 1);
     e.number = 5;
 
-    e = new Enemy({scene:level1, x: 340, y:50, defaultKey:'ufo7'});
+    e = new Enemy({scene:level1, x: 340, y:-50, defaultKey:'ufo7'});
     enemies.add(e);
     e.body.immovable = true;
     e.enemyType = 'attack';
     e.body.velocity.y = 90;
     e.body.velocity.x = -250;
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+    e.isCollide = true;
     e.body.setBounce(1, 1);
     e.number = 5;
 
     
-    e = new Enemy({scene:level1, x: 260, y: 100, defaultKey:'ufo8'});
+    e = new Enemy({scene:level1, x: 260, y: 0, defaultKey:'ufo8'});
     enemies.add(e);
     e.body.immovable = true;
     e.enemyType = 'attack';
     e.body.velocity.y = 90;
     e.body.velocity.x = -250;
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+e.isCollide = true;
     e.body.setBounce(1, 1);
     e.number = 5;
 }
@@ -633,24 +747,24 @@ function addSmallboss1(){
 
 function addUfo11(){
     
-    e = new Enemy({scene:level1, x: 0, y:worldY/2, defaultKey:'ufo6'});
+    e = new Enemy({scene:level1, x: -50, y:worldY/2, defaultKey:'ufo6'});
     enemies.add(e);
     e.body.immovable = true;
     e.enemyType = 'attack3';
     e.body.velocity.y = -130;
     e.body.velocity.x = 20;
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+e.isCollide = true;
     e.body.setBounce(1, 1);
     e.number = 8;
 
     
-    e = new Enemy({scene:level1, x: worldX-20, y: worldY/2, defaultKey:'ufo8'});
+    e = new Enemy({scene:level1, x: worldX+50, y: worldY/2, defaultKey:'ufo8'});
     enemies.add(e);
     e.body.immovable = true;
     e.enemyType = 'attack3';
     e.body.velocity.y = -130;
     e.body.velocity.x = -20;
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+e.isCollide = true;
     e.body.setBounce(1, 1);
     e.number = 8;
 }
@@ -663,7 +777,7 @@ function addUfo12(){
     e.enemyType = 'round_back';
     e.body.velocity.y = 180;
     e.body.velocity.x = 0;
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+e.isCollide = true;
     e.body.setBounce(1, 1);
     e.number = 48;
 
@@ -847,27 +961,27 @@ function addBoss2(){ // crab
 
 function addEnemy1(){
 
-    e = new Enemy({scene:level1, x: worldX/4, y:0, defaultKey:'brick1'});
+    e = new Enemy({scene:level1, x: worldX/4, y:-20, defaultKey:'brick1'});
     enemies.add(e);
     e.enemyType = 'line';
     e.body.immovable = true;
     e.number = 20;
     e.body.velocity.y = 40;
     e.body.velocity.x = 150;
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+    e.isCollide = true;
     e.body.setBounce(1, 1);
     e.anims.play('brick1');
 
     
     
-    e = new Enemy({scene:level1, x: worldX/4*3, y:0, defaultKey:'brick1'});
+    e = new Enemy({scene:level1, x: worldX/4*3, y:-20, defaultKey:'brick1'});
     enemies.add(e);
     e.enemyType = 'line';
     e.body.immovable = true;
     e.number = 20;
     e.body.velocity.y = 40;
-    e.body.velocity.x = 150;
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+    e.body.velocity.x = -150;
+    e.isCollide = true;
     e.body.setBounce(1, 1);
     e.anims.play('brick1');
 
@@ -875,30 +989,13 @@ function addEnemy1(){
 
 function addEnemy2(){
 
-    e = new Enemy({scene:level1, x: worldX/4*3, y:-20, defaultKey:'boss1'});
+    e = new Enemy({scene:level1, x: worldX/4*3, y:-20, defaultKey:'crab'});
     enemies.add(e);
-    e.enemyType = 'round_back';
+    e.enemyType = 'smallboss';
     e.body.immovable = true;
     e.body.velocity.y = 0;
-    e.number = 30;
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
-    e.body.setBounce(1, 1);
-    e.scaleX = 0.8;
-    e.scaleY = 0.8;
-    e.anims.play('boss1');
-
-}
-
-function addEnemy3(){
-
-    e = new Enemy({scene:level1, x: worldX/4, y: 0, defaultKey:'crab'});
-    enemies.add(e);
-    e.enemyType = 'line';
-    e.body.immovable = true;
-    e.body.velocity.y = 50;
-    e.body.velocity.x = 150;
-    e.number = 30;
-    e.body.setCollideWorldBounds(true); //ball can't leave the screen
+    e.number = 50;
+    e.isCollide = true;
     e.body.setBounce(1, 1);
     e.scaleX = 0.8;
     e.scaleY = 0.8;
@@ -906,6 +1003,86 @@ function addEnemy3(){
 
 }
 
+function addBoss3(){
+
+    e = new Enemy({scene:level1, x: worldX/2, y: -20, defaultKey:'boss3'});
+    enemies.add(e);
+    e.enemyType = 'boss3';
+    e.body.immovable = true;
+    e.body.velocity.x = 20;
+    e.body.velocity.y = 100;
+    e.number = 250;
+
+    e.scaleX = 1.5;
+    e.scaleY = 1.5;
+    e.anims.play('boss3');
+    e.isCollide = true;
+    e.body.setBounce(1, 1);
+    
+    sfxBattle2.stop();
+    sfxBoss1.play({
+        volume: .3,
+        loop: true
+      })
+    
+    level1.time.addEvent({ delay: 5000, 
+                          callback: function(){
+                            sfxBoss1.stop();
+                            sfxBattle2.play({volume: .6,loop: true});
+                        }
+                  ,callbackScope: this, loop: false });    
+    
+    
+    
+    bossText3 = this.add.text(
+    this.physics.world.bounds.width/2,
+    40,
+    'BOSS GIANT' ,
+    {
+      fontFamily:  'monospace',
+      fontSize: '22px',
+      fill: '#fff',
+    },
+    );
+    bossText3.setOrigin(0.5);
+    bossText3.setAlpha(0.75);
+
+}
+
+function addEnemy5(child){
+
+    e = new Enemy({scene:level1, x: child.x, y: child.y + 150, defaultKey:'brick1'});
+    enemies.add(e);
+    e.body.immovable = true;
+    e.body.velocity.y = 180;
+    e.body.velocity.x = 180;
+    //e.enemyType = "attack";
+    e.number = 10;
+
+    e.isCollide = true;
+    e.body.setBounce(1, 1);
+    e.anims.play('brick1');
+    if(child.bulletTimer)
+        child.bulletTimer.remove();
+    child.bulletTimer = null;
+
+}
+
+
+function hitLiveBall2(player, ball){
+    
+    if(ball.visible){
+        sfxPoint.play();
+        ball.visible = false;
+        ball.destroy();
+    }
+    
+    if(lives < max_live && lives >=0){
+        ship[lives].setAlpha(1);
+        lives++;
+    }
+
+}
 
 function hitLiveBall(){
     
@@ -984,20 +1161,19 @@ function addLevel2(){
 }
 
 function addLevel3(){
-        //level1.time.addEvent({ delay:  1000, callback: addEnemy2,callbackScope: level1, loop: false });
-        //level1.time.addEvent({ delay:  1000, callback: addEnemy3,callbackScope: level1, loop: false });
-        //level1.time.addEvent({ delay:  3000, callback: addEnemy3,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay:  2000, callback: addEnemy1,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay:  14000, callback: addEnemy1,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay:  26000, callback: addEnemy1,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay:  38000, callback: addEnemy2,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay:  42000, callback: addEnemy3,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay:  47000, callback: addEnemy3,callbackScope: level1, loop: false });
+
+        
+        //level1.time.addEvent({ delay:  2000, callback: addBoss3,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay:  4000, callback: addEnemy1,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay:  14000, callback: addEnemy2,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay:  24000, callback: addEnemy2,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay:  36000, callback: addBoss3,callbackScope: level1, loop: false });
+
 
 }
 
 function enemyHitPlayer(player, enemy){
-    if(enemy.enemyType=='smallboss' || enemy.enemyType=='boss1' || enemy.enemyType=='boss2'){
+    if(enemy.enemyType=='smallboss' || enemy.enemyType=='boss1' || enemy.enemyType=='boss2'|| enemy.enemyType=='boss3'){
         player.anims.play("sprExplosion"); // play the animation
         
         lives = 0;
@@ -1023,6 +1199,9 @@ function enemyHitPlayer(player, enemy){
 
 function hitEnemy(bullet, enemy){
 
+    if(enemy.y <= 0){
+        return;
+    }
     score += 50;
     if(enemy.number > 0){
         enemy.number--;
@@ -1068,6 +1247,18 @@ function hitEnemy(bullet, enemy){
             stage++;
             stageText.text = 'stage ' + stage;
             addLevel3();
+         }
+     }
+    if(enemy.enemyType =='boss3'){
+        enemy.moveTimer.remove();
+         if(enemy.bulletTimer!=null)
+            enemy.bulletTimer.remove();
+         score+=200;
+         if(enemy.winLock==false){
+            enemy.winLock = true;
+            bossText3.visible = false;
+            winText.visible = true;
+            //addLevel3();
          }
      }
     
@@ -1261,6 +1452,12 @@ level1.preload = function ()
       frameRate: 5,
       repeat: -1
     });
+      this.anims.create({
+      key: "boss3",
+      frames: this.anims.generateFrameNumbers("boss3"),
+      frameRate: 5,
+      repeat: -1
+    });
     
  
       
@@ -1288,6 +1485,7 @@ level1.create = function ()
     
 
 
+    liveBalls = this.physics.add.group({ defaultKey: 'live', maxSize: 50 });
     bullets = this.physics.add.group({ defaultKey: 'bullet2', maxSize: 500 });
     enemybullets = this.physics.add.group({ defaultKey: 'bullet3', maxSize: 500 });
     lazerbullets = this.physics.add.group({ defaultKey: 'bullet1', maxSize: 500 });
@@ -1321,17 +1519,17 @@ level1.create = function ()
 
     this.physics.world.enable(enemies);
     this.physics.world.enable(bullets);
+    this.physics.world.enable(liveBalls);
     this.physics.world.enable(enemybullets);
     this.physics.world.enable(lazerbullets);
-    this.physics.world.enable(lazerbullets2);
     this.physics.world.enable(smallbossbullets);
 
     
     this.physics.add.overlap(liveBall, player, hitLiveBall, null, this);
+    this.physics.add.overlap(liveBalls, player, hitLiveBall2, null, this);
     this.physics.add.overlap(bulletBall, player, hitBulletBall, null, this);
     this.physics.add.overlap(enemybullets, player, hitPlayer, null, this);
-    this.physics.add.overlap(lazerbullets, player, hitPlayer, null, this);
-    this.physics.add.overlap(lazerbullets2, player, hitPlayer, null, this);
+    this.physics.add.overlap(lazerbullets, enemies, hitEnemy, null, this);
     this.physics.add.overlap(smallbossbullets, player, hitPlayer, null, this);
     this.physics.add.overlap(bullets, enemies, hitEnemy, null, this);
     this.physics.add.collider(player,enemies, enemyHitPlayer, null, this);
@@ -1340,7 +1538,7 @@ level1.create = function ()
     
     // level1
 
-    addLevel3();
+    addLevel1();
 
     
     if(bgmusic == null){
@@ -1384,7 +1582,14 @@ level1.create = function ()
     overText.setText([
         'GAME OVER'
     ]);
-    overText.visible = false;
+    overText.visible = false; 
+    
+    winText = this.add.bitmapText(worldX/2,worldY/2, 'desyrel', '', 90).setOrigin(0.5).setCenterAlign().setInteractive();
+
+    winText.setText([
+        'YOU WIN'
+    ]);
+    winText.visible = false;
  
 },
 
@@ -1447,6 +1652,13 @@ level1.update = function (time, delta)
                smallbossbullets.remove(b);
            }
            
+    }); 
+    
+    lazerbullets.children.each(function(b) {
+           if(!b.visible || b.y > worldY || b.x > worldX || b.x < 0 || b.y < 0){
+               lazerbullets.remove(b);
+           }
+           
     });
     
    
@@ -1487,7 +1699,9 @@ level1.update = function (time, delta)
             }
 
         }
-        
+        if(child.y >= 50 && child.isCollide){
+            child.body.setCollideWorldBounds(true); //ball can't leave the screen
+        }
         if(child.enemyType == 'boss1' || child.enemyType == 'boss2'){
             
             var dir = direction[child.index];
@@ -1519,6 +1733,37 @@ level1.update = function (time, delta)
             if(child.bulletTimer==null){
 
                 child.bulletTimer = level1.time.addEvent({ delay: 1400, callback: fire, args: [child], callbackScope: level1, loop: false });  
+                
+            }
+
+        }
+        if(child.enemyType == 'boss3'){
+            
+
+            if(child.moveTimer==null){
+                
+                child.moveTimer = level1.time.addEvent({ 
+                    delay: 8000, 
+                    callback: function(){
+                        var live = liveBalls.get(child.x, child.y + 100);
+                        if (live) {
+                            live.x = child.body.x;
+                            live.y = child.body.y + 50;
+                            live.setVelocityY(50);
+                            live.setVelocityX(50);
+                            live.visible = true;
+                            live.body.setCollideWorldBounds(true); //ball can't leave the screen
+                            live.body.setBounce(1, 1);
+                        }
+                       
+                    },
+                    callbackScope: level1, 
+                    loop: true }); 
+            }
+            
+            if(child.bulletTimer==null){
+                
+                child.bulletTimer = level1.time.addEvent({ delay: 1500, callback: fire2, args: [child], callbackScope: level1, loop: false });  
                 
             }
 
