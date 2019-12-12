@@ -57,7 +57,70 @@ class Enemy extends Phaser.GameObjects.Sprite{
         this.isCollide = false;
     } 
 }
+function playOverAnimation(){
+           level1.time.addEvent({ delay: 100, callback: function(){
+                    e = new Enemy({scene:level1, x: player.x, y:player.y -40});
+                    e.body.immovable = true;
+                    e.anims.play('sprExplosion2');
 
+            }, callbackScope: level1, loop: false }); 
+            
+           level1.time.addEvent({ delay: 150, callback: function(){
+                    e = new Enemy({scene:level1, x: player.x + 40, y:player.y -40});
+                    e.body.immovable = true;
+                    e.anims.play('sprExplosion2');
+
+            }, callbackScope: level1, loop: false }); 
+            
+           level1.time.addEvent({ delay: 200, callback: function(){
+                    e = new Enemy({scene:level1, x: player.x - 40, y:player.y -40});
+                    e.body.immovable = true;
+                    e.anims.play('sprExplosion2');
+
+            }, callbackScope: level1, loop: false }); 
+            
+            level1.time.addEvent({ delay: 250, callback: function(){
+                    e = new Enemy({scene:level1, x: player.x, y:player.y -40});
+                    e.body.immovable = true;
+                    e.anims.play('sprExplosion2');
+
+            }, callbackScope: level1, loop: false }); 
+            
+           level1.time.addEvent({ delay: 300, callback: function(){
+                    e = new Enemy({scene:level1, x: player.x + 40, y:player.y -40});
+                    e.body.immovable = true;
+                    e.anims.play('sprExplosion2');
+
+            }, callbackScope: level1, loop: false }); 
+            
+           level1.time.addEvent({ delay: 350, callback: function(){
+                    e = new Enemy({scene:level1, x: player.x - 40, y:player.y -40});
+                    e.body.immovable = true;
+                    e.anims.play('sprExplosion2');
+
+            }, callbackScope: level1, loop: false });  
+    
+            level1.time.addEvent({ delay: 400, callback: function(){
+                    e = new Enemy({scene:level1, x: player.x, y:player.y -40});
+                    e.body.immovable = true;
+                    e.anims.play('sprExplosion2');
+
+            }, callbackScope: level1, loop: false }); 
+            
+           level1.time.addEvent({ delay: 450, callback: function(){
+                    e = new Enemy({scene:level1, x: player.x + 40, y:player.y -40});
+                    e.body.immovable = true;
+                    e.anims.play('sprExplosion2');
+
+            }, callbackScope: level1, loop: false }); 
+            
+           level1.time.addEvent({ delay: 500, callback: function(){
+                    e = new Enemy({scene:level1, x: player.x - 40, y:player.y -40});
+                    e.body.immovable = true;
+                    e.anims.play('sprExplosion2');
+
+            }, callbackScope: level1, loop: false }); 
+}
 function pad(num, size) {
     var s = num+"";
     while (s.length < size) s = "0" + s;
@@ -135,6 +198,45 @@ function fire2(child){
             if(!child.isDead)
                 bossFire4(child.x, child.y);
         },callbackScope: level1, loop: false });  
+    }
+
+    child.bulletTimer.remove();
+    child.bulletTimer = null;
+    child.flip = !child.flip;        
+}   
+
+function fire3(child){
+    console.log(child);
+
+    if(child.flip){
+        level1.time.addEvent({ delay: 300, callback: 
+          function(){
+        if(!child.isDead)
+                bossFire5(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+
+        level1.time.addEvent({ delay: 600, callback: 
+          function(){
+            if(!child.isDead)
+                bossFire5(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+         
+
+    }
+    else{
+        level1.time.addEvent({ delay: 250, callback: 
+          function(){
+            if(!child.isDead)
+                bossFire6(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+
+        level1.time.addEvent({ delay: 450, callback: 
+          function(){
+            if(!child.isDead)
+                bossFire6(child.x, child.y);
+        },callbackScope: level1, loop: false });  
+
+
     }
 
     child.bulletTimer.remove();
@@ -287,8 +389,8 @@ function bossFire3(x,y){
             bullet.setVisible(true);
             bullet.body.velocity.x = dx[i]*350 * v[i];
             bullet.body.velocity.y = dy[i]*350 * v[i];
-            bullet.scaleX = 2;
-            bullet.scaleY = 2;
+            bullet.scaleX = 1.5;
+            bullet.scaleY = 1.5;
         }
     }
 }
@@ -298,26 +400,6 @@ function bossFire4(x,y){
 
     
     var bullet;
-    /*bullet = smallbossbullets.get(x , y + 20);
-    if (bullet) {
-        
-        bullet.setActive(true);
-        bullet.setVisible(true);
-        bullet.body.velocity.x = 300;
-        bullet.body.velocity.y = 350;
-        bullet.scaleX = 2;
-        bullet.scaleY = 2;
-    }
-    
-    bullet = smallbossbullets.get(x , y + 20);
-    if (bullet) {
-        bullet.setActive(true);
-        bullet.setVisible(true);
-        bullet.body.velocity.x = -300;
-        bullet.body.velocity.y = 350;
-        bullet.scaleX = 2;
-        bullet.scaleY = 2;
-    } */
     
     bullet = smallbossbullets.get(x , y + 20);
     if (bullet) {
@@ -325,8 +407,45 @@ function bossFire4(x,y){
         bullet.setVisible(true);
         bullet.body.velocity.x = 0;
         bullet.body.velocity.y = 450;
-        bullet.scaleX = 2;
-        bullet.scaleY = 2;
+        bullet.scaleX = 1.5;
+        bullet.scaleY = 1.5;
+    }
+
+}
+
+function bossFire5(x,y){
+    var dx = [0, 0, 1, -1, 1, -1, 1, -1];
+    var dy = [1, -1, 0, 0, 1, 1, -1, -1];
+    var v = [1,1,1,1,0.7, 0.7, 0.7, 0.7];
+
+
+    for(var i = 0; i < dx.length; i ++){
+        var bullet = smallbossbullets.get(x + dx[i] * 30, y + dy[i]*30);
+        bullet
+        if (bullet) {
+            bullet.setActive(true);
+            bullet.setVisible(true);
+            bullet.body.velocity.x = dx[i]*350 * v[i];
+            bullet.body.velocity.y = dy[i]*350 * v[i];
+            bullet.scaleX = 1.25;
+            bullet.scaleY = 1.25;
+        }
+    }
+}
+
+function bossFire6(x,y){
+
+    
+    var bullet;
+    
+    bullet = smallbossbullets.get(x , y + 20);
+    if (bullet) {
+        bullet.setActive(true);
+        bullet.setVisible(true);
+        bullet.body.velocity.x = 0;
+        bullet.body.velocity.y = 450;
+        bullet.scaleX = 1.25;
+        bullet.scaleY = 1.25;
     }
 
 }
@@ -348,8 +467,8 @@ function shoot() {
     if(bulletNum==3){
         
         var dx = [ 0, 1, -1];
-        var dy = [-1,-2, -2];
-        var v =  [ 1, 0.5, 0.5];
+        var dy = [-1,-3, -3];
+        var v =  [ 1, 0.3, 0.3];
 
 
         for(var i = 0; i < 3; i ++){
@@ -592,7 +711,7 @@ function addUfo4(){
     e.number = 5;
     
     e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     
     e.anims.play('ufo4');
 
@@ -606,7 +725,7 @@ function addUfo4(){
     e.number = 5;
     
     e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     e.anims.play('ufo4');
     
 
@@ -619,7 +738,7 @@ function addUfo4(){
     e.number = 5;
     
     e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     e.anims.play('ufo4');
 
 }
@@ -667,7 +786,7 @@ function addUfo7(){
     e.body.velocity.y = 90;
     e.body.velocity.x = -250;
     e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     e.number = 5;
 
     e = new Enemy({scene:level1, x: 340, y:-50, defaultKey:'ufo7'});
@@ -677,7 +796,7 @@ function addUfo7(){
     e.body.velocity.y = 90;
     e.body.velocity.x = -250;
     e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     e.number = 5;
 
     
@@ -688,7 +807,7 @@ function addUfo7(){
     e.body.velocity.y = 90;
     e.body.velocity.x = -250;
 e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     e.number = 5;
 }
 
@@ -757,7 +876,7 @@ function addUfo11(){
     e.body.velocity.y = -130;
     e.body.velocity.x = 20;
 e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     e.number = 8;
 
     
@@ -768,7 +887,7 @@ e.isCollide = true;
     e.body.velocity.y = -130;
     e.body.velocity.x = -20;
 e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     e.number = 8;
 }
 
@@ -781,7 +900,7 @@ function addUfo12(){
     e.body.velocity.y = 180;
     e.body.velocity.x = 0;
 e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     e.number = 48;
 
 }
@@ -964,7 +1083,7 @@ function addBoss2(){ // crab
 
 function addEnemy1(){
 
-    e = new Enemy({scene:level1, x: worldX/4, y:-20, defaultKey:'brick1'});
+    e = new Enemy({scene:level1, x: worldX/4, y:-50, defaultKey:'brick1'});
     enemies.add(e);
     e.enemyType = 'line';
     e.body.immovable = true;
@@ -972,12 +1091,12 @@ function addEnemy1(){
     e.body.velocity.y = 40;
     e.body.velocity.x = 150;
     e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     e.anims.play('brick1');
 
     
     
-    e = new Enemy({scene:level1, x: worldX/4*3, y:-20, defaultKey:'brick1'});
+    e = new Enemy({scene:level1, x: worldX/4*3, y:-50, defaultKey:'brick1'});
     enemies.add(e);
     e.enemyType = 'line';
     e.body.immovable = true;
@@ -985,42 +1104,45 @@ function addEnemy1(){
     e.body.velocity.y = 40;
     e.body.velocity.x = -150;
     e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     e.anims.play('brick1');
 
 }
 
 function addEnemy2(){
 
-    e = new Enemy({scene:level1, x: worldX/4*3, y:-20, defaultKey:'crab'});
+    e = new Enemy({scene:level1, x: worldX/4, y:-50, defaultKey:'crab'});
     enemies.add(e);
-    e.enemyType = 'smallboss';
+    e.enemyType = 'smallboss3';
     e.body.immovable = true;
-    e.body.velocity.y = 0;
-    e.number = 50;
+    e.body.velocity.y = 80;
+    e.body.velocity.x = 100;
+    e.number = 40;
     e.isCollide = true;
-    e.body.setBounce(1, 1);
-    e.scaleX = 0.8;
-    e.scaleY = 0.8;
+
     e.anims.play('crab');
+
+}
+
+function addEnemy3(){
+
+    e = new Enemy({scene:level1, x: worldX/4*3, y:-50, defaultKey:'boss3'});
+    enemies.add(e);
+    e.enemyType = 'smallboss4';
+    e.body.immovable = true;
+    e.body.velocity.x = -100;
+    e.body.velocity.y = 90;
+    e.number = 60;
+    e.isCollide = true;
+
+    e.anims.play('boss3');
 
 }
 
 function addBoss3(){
 
-    e = new Enemy({scene:level1, x: worldX/2, y: -20, defaultKey:'boss3'});
-    enemies.add(e);
-    e.enemyType = 'boss3';
-    e.body.immovable = true;
-    e.body.velocity.x = 20;
-    e.body.velocity.y = 100;
-    e.number = 250;
 
-    e.scaleX = 1.5;
-    e.scaleY = 1.5;
-    e.anims.play('boss3');
-    e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     
     sfxBattle2.stop();
     sfxBoss1.play({
@@ -1032,6 +1154,19 @@ function addBoss3(){
                           callback: function(){
                             sfxBoss1.stop();
                             sfxBattle3.play({volume: .6,loop: true});
+                              
+                            e = new Enemy({scene:level1, x: worldX/2, y: -50, defaultKey:'boss3'});
+                            enemies.add(e);
+                            e.enemyType = 'boss3';
+                            e.body.immovable = true;
+                            e.body.velocity.x = 20;
+                            e.body.velocity.y = 100;
+                            e.number = 250;
+
+                            e.scaleX = 1.25;
+                            e.scaleY = 1.25;
+                            e.anims.play('boss3');
+                            e.isCollide = true;
                         }
                   ,callbackScope: this, loop: false });    
     
@@ -1063,7 +1198,7 @@ function addEnemy5(child){
     e.number = 10;
 
     e.isCollide = true;
-    e.body.setBounce(1, 1);
+
     e.anims.play('brick1');
     if(child.bulletTimer)
         child.bulletTimer.remove();
@@ -1071,7 +1206,15 @@ function addEnemy5(child){
 
 }
 
+function updateLive(){
+    for(var i = 0 ; i < max_live; i++){
+      ship[i].setAlpha(0.15);
+    }
+    for(var i = 0 ; i < lives; i++){
+      ship[i].setAlpha(1);
+    }
 
+}
 function hitLiveBall2(player, ball){
     
     if(ball.visible){
@@ -1081,9 +1224,9 @@ function hitLiveBall2(player, ball){
     }
     
     if(lives < max_live && lives >=0){
-        ship[lives].setAlpha(1);
         lives++;
     }
+    updateLive();
 
 }
 
@@ -1091,9 +1234,9 @@ function hitLiveBall(){
     
     
     if(lives < max_live && lives >=0){
-        ship[lives].setAlpha(1);
         lives++;
     }
+    updateLive();
 
     
             
@@ -1166,11 +1309,13 @@ function addLevel2(){
 function addLevel3(){
 
         
-        //level1.time.addEvent({ delay:  2000, callback: addBoss3,callbackScope: level1, loop: false });
+       
         level1.time.addEvent({ delay:  4000, callback: addEnemy1,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay:  14000, callback: addEnemy2,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay:  24000, callback: addEnemy2,callbackScope: level1, loop: false });
-        level1.time.addEvent({ delay:  36000, callback: addBoss3,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay:  12000, callback: addEnemy1,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay:  20000, callback: addEnemy1,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay:  30000, callback: addEnemy2,callbackScope: level1, loop: false });
+        level1.time.addEvent({ delay:  45000, callback: addEnemy3,callbackScope: level1, loop: false });
+
 
 
 }
@@ -1219,10 +1364,11 @@ function addWinningScene(x, y){
 }
 
 function enemyHitPlayer(player, enemy){
-    if(enemy.enemyType=='smallboss' || enemy.enemyType=='boss1' || enemy.enemyType=='boss2'|| enemy.enemyType=='boss3'){
+    if(enemy.enemyType=='smallboss' || enemy.enemyType=='smallboss3'|| enemy.enemyType=='smallboss4' || enemy.enemyType=='boss1' || enemy.enemyType=='boss2'|| enemy.enemyType=='boss3'){
         player.anims.play("sprExplosion"); // play the animation
         
         lives = 0;
+        updateLive();
         return;
     }
     if(!enemy.isDead && enemy.body.y >= 10){
@@ -1237,8 +1383,7 @@ function enemyHitPlayer(player, enemy){
 
     
     lives--;
-    if(lives>=0)
-        ship[lives].setAlpha(0.15);
+    updateLive();
     
 }
 
@@ -1350,8 +1495,7 @@ function hitPlayer(player, bullet){
     //bullet.anims.play('sprExplosion');
     console.log(lives);
     lives--;
-    if(lives>=0)
-        ship[lives].setAlpha(0.15);
+    updateLive();
     
     if(lives == 0){
         return;
@@ -1650,6 +1794,8 @@ level1.update = function (time, delta)
         winText.y += 2;
          gameState = 'win';
     }
+
+
     if(gameState == 'win'){
         
        this.time.addEvent({ delay: 8000, callback: function(){
@@ -1769,8 +1915,9 @@ level1.update = function (time, delta)
             }
 
         }
-        if(child.y >= 50 && child.isCollide){
+        if(child.y >= child.body.height/2 && child.isCollide){
             child.body.setCollideWorldBounds(true); //ball can't leave the screen
+            child.body.setBounce(1, 1);
         }
         if(child.enemyType == 'boss1' || child.enemyType == 'boss2'){
             
@@ -1819,8 +1966,11 @@ level1.update = function (time, delta)
                         if (live) {
                             live.x = child.body.x;
                             live.y = child.body.y + 50;
-                            live.setVelocityY(50);
-                            live.setVelocityX(50);
+                            if(Math.random() >= 0.5)
+                                live.setVelocityY(100);
+                            else
+                                live.setVelocityY(-100);
+                            live.setVelocityX(100);
                             live.visible = true;
                             live.body.setCollideWorldBounds(true); //ball can't leave the screen
                             live.body.setBounce(1, 1);
@@ -1837,6 +1987,23 @@ level1.update = function (time, delta)
                 
             }
 
+        }
+        
+        if(child.enemyType == 'smallboss3' || child.enemyType == 'smallboss4'){
+            
+
+            if(child.bulletTimer==null){
+                
+                child.bulletTimer = level1.time.addEvent({ delay: 1500, callback: fire3, args: [child], callbackScope: level1, loop: false });  
+                
+            }
+            
+
+        }
+        if(child.enemyType == 'smallboss4'){
+            if(child.moveTimer==null && child.number <=2){
+                    child.moveTimer = level1.time.addEvent({ delay:  1000, callback: addBoss3,callbackScope: level1, loop: false });
+                }
         }
         
         if(this.enemyType == 'attack' || this.enemyType == 'attack2' || this.enemyType == 'scatter'){
@@ -1990,9 +2157,11 @@ level1.update = function (time, delta)
         }   
     
         if(!overText.visible){
-            player.anims.play("sprExplosion");
+            
+            playOverAnimation();
+            
             overText.visible = true;
-            player.disableBody(true, true); 
+            player.disableBody(true,true);
             bgmusic.stop();
             death.play({
             volume: .5,
