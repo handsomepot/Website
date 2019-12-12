@@ -899,7 +899,7 @@ function addUfo12(){
     e.enemyType = 'round_back';
     e.body.velocity.y = 180;
     e.body.velocity.x = 0;
-e.isCollide = true;
+    e.isCollide = true;
 
     e.number = 48;
 
@@ -1022,7 +1022,7 @@ function addBrick4(){
     e.enemyType = 'round';
     e.body.immovable = true;
     e.body.velocity.y = 0;
-    e.number = 30;
+    e.number = 36;
     e.anims.play('brick1');
     e.body.velocity.y = 90;
 
@@ -1035,7 +1035,7 @@ function addBrick5(){ // crab small
     e.enemyType = 'smallboss';
     e.body.immovable = true;
     e.body.velocity.y = 0;
-    e.number = 50;
+    e.number = 60;
     e.anims.play('crab');
 
 }
@@ -1117,7 +1117,7 @@ function addEnemy2(){
     e.body.immovable = true;
     e.body.velocity.y = 80;
     e.body.velocity.x = 100;
-    e.number = 40;
+    e.number = 60;
     e.isCollide = true;
 
     e.anims.play('crab');
@@ -1132,7 +1132,7 @@ function addEnemy3(){
     e.body.immovable = true;
     e.body.velocity.x = -100;
     e.body.velocity.y = 90;
-    e.number = 60;
+    e.number = 80;
     e.isCollide = true;
 
     e.anims.play('boss3');
@@ -1160,7 +1160,7 @@ function addBoss3(){
                             e.enemyType = 'boss3';
                             e.body.immovable = true;
                             e.body.velocity.x = 20;
-                            e.body.velocity.y = 100;
+                            e.body.velocity.y = 80;
                             e.number = 250;
 
                             e.scaleX = 1.25;
