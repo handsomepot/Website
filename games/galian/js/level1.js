@@ -15,6 +15,7 @@ var sfxPoint;
 let bgmusic = null;
 var sfxBattle1;
 var sfxBattle2;
+var sfxBattle3;
 var globalTime;
 var lock = false;
 var lives = max_live; // lives
@@ -387,6 +388,7 @@ function shoot() {
 
 
 function enemyFire(child) {
+    
     if(!child.isDead){
     if(child.enemyType == 'regular'){
         var bullet = enemybullets.get(child.x, child.y);
@@ -485,6 +487,7 @@ function enemyFire(child) {
         bossFire3(child.x, child.y);
     }
     }
+    
 }
 
 
@@ -1028,7 +1031,7 @@ function addBoss3(){
     level1.time.addEvent({ delay: 5000, 
                           callback: function(){
                             sfxBoss1.stop();
-                            sfxBattle2.play({volume: .6,loop: true});
+                            sfxBattle3.play({volume: .6,loop: true});
                         }
                   ,callbackScope: this, loop: false });    
     
@@ -1171,6 +1174,49 @@ function addLevel3(){
 
 
 }
+function addWinningScene(x, y){
+    level1.time.addEvent({ delay:  100, callback: 
+        function(){
+            e = new Enemy({scene:level1, x: x, y:y -40});
+            e.body.immovable = true;
+            e.anims.play('sprExplosion2');
+            e.scaleX = 2;
+            e.scaleY = 2;
+            },callbackScope: level1, loop: false });
+
+    level1.time.addEvent({ delay:  200, callback: 
+        function(){
+            e = new Enemy({scene:level1, x: x -50, y:y -40});
+            e.body.immovable = true;
+            e.anims.play('sprExplosion2');
+            e.scaleX = 2;
+            e.scaleY = 2;
+        },callbackScope: level1, loop: false });
+    
+    level1.time.addEvent({ delay:  300, callback: 
+        function(){
+            e = new Enemy({scene:level1, x: x +50, y:y -40});
+            e.body.immovable = true;
+            e.anims.play('sprExplosion2');
+            e.scaleX = 2;
+            e.scaleY = 2;
+        },callbackScope: level1, loop: false });
+      
+    level1.time.addEvent({ delay:  400, callback: 
+        function(){
+            e = new Enemy({scene:level1, x: x +50, y:y -40});
+            e.body.immovable = true;
+            e.anims.play('sprExplosion2');
+            e.scaleX = 2;
+            e.scaleY = 2;
+        },callbackScope: level1, loop: false });
+    
+    level1.time.addEvent({ delay:  2000, callback: function(){
+
+         winText.visible = true;
+    },callbackScope: level1, loop: false });
+   
+}
 
 function enemyHitPlayer(player, enemy){
     if(enemy.enemyType=='smallboss' || enemy.enemyType=='boss1' || enemy.enemyType=='boss2'|| enemy.enemyType=='boss3'){
@@ -1257,8 +1303,10 @@ function hitEnemy(bullet, enemy){
          if(enemy.winLock==false){
             enemy.winLock = true;
             bossText3.visible = false;
-            winText.visible = true;
-            //addLevel3();
+
+
+             
+            addWinningScene(bullet.x, bullet.y);
          }
      }
     
@@ -1551,6 +1599,7 @@ level1.create = function ()
         sfxBoss1 = this.sound.add('boss1Music');
         sfxBattle1 = this.sound.add('battle1');
         sfxBattle2 = this.sound.add('battle2');
+        sfxBattle3 = this.sound.add('battle3');
     }
     
    bgmusic.play({
@@ -1584,7 +1633,7 @@ level1.create = function ()
     ]);
     overText.visible = false; 
     
-    winText = this.add.bitmapText(worldX/2,worldY/2, 'desyrel', '', 90).setOrigin(0.5).setCenterAlign().setInteractive();
+    winText = this.add.bitmapText(worldX/2, 0, 'desyrel', '', 90).setOrigin(0.5).setCenterAlign().setInteractive();
 
     winText.setText([
         'YOU WIN'
@@ -1596,6 +1645,27 @@ level1.create = function ()
 
 level1.update = function (time, delta)
 {
+    scoreText.text =  pad(score, 8);
+    if(winText.visible && winText.y <= 300){
+        winText.y += 2;
+         gameState = 'win';
+    }
+    if(gameState == 'win'){
+        
+       this.time.addEvent({ delay: 8000, callback: function(){
+       lives = max_live;
+
+       gameState = 'running'
+       menu.scene.stop('menu');
+       this.scene.stop('level1');
+       removeAllObjects();
+       menu.scene.restart();
+       sfxBattle3.stop();
+
+
+        }, callbackScope: this, loop: false }); 
+    }
+    
     if(stage==1){
         starfield.tilePositionY -= 2; // background scrolling
     }
@@ -1899,6 +1969,7 @@ level1.update = function (time, delta)
     if(lives <= 0){
         sfxBattle1.stop();
         sfxBattle2.stop();
+        sfxBattle3.stop();
         sfxBoss1.stop();
         bgmusic.stop();
         player.visible = false;
@@ -1931,10 +2002,11 @@ level1.update = function (time, delta)
         }
 
     }
-        
-    scoreText.text =  pad(score, 8);
+    
+
 
   })
+
     globalTime = time;
 
 }
