@@ -78,7 +78,7 @@ preload.preload = function ()
             this.load.audio('explode', 'assets/laser1.wav');
             this.load.audio('explode1', 'assets/explosion07.wav');
             this.load.audio('explode2', 'assets/explosion01.wav');
-            this.load.audio('menuMusic', 'assets/menu.ogg');
+            this.load.audio('menuMusic', 'assets/menu.mp3');
             this.load.audio('point', 'assets/point.mp3');
             this.load.audio('death', 'assets/death.wav');
             this.load.audio('boss1Music', 'assets/boss.wav');
