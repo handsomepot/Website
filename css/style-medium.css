@@ -49,8 +49,14 @@
 		}
 
         #banner div {
-			width: 200%;
+			width: 100%;
 		}
+.clock {
+    
+    font-size: 40px;
+   
+   
+}
     
 
 /* Layers */
