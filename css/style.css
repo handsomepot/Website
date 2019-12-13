@@ -1045,7 +1045,7 @@ right: 0;
 #background: rgba(80, 80, 80, 0.04);
 	background-position: center center;
 	background-size: cover;
-	background-color: #202020;
+	background-color: #323975;
 
 color: rgba(255,255,255,.8);
 padding: 14em 0em 14em;
@@ -1063,9 +1063,9 @@ padding: 14em 0em 14em;
 
 	font-size: 4em;
 	line-height: 1.25em;
-margin: 0 0 0.5em 0;
-padding: 0;
-color: #009E2D;
+    margin: 0 0 0.5em 0;
+    padding: 0;
+    color: #17D4FE;
 }
 
 #banner h3 {
@@ -1628,4 +1628,28 @@ color: white;
 
 @keyframes example {
 
+}
+
+
+.fa-snowflake {
+	color: #ffffff;
+	position: absolute;
+	top: 30px;
+	animation: fall linear forwards;
+}
+@keyframes fall {
+	to {
+		transform: translateY(105vh);
+	}
+}
+
+.clock {
+    top: 80%;
+    left: 50%;
+    color: #17D4FE;
+    font-size: 50px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+    max-width: 100%;
+   
 }
