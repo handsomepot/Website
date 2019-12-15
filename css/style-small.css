@@ -13,15 +13,17 @@
 /* Banner */
 
 	#banner {
-		padding: 8em 2em 8em;
+		padding: 4em 2em 6em;
 	}
-
-.clock {
-    
-    font-size: 28px;
-   
-   
+#banner .clock{
+    font-size: 32px;
 }
+#banner .fa-moon{
+    font-size: 4em;
+}
+
+
+
 
 /* Wrapper */
 

@@ -1,0 +1,104 @@
+/* Day1*/
+.fa-snowflake {
+	color: #ffffff;
+	position: absolute;
+	animation: fall linear forwards;
+}
+
+
+@keyframes fall {
+	to {
+		transform: translateY(105vh);
+	}
+}
+
+
+@keyframes fall45 {
+	to {
+		transform: translate(105vh, 105vh);
+	}
+}
+
+@keyframes spin {
+    from {
+        transform:rotateY(0deg);
+        opacity: 1;
+    }
+    to {
+        transform:rotateY(360deg);
+        opacity: 0.5;
+    }
+}
+
+
+
+@keyframes fall_infinite {
+    0%   {top: 0px; left: 0px; background: red;}
+    50% {top: 200px; left: 200px; background: red;}
+    100% {top: 300px; left: 300px; background: red;}
+}
+
+.clock {
+    top: 80%;
+    left: 50%;
+    color: #17D4FE;
+    font-size: 44px;
+    font-family: Orbitron;
+    letter-spacing: 7px;
+    max-width: 100%; 
+}
+
+/* Day2*/
+.fa-tint {
+	color: #ffffff;
+	position: absolute;
+	animation: fall linear forwards;
+}
+
+/*Day3*/
+.fa-circle {
+	color: #ffffff;
+	position: absolute;
+	animation: fall45 linear forwards;
+}
+
+.fa-star{
+	color: #f4fc2e;
+    font-size: 20px;
+    animation-name: spin;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear; 
+}
+.fa-cloud {
+  color: #ffffff;
+  font-size: 150px;
+  transform:  translate(0, -30%)    scaleY(0.25);
+
+}
+
+.fa-home, .fa-city{
+  color: #cf0dfd;
+  font-size: 6em;
+}
+
+.fa-moon{
+  color: #f4fc2e;
+  font-size: 6em;
+    
+}
+.fa-trailer{
+    color:darkorange;
+    position: absolute;
+    font-size: 4em;
+}
+.fa-car-side, .fa-truck-pickup,.fa-truck-moving, .fa-truck{
+    color:darkorange;
+    position: absolute;
+    font-size: 4em;
+}
+
+.flex{
+    display: flex;
+}
+

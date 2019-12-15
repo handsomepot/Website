@@ -1041,14 +1041,13 @@ right: 0;
 /* Banner */
 
 #banner {
-#background-image: url(../images/1.png);
-#background: rgba(80, 80, 80, 0.04);
 	background-position: center center;
-	background-size: cover;
-	background-color: #323975;
+	#background-size: 100px;
+	#background-color: #323975;
+	background-color: #202336;
 
-color: rgba(255,255,255,.8);
-padding: 14em 0em 14em;
+    color: rgba(255,255,255,.8);
+    padding: 8em 0em 10em;
 	 text-align: center;
 	 font-family: 'Varela', sans-serif;
 
@@ -1364,7 +1363,7 @@ background: #F5F5F5;
 	background-image: url(../images/dark_tint.png), url(../images/slide04.jpg);
 	background-position: center center;
 	background-size: cover;
-color: #ffffff;
+    color: #ffffff;
 padding: 14em 0em 14em;
 	 text-align: center;
 }
@@ -1631,25 +1630,5 @@ color: white;
 }
 
 
-.fa-snowflake {
-	color: #ffffff;
-	position: absolute;
-	top: 30px;
-	animation: fall linear forwards;
-}
-@keyframes fall {
-	to {
-		transform: translateY(105vh);
-	}
-}
 
-.clock {
-    top: 80%;
-    left: 50%;
-    color: #17D4FE;
-    font-size: 44px;
-    font-family: Orbitron;
-    letter-spacing: 7px;
-    max-width: 100%;
-   
-}
+
