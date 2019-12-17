@@ -1,6 +1,6 @@
 //setInterval(createSnowFlake, 100);
 //setInterval(createShootingStar, 100);
-setInterval(moveCar, 10);
+//setInterval(moveCar, 10);
 
 
 setInterval(showTime, 100);
