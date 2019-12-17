@@ -87,18 +87,50 @@
   font-size: 6em;
     
 }
-.fa-trailer{
-    color:darkorange;
-    position: absolute;
-    font-size: 4em;
+
+.fa-car-side, .fa-truck-pickup, .fa-truck-moving, .fa-truck{
+	color: darkorange;
 }
-.fa-car-side, .fa-truck-pickup,.fa-truck-moving, .fa-truck{
-    color:darkorange;
-    position: absolute;
-    font-size: 4em;
+.fa-lightbulb{
+  color: yellow;
+  padding-left:20px;
+  opacity: 0.1;
+  font-size: 80px;
+
 }
+
+#car{
+    font-size: 100px;
+    position: absolute;
+    left: 0%;
+    top: 25%;
+}
+
+#light{
+  padding-top:100px;
+  padding-left: 120px;
+  font-size:80px;
+
+}
+
+@keyframes fall {
+	to {
+		transform: translateY(-105vh);
+	}
+}
+
+
 
 .flex{
     display: flex;
 }
+
+
+.center1{
+    position: absolute;
+    left: 20%;
+    top: 10%;
+    transform: translate(-50%,-50%);
+}
+
 

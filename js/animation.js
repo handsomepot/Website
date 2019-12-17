@@ -1,5 +1,5 @@
 //setInterval(createSnowFlake, 100);
-setInterval(createShootingStar, 100);
+//setInterval(createShootingStar, 100);
 setInterval(moveCar, 10);
 
 
@@ -84,8 +84,8 @@ function moveCar(){
     console.log(document.getElementById('moving-car').className);
     var icon = document.getElementById('car').style.paddingLeft = pos + 'px';
 
-    if(pos <= window.innerWidth + 100){
-        pos += 2;
+    if(pos <= window.innerWidth){
+        pos += 4;
     }
     else{
         pos = 0;
@@ -105,9 +105,5 @@ function moveCar(){
 
     }
 
-    
-    
-    
-  
-  
+ 
 }
