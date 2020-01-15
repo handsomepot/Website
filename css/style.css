@@ -548,7 +548,7 @@ position: relative;
 
 .image img {
 	border-radius: 4px;
-display: block;
+    display: block;
 }
 
 .image.left {
@@ -725,7 +725,7 @@ margin: 0 0 2em 0;
 }
 
 table {
-margin: 0 0 2em 0;
+margin: 1em 5em;
 width: 100%;
 }
 
